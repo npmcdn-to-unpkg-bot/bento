@@ -14,7 +14,8 @@ class CreateIngredientsTable extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('name');
+            $table->string('name');
+            $table->string('image');
             $table->float('proteins');
             $table->float('fats');
             $table->float('carbs');
