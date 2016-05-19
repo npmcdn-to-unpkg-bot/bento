@@ -25,10 +25,28 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
 
         $form->addItem(AdminFormElement::custom()
             ->setDisplay(function($model){
-                return view('admin.ingredients', ['ingredients'=>$model->ingredients]);
+
+                if (old()) {
+                    $old = old('ingredient');
+                    foreach ($old['id'] as $key => $id){
+                        $inputs[$id]['id'] = $id;
+                        $inputs[$id]['weight'] = $old['weight'][$key];
+                    }
+                }else{
+                    foreach ($model->ingredients as $ingredient){
+                        $inputs[$ingredient->id]['id'] = $ingredient->id;
+                        $inputs[$ingredient->id]['weight'] = $ingredient->pivot->weight;
+                    }
+                }
+                $inputs[]=['id'=>'','weight'=>''];
+                return view('admin.ingredients', ['inputs'=>$inputs]);
             })
             ->setCallback(function($model){
+                $inputs = Request::input('ingredient');
+                foreach ($inputs['id'] as $key => $id)
+                    $ingredients[$id]['weight'] = $inputs['weight'][$key];
 
+                $model->ingredients()->sync($ingredients);
             }));
 
         return $form;
