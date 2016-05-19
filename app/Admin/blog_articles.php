@@ -14,7 +14,7 @@ AdminSection::registerModel(App\Models\Blog\Article::class, function ($model) {
     $model->onCreateAndEdit(function() {
         return $form = AdminForm::panel()->addBody(
             AdminFormElement::text('name', 'Название')->required(),
-            AdminFormElement::image('image', 'Картинка')->required(),
+            AdminFormElement::image('image', 'Картинка'),
             AdminFormElement::textarea('entry', 'Краткое содержание')->required(),
             AdminFormElement::ckeditor('content', 'Содержание')->required()
         );

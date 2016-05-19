@@ -18,7 +18,7 @@ AdminSection::registerModel(App\Models\Ingredient::class, function ($model) {
     $model->onCreateAndEdit(function() {
         return $form = AdminForm::panel()->addBody(
             AdminFormElement::text('name', 'Название')->required(),
-            AdminFormElement::image('image', 'Картинка')->required(),
+            AdminFormElement::image('image', 'Картинка'),
             AdminFormElement::textaddon('proteins', 'Белки')->required()->setAddon('грамм')->placeAfter(),
             AdminFormElement::textaddon('fats', 'Жиры')->required()->setAddon('грамм')->placeAfter(),
             AdminFormElement::textaddon('carbs', 'Углеводы')->required()->setAddon('грамм')->placeAfter(),
