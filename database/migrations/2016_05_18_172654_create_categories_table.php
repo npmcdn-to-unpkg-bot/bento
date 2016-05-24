@@ -16,6 +16,9 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('image');
             $table->string('name');
+            $table->string('slug');
+            $table->string('meta_title');
+            $table->text('meta_description');
         });
     }
 
