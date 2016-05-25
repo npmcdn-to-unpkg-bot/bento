@@ -33,6 +33,7 @@ return array(
     'KodiComponents\\Support\\' => array($vendorDir . '/kodicomponents/support/src'),
     'KodiComponents\\Navigation\\' => array($vendorDir . '/kodicomponents/navigation/src'),
     'KodiCMS\\Assets\\' => array($vendorDir . '/kodicms/laravel-assets/src'),
+    'Jenssegers\\Agent\\' => array($vendorDir . '/jenssegers/agent/src'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image', $vendorDir . '/intervention/imagecache/src/Intervention/Image'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),

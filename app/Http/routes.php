@@ -12,9 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'welcome';
 });
+
+Route::get('fit/{width}/{height}',        'General\ImageController@fit');
+Route::get('resize/{width}/{height}',     'General\ImageController@resize');
+Route::get('width/{width}',               'General\ImageController@width');
+Route::get('height/{height}',             'General\ImageController@height');
+Route::get('greyscale',                   'General\ImageController@greyscale');
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/',                       'General\HomeController@index');
+Route::get('menu/{slug}',             'General\ProductController@index');

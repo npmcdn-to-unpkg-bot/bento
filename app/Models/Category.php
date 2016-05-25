@@ -9,4 +9,8 @@ class Category extends Model
 	protected $table = 'categories';
 
     public $timestamps = false;
+
+    public function products () {
+    	return $this->belongsToMany('App\Models\Product');
+    }
 }

@@ -14,7 +14,11 @@ AdminSection::registerModel(App\Models\Category::class, function ($model) {
     $model->onCreateAndEdit(function() {
         return $form = AdminForm::panel()->addBody(
             AdminFormElement::text('name', 'Название')->required(),
-            AdminFormElement::image('image', 'Картинка')->required()
+            AdminFormElement::image('image', 'Картинка')->required(),
+            AdminFormElement::text('order', 'Порядок'),
+            AdminFormElement::text('slug', 'Slug')->required(),
+            AdminFormElement::text('meta_title', 'Meta title'),
+            AdminFormElement::textarea('meta_description', 'Meta description')
         );
         return $form;
     });

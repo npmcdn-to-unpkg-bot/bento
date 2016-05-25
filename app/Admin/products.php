@@ -17,7 +17,7 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
             AdminFormElement::image('image', 'Картинка')->required(),
             AdminFormElement::ckeditor('description', 'Описание'),
             AdminFormElement::textaddon('price', 'Цена')->required()->setAddon('грн.')->placeAfter(),
-            AdminFormElement::text('order', 'Порядок сортировки')->required(),
+            AdminFormElement::text('order', 'Порядок сортировки'),
             AdminFormElement::select('left_label_id', 'Левый лейбл')->setModelForOptions('App\Models\Label')->setDisplay('name'),
             AdminFormElement::select('right_label_id', 'Правый лейбл')->setModelForOptions('App\Models\Label')->setDisplay('name'),
             AdminFormElement::multiselect('categories', 'Категории')->setModelForOptions('App\Models\Category')->setDisplay('name')
@@ -43,8 +43,9 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
             })
             ->setCallback(function($model){
                 $inputs = Request::input('ingredient');
+                $ingredients = [];
                 foreach ($inputs['id'] as $key => $id)
-                    $ingredients[$id]['weight'] = $inputs['weight'][$key];
+                    if ($id != 0) $ingredients[$id]['weight'] = $inputs['weight'][$key];
 
                 $model->ingredients()->sync($ingredients);
             }));

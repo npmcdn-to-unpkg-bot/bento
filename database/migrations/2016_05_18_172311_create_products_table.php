@@ -23,8 +23,8 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->integer('price');
             $table->integer('order');
-            $table->integer('left_label_id')->index();
-            $table->integer('right_label_id')->index();
+            $table->integer('left_label_id')->index()->nullable();
+            $table->integer('right_label_id')->index()->nullable();
         });
     }
 
