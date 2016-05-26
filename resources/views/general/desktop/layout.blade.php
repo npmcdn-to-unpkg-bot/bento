@@ -10,13 +10,13 @@
 </head>
 <body>
 	<div class="container-fluid container-fluid_lightgray">
-		<div class="container">
+		<div class="container container_fix">
 			<div class="about-menu container__col-left">
 				<a href="" class="about-menu__item">О ресторане</a>
 				<a href="" class="about-menu__item">Оставить отзыв</a>
 				<a href="" class="about-menu__item">Вакансии</a>
 				<a href="" class="about-menu__item">Партнеры</a>
-				<a href="" class="about-menu__item">Блог</a>
+				<a href="{{url('blog')}}" class="about-menu__item">Блог</a>
 			</div>
 			<div class="user-menu container__col-right">
 				<div class="user-menu__box">
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container container_fix">
 		<div class="container__col-left">
 			<a href="{{url('/')}}" class="logo logo_dark logo_in-header">
 				<img src="{{url('img/dark-logo.png')}}" alt="">
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 			<a href="" class="main-menu__item">ДОСТАВКА И ОПЛАТА</a>
-			<a href="" class="main-menu__item">НОВОСТИ И АКЦИИ</a>
+			<a href="{{url('news')}}" class="main-menu__item">НОВОСТИ И АКЦИИ</a>
 			<a href="" class="main-menu__item">НАШИ КОНТАКТЫ</a>
 		</div>
 	</div>
@@ -81,7 +81,7 @@
 	</div>
 	@yield('content')
 	<div class="container-fluid container-fluid_darkgray">
-		<div class="container">
+		<div class="container container_fix">
 			<div class="container__col-left">
 				<a href="" class="logo logo_light logo_in-footer">
 					<img src="{{url('img/light-logo.png')}}" alt="">

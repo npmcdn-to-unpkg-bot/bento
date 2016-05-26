@@ -25,3 +25,5 @@ Route::auth();
 
 Route::get('/',                       'General\HomeController@index');
 Route::get('menu/{slug}',             'General\ProductController@index');
+Route::get('news/{slug?}',            'General\NewsController@index');
+Route::get('blog/{slug?}',            'General\BlogController@index');

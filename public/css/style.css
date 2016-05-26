@@ -1304,12 +1304,16 @@ strong{
 	border: 1px solid #e6e6e6;
 	border-radius: 3px;
 	z-index: 99;
-	display: none;
 }
 
-@media (min-width: 1720px){
-	.floating-shoping-cart{
-		display: block;
+@media (max-width: 1720px){
+	.container{
+		margin-right: 300px;
+		margin-left: 20px;
+	}
+	.container_fix{
+		margin-left: auto;
+		margin-right: auto;
 	}
 }
 

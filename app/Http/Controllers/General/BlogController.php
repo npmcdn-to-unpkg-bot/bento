@@ -14,9 +14,16 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($slug = false)
     {
-        //
+        if (!$slug) {
+            return view('general.article.index',[
+                'title' => 'НОВОСТИ И АКЦИИ',
+                'articles' => \App\Models\News\Article::orderBy('created_at')->paginate(3),
+            ]);
+        }else{
+            return $this->show($slug);
+        }
     }
 
     /**
