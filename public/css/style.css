@@ -1298,7 +1298,7 @@ strong{
 	width: 280px;
 	position: fixed;
 	right: 0;
-	top: 300px;
+	top: 250px;
 	background-color: white;
 	padding: 0 13px 13px 13px;
 	border: 1px solid #e6e6e6;
@@ -1757,4 +1757,79 @@ strong{
 .new-user__link{
 	margin-top: 20px;
 	width: 190px;
+}
+
+/* ====================================================================================================================
+ * RESETS
+ * ====================================================================================================================*/
+.flex-container a:hover,
+.flex-slider a:hover {
+  outline: none;
+}
+.slides,
+.slides > li,
+.flex-control-nav,
+.flex-direction-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.flex-pauseplay span {
+  text-transform: capitalize;
+}
+/* ====================================================================================================================
+ * BASE STYLES
+ * ====================================================================================================================*/
+.flexslider {
+  margin: 0;
+  padding: 0;
+}
+.flexslider .slides > li {
+  display: none;
+  -webkit-backface-visibility: hidden;
+}
+.flexslider .slides img {
+  width: 100%;
+  display: block;
+}
+.flexslider .slides:after {
+  content: "\0020";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+html[xmlns] .flexslider .slides {
+  display: block;
+}
+* html .flexslider .slides {
+  height: 1%;
+}
+.no-js .flexslider .slides > li:first-child {
+  display: block;
+}
+
+/*flexslider styles for bento web site*/
+
+.flex-control-nav li{
+  display: inline-block;
+}
+
+.flex-control-nav a{
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  border: 3px solid #c2c2c2;
+  font-size: 0;
+  color: transparent;
+  background-color: transparent;
+  box-sizing: border-box;
+  margin: 4px;
+  border-radius: 50%;
+}
+
+a.flex-active{
+  background-color: #ff4848;
+  border-color: #ff4848;
 }

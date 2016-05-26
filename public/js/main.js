@@ -19,10 +19,6 @@
 		directionNav: false
 	});
 
-	// listners
-
-	$(".open-dialog-link").on("click", GetOpenDialog);
-
 	// controllers
 
 	function GetOpenDialog(event){
@@ -32,4 +28,23 @@
 		});
 	}
 
+	var topElement = $('.main-slider');
+	var bottomElement = $('.footer');
+	var floatingShopingCart = $('.floating-shoping-cart')
+
+	function PositionFloatingShopingCart(){
+		var minTop = topElement.offset().top + topElement.outerHeight();
+		var maxTop = bottomElement.offset().top - floatingShopingCart.outerHeight();
+		var top = Math.max(250, minTop - $(window).scrollTop());
+			top = Math.min(top, maxTop - $(window).scrollTop());
+		floatingShopingCart.css({
+			top: top
+		});
+	}
+
+	// listners
+
+	$(".open-dialog-link").on("click", GetOpenDialog);
+	$(window).on("scroll", PositionFloatingShopingCart);
+	$(document).imagesLoaded(PositionFloatingShopingCart);
 })($)

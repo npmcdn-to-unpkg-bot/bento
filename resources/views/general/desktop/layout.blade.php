@@ -3,8 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>bento</title>
-	<link rel="stylesheet" href="{{url('js/fancybox/jquery.fancybox.css')}}">
-	<link rel="stylesheet" href="{{url('js/flexslider/flexslider.css')}}">
+	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{url('css/style.css')}}">
 </head>
@@ -80,7 +79,7 @@
 		</ul>
 	</div>
 	@yield('content')
-	<div class="container-fluid container-fluid_darkgray">
+	<div class="container-fluid container-fluid_darkgray footer">
 		<div class="container container_fix">
 			<div class="container__col-left">
 				<a href="" class="logo logo_light logo_in-footer">
@@ -156,8 +155,9 @@
 	<!-- floating shoping cart -->
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="{{url('js/fancybox/jquery.fancybox.min.js')}}"></script>
-	<script src="{{url('js/flexslider/jquery.flexslider.min.js')}}"></script>
+	<script src="{{url('bower/fancybox/source/jquery.fancybox.pack.js')}}"></script>
+	<script src="{{url('bower/flexslider/jquery.flexslider-min.js')}}"></script>
+	<script src="{{url('bower/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
 	<script src="{{url('js/main.js')}}"></script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+{
+  "name": "bento",
+  "description": "",
+  "main": "",
+  "authors": [
+    "scynetpro <5821262@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/scynetpro/bento",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
