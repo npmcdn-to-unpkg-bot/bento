@@ -33,18 +33,30 @@
 	var floatingShopingCart = $('.floating-shoping-cart')
 
 	function PositionFloatingShopingCart(){
-		var minTop = topElement.offset().top + topElement.outerHeight();
-		var maxTop = bottomElement.offset().top - floatingShopingCart.outerHeight();
-		var top = Math.max(250, minTop - $(window).scrollTop());
-			top = Math.min(top, maxTop - $(window).scrollTop());
+		var upperLimit = topElement.offset().top + topElement.outerHeight();
+		var lowerLimit = bottomElement.offset().top;
+
+		if (upperLimit >= $(window).scrollTop()) {
+			floatingShopingCart.css({
+				top: upperLimit,
+				position: 'absolute'
+			})
+		}else{
+			floatingShopingCart.css({
+				top: 0,
+				position: 'fixed'
+			})
+		}
+
 		floatingShopingCart.css({
-			top: top
+			height: lowerLimit - floatingShopingCart.offset().top,
 		});
 	}
 
 	// listners
 
 	$(".open-dialog-link").on("click", GetOpenDialog);
-	$(window).on("scroll", PositionFloatingShopingCart);
-	$(document).imagesLoaded(PositionFloatingShopingCart);
+	$(window)
+		.on("scroll resize", PositionFloatingShopingCart)
+		.imagesLoaded(PositionFloatingShopingCart);
 })($)
