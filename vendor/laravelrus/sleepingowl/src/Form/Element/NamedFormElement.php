@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 abstract class NamedFormElement extends FormElement
 {
-
     /**
      * @var string
      */
@@ -70,6 +69,8 @@ abstract class NamedFormElement extends FormElement
         $parts = explode('.', $path);
         $this->setName($this->composeName($parts));
         $this->setAttribute(end($parts));
+
+        parent::__construct();
     }
 
     /**
@@ -371,7 +372,6 @@ abstract class NamedFormElement extends FormElement
         }
 
         foreach ($relations as $relation) {
-
             if ($model->{$relation} instanceof Model) {
                 $model = $model->{$relation};
                 continue;
@@ -397,9 +397,8 @@ abstract class NamedFormElement extends FormElement
     {
         $rules = parent::getValidationRules();
 
-        
         foreach ($rules as &$rule) {
-            if ($rule !== '_unique'){
+            if ($rule !== '_unique') {
                 continue;
             }
 
@@ -407,7 +406,7 @@ abstract class NamedFormElement extends FormElement
             $table = $model->getTable();
 
             $rule = 'unique:'.$table.','.$this->getAttribute();
-            
+
             if ($model->exists()) {
                 $rule .= ','.$model->getKey();
             }

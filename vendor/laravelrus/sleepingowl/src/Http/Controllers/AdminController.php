@@ -2,19 +2,62 @@
 
 namespace SleepingOwl\Admin\Http\Controllers;
 
-use App;
-use Request;
 use AdminTemplate;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App;
+use Breadcrumbs;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
+use Request;
+use SleepingOwl\Admin\Contracts\Display\ColumnEditableInterface;
 use SleepingOwl\Admin\Contracts\FormInterface;
 use SleepingOwl\Admin\Model\ModelConfiguration;
-use SleepingOwl\Admin\Contracts\Display\ColumnEditableInterface;
 
 class AdminController extends Controller
 {
+
+    /**
+     * @var \SleepingOwl\Admin\Navigation
+     */
+    public $navigation;
+
+    /**
+     * @var
+     */
+    private $parentBreadcrumb = 'home';
+
+    public function __construct()
+    {
+        $this->navigation = app('sleeping_owl.navigation');
+
+        Breadcrumbs::register('home', function($breadcrumbs) {
+            $breadcrumbs->push('Dashboard', route('admin.dashboard'));
+        });
+
+        $breadcrumbs = [];
+
+        if ($currentPage = $this->navigation->getCurrentPage()) {
+            foreach ($currentPage->getPathArray() as $page) {
+                $breadcrumbs[] = [
+                    'id' => $page['id'],
+                    'title' => $page['title'],
+                    'url' => $page['url'],
+                    'parent' => $this->parentBreadcrumb
+                ];
+
+                $this->parentBreadcrumb = $page['id'];
+            }
+        }
+
+        foreach ($breadcrumbs as  $breadcrumb) {
+            Breadcrumbs::register($breadcrumb['id'], function ($breadcrumbs) use ($breadcrumb) {
+                $breadcrumbs->parent($breadcrumb['parent']);
+                $breadcrumbs->push($breadcrumb['title'], $breadcrumb['url']);
+            });
+        }
+    }
+
     /**
      * @param ModelConfiguration $model
      *
@@ -42,7 +85,9 @@ class AdminController extends Controller
 
         $create = $model->fireCreate();
 
-        return $this->render($model, $create);
+        $this->registerBreadcrumb($model->getCreateTitle(), $this->parentBreadcrumb);
+
+        return $this->render($model, $create, $model->getCreateTitle());
     }
 
     /**
@@ -116,7 +161,9 @@ class AdminController extends Controller
             abort(404);
         }
 
-        return $this->render($model, $model->fireFullEdit($id));
+        $this->registerBreadcrumb($model->getEditTitle(), $this->parentBreadcrumb);
+
+        return $this->render($model, $model->fireFullEdit($id), $model->getEditTitle());
     }
 
     /**
@@ -271,19 +318,25 @@ class AdminController extends Controller
 
     /**
      * @param ModelConfiguration $model
-     * @param Renderable|string  $content
+     * @param Renderable|string $content
+     * @param string|null $title
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function render(ModelConfiguration $model, $content)
+    public function render(ModelConfiguration $model, $content, $title = null)
     {
         if ($content instanceof Renderable) {
             $content = $content->render();
         }
 
+        if (is_null($title)) {
+            $title = $model->getTitle();
+        }
+
         return AdminTemplate::view('_layout.inner')
-            ->with('title', $model->getTitle())
+            ->with('title', $title)
             ->with('content', $content)
+            ->with('breadcrumbKey', $this->parentBreadcrumb)
             ->with('successMessage', session('success_message'));
     }
 
@@ -302,6 +355,7 @@ class AdminController extends Controller
         return AdminTemplate::view('_layout.inner')
             ->with('title', $title)
             ->with('content', $content)
+            ->with('breadcrumbKey', $this->parentBreadcrumb)
             ->with('successMessage', session('success_message'));
     }
 
@@ -362,5 +416,19 @@ class AdminController extends Controller
     public function getWildcard()
     {
         abort(404);
+    }
+
+    /**
+     * @param string $title
+     * @param string $parent
+     */
+    protected function registerBreadcrumb($title, $parent)
+    {
+        Breadcrumbs::register('render', function($breadcrumbs) use($title, $parent) {
+            $breadcrumbs->parent($parent);
+            $breadcrumbs->push($title);
+        });
+
+        $this->parentBreadcrumb = 'render';
     }
 }

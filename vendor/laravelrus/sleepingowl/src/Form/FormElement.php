@@ -3,21 +3,17 @@
 namespace SleepingOwl\Admin\Form;
 
 use Illuminate\Database\Eloquent\Model;
-use KodiCMS\Assets\Facades\Meta;
 use SleepingOwl\Admin\Contracts\FormElementInterface;
+use SleepingOwl\Admin\Traits\Assets;
 
 abstract class FormElement implements FormElementInterface
 {
+    use Assets;
 
     /**
      * @var \SleepingOwl\Admin\Contracts\TemplateInterface
      */
     protected $template;
-
-    /**
-     * @var \KodiCMS\Assets\Meta
-     */
-    protected $meta;
 
     /**
      * @var string
@@ -33,10 +29,15 @@ abstract class FormElement implements FormElementInterface
      * @var array
      */
     protected $validationRules = [];
+    
+    public function __construct()
+    {
+        $this->initializePackage();
+    }
 
     public function initialize()
     {
-        Meta::loadPackage(get_called_class());
+        $this->includePackage();
     }
 
     /**
@@ -65,6 +66,7 @@ abstract class FormElement implements FormElementInterface
 
     /**
      * @param string $rule
+     * @param string|null $message
      *
      * @return $this
      */

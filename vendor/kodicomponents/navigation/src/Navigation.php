@@ -3,26 +3,39 @@
 namespace KodiComponents\Navigation;
 
 use Closure;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Renderable;
+use KodiComponents\Navigation\Contracts\NavigationInterface;
 use KodiComponents\Navigation\Contracts\PageInterface;
 
-class Navigation implements Renderable, Arrayable
+class Navigation implements NavigationInterface
 {
 
     /**
-     * @var PageInterface|null
+     * @param array $data
+     * @param string $class
+     *
+     * @return PageInterface
      */
-    protected static $current;
+    public static function makePage(array $data, $class = PageInterface::class)
+    {
+        $page = app($class);
+
+        foreach ($data as $key => $value) {
+            if ($key != 'pages' and method_exists($page, $method = 'set'.ucfirst($key))) {
+                $page->{$method}($value);
+            }
+        }
+
+        if (isset($data['pages']) and is_array($data['pages'])) {
+            foreach ($data['pages'] as $child) {
+                $page->addPage($child);
+            }
+        }
+
+        return $page;
+    }
 
     /**
-     * @var PageInterface|null
-     */
-    protected static $foundPages = [];
-
-    /**
-     * @var Collection
+     * @var PageCollection|PageInterface[]
      */
     protected $items;
 
@@ -31,9 +44,53 @@ class Navigation implements Renderable, Arrayable
      */
     protected $accessLogic;
 
-    public function __construct()
+    /**
+     * @var null|string
+     */
+    private $currentUrl;
+
+    /**
+     * @var PageInterface|null
+     */
+    private $currentPage;
+
+    /**
+     * Navigation constructor.
+     *
+     * @param array|null $pages
+     */
+    public function __construct(array $pages = null)
     {
-        $this->items = new Collection();
+        $this->items = new PageCollection();
+
+        if (! is_null($pages)) {
+            $this->setFromArray($pages);
+        }
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getCurrentUrl()
+    {
+        if (is_null($this->currentUrl)) {
+            return url()->current();
+        }
+
+        return $this->currentUrl;
+    }
+
+    /**
+     * @param null|string $url
+     *
+     * @return $this
+     */
+    public function setCurrentUrl($url)
+    {
+        $this->currentUrl = $url;
+        $this->currentPage = null;
+
+        return $this;
     }
 
     /**
@@ -47,16 +104,19 @@ class Navigation implements Renderable, Arrayable
     }
 
     /**
-     * @param string|array|PageInterface|null $page
+     * @param string|array|PageInterface $page
      *
-     * @return PageInterface
+     * @return PageInterface|null
      */
-    public function addPage($page = null)
+    public function addPage($page)
     {
         if (is_array($page)) {
-            $page = $this->createPageFromArray($page);
+            $page = static::makePage($page);
         } elseif (is_string($page) or is_null($page)) {
-            $page = app(PageInterface::class, [$page]);
+            $title = $page;
+
+            $page = app(PageInterface::class);
+            $page->setTitle($title);
         }
 
         if (! ($page instanceof PageInterface)) {
@@ -69,7 +129,7 @@ class Navigation implements Renderable, Arrayable
     }
 
     /**
-     * @return Collection
+     * @return PageCollection|PageInterface[]
      */
     public function getPages()
     {
@@ -77,15 +137,18 @@ class Navigation implements Renderable, Arrayable
     }
 
     /**
-     * @param Closure $callback
-     *
-     * @return $this
+     * @return int
      */
-    public function setPages(Closure $callback)
+    public function countPages()
     {
-        call_user_func($callback, $this);
+        $count = 0;
 
-        return $this;
+        $this->getPages()->each(function (PageInterface $page) use (&$count) {
+            $count++;
+            $count += $page->countPages();
+        });
+
+        return $count;
     }
 
     /**
@@ -96,6 +159,10 @@ class Navigation implements Renderable, Arrayable
     public function setAccessLogic(Closure $accessLogic)
     {
         $this->accessLogic = $accessLogic;
+
+        foreach ($this->getPages() as $page) {
+            $page->setAccessLogic($accessLogic);
+        }
 
         return $this;
     }
@@ -111,6 +178,36 @@ class Navigation implements Renderable, Arrayable
     }
 
     /**
+     * @return $this
+     */
+    public function filterByAccessRights()
+    {
+        $this->items = $this->getPages()->filterByAccessRights();
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function filterEmptyPages()
+    {
+        $this->items = $this->getPages()->filterEmptyPages();
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function sort()
+    {
+        $this->items = $this->getPages()->sortByPriority();
+
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function hasChild()
@@ -121,11 +218,11 @@ class Navigation implements Renderable, Arrayable
     /**
      * @return PageInterface|null
      */
-    public function getCurrent()
+    public function getCurrentPage()
     {
-        $this->findActive();
+        $this->findActivePage();
 
-        return self::$current;
+        return $this->currentPage;
     }
 
     /**
@@ -133,117 +230,79 @@ class Navigation implements Renderable, Arrayable
      */
     public function toArray()
     {
-        return $this->getPages();
+        return $this->getPages()->toArray();
     }
 
     /**
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @param string|null $view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function render()
+    public function render($view = null)
     {
-        $this->findActive();
+        $this->findActivePage();
         $this->filterByAccessRights();
+        $this->filterEmptyPages();
+
         $this->sort();
 
-        return view(config('navigation.view.navigation', 'navigation::navigation'), [
-            'pages' => $this->toArray(),
+        if (is_null($view)) {
+            $view = config('navigation.view.navigation', 'navigation::navigation');
+        }
+
+        return view($view, [
+            'pages' => $this->getPages(),
         ])->render();
-    }
-
-    public function filterByAccessRights()
-    {
-        $this->items = $this->getPages()->filter(function (PageInterface $page) {
-            $page->filterByAccessRights();
-
-            return $page->checkAccess();
-        });
-    }
-
-    public function sort()
-    {
-        $this->items = $this->getPages()->sortBy(function (PageInterface $page) {
-            $page->sort();
-
-            return $page->getPriority();
-        });
     }
 
     /**
      * @return bool
      */
-    protected function findActive()
+    protected function findActivePage()
     {
-        if (! is_null(self::$current)) {
+        if (! is_null($this->currentPage)) {
             return true;
         }
 
-        $url = url()->current();
+        $foundPages = [];
 
-        $this->getPages()->each(function (PageInterface $page) use ($url) {
+        $url = $this->getCurrentUrl();
+
+        $this->findActive($url, $foundPages);
+
+        $calculates = [];
+
+        foreach ($foundPages as $data) {
+            $calculates[] = $data[0];
+        }
+
+        if (count($calculates)) {
+            $this->currentPage = array_get($foundPages, array_search(min($calculates), $calculates).'.1');
+        }
+
+        if (! is_null($this->currentPage)) {
+            $this->currentPage->setActive();
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $url
+     * @param array $foundPages
+     */
+    protected function findActive($url, array & $foundPages)
+    {
+        $this->getPages()->each(function (PageInterface $page) use ($url, &$foundPages) {
+            
             if (strpos($url, $page->getUrl()) !== false) {
-                Navigation::$foundPages[] = [
+                $foundPages[] = [
                     levenshtein($url, $page->getUrl()),
                     $page,
                 ];
             }
 
-            $page->findActive();
+            $page->findActive($url, $foundPages);
         });
-
-        $calculates = [];
-
-        foreach (self::$foundPages as $data) {
-            $calculates[] = $data[0];
-        }
-
-        if (count($calculates)) {
-            self::$current = array_get(self::$foundPages, array_search(min($calculates), $calculates).'.1');
-        }
-
-        if (! is_null(self::$current)) {
-            self::$current->setActive();
-        }
-
-        return false;
-    }
-
-    /**
-     * @param string $title
-     *
-     * @return Page|false
-     */
-    public function findPageByTitle($title)
-    {
-        foreach ($this->getPages() as $page) {
-            if ($page->findPageByTitle($title)) {
-                return $page;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return PageInterface
-     */
-    protected function createPageFromArray(array $data)
-    {
-        $page = app(PageInterface::class);
-
-        foreach ($data as $key => $value) {
-            if ($key != 'pages' and method_exists($page, $method = 'set'.ucfirst($key))) {
-                $page->{$method}($value);
-            }
-        }
-
-        if (isset($data['pages']) and is_array($data['pages'])) {
-            foreach ($data['pages'] as $child) {
-                $page->addPage($child);
-            }
-        }
-
-        return $page;
     }
 }

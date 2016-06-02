@@ -22,4 +22,4 @@ AdminSection::registerModel(App\Models\News\Article::class, function ($model) {
     });
 })
     ->addMenuPage(App\Models\News\Article::class, 60)
-    ->setIcon('fa fa-bank');
+    ->setIcon('fa fa-newspaper-o');

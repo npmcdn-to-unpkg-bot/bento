@@ -20,4 +20,4 @@ AdminSection::registerModel(App\Models\Label::class, function ($model) {
     });
 })
     ->addMenuPage(App\Models\Label::class, 40)
-    ->setIcon('fa fa-bank');
+    ->setIcon('fa fa-exclamation-circle');

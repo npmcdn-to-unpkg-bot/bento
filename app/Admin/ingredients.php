@@ -28,4 +28,4 @@ AdminSection::registerModel(App\Models\Ingredient::class, function ($model) {
     });
 })
     ->addMenuPage(App\Models\Ingredient::class, 30)
-    ->setIcon('fa fa-bank');
+    ->setIcon('fa fa-flask');

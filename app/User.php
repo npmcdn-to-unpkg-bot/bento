@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password', 'first_name', 'last_name', 'trafic_source', 'bento_card', 'birth_day'
     ];
 
     /**
@@ -23,4 +23,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function places () {
+        return $this->hasMany('App\Models\Place');
+    }
 }

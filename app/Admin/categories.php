@@ -24,4 +24,4 @@ AdminSection::registerModel(App\Models\Category::class, function ($model) {
     });
 })
     ->addMenuPage(App\Models\Category::class, 20)
-    ->setIcon('fa fa-bank');
+    ->setIcon('fa fa-folder');

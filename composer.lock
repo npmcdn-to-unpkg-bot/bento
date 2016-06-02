@@ -62,6 +62,55 @@
             "time": "2015-11-09 22:51:51"
         },
         {
+            "name": "davejamesmiller/laravel-breadcrumbs",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davejamesmiller/laravel-breadcrumbs.git",
+                "reference": "5a5d5d1b1f5780359604f7fde11bbf810ff3e9e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davejamesmiller/laravel-breadcrumbs/zipball/5a5d5d1b1f5780359604f7fde11bbf810ff3e9e4",
+                "reference": "5a5d5d1b1f5780359604f7fde11bbf810ff3e9e4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "illuminate/view": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "orchestra/testbench": "3.0.*",
+                "phpunit/phpunit": "4.*",
+                "satooshi/php-coveralls": "0.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DaveJamesMiller\\Breadcrumbs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT License"
+            ],
+            "authors": [
+                {
+                    "name": "Dave James Miller",
+                    "email": "dave@davejamesmiller.com",
+                    "homepage": "http://davejamesmiller.com/"
+                }
+            ],
+            "description": "A simple Laravel-style way to create breadcrumbs in Laravel 4+.",
+            "homepage": "https://github.com/davejamesmiller/laravel-breadcrumbs",
+            "keywords": [
+                "laravel"
+            ],
+            "time": "2015-02-08 21:44:39"
+        },
+        {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
             "source": {
@@ -1016,22 +1065,26 @@
         },
         {
             "name": "kodicomponents/navigation",
-            "version": "v0.0.2",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KodiComponents/Navigation.git",
-                "reference": "ce333ef142290de4298936f1f3159993d656f353"
+                "reference": "c1c2a91ca8b0ed2f111c87c6bcabd07e834c53df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KodiComponents/Navigation/zipball/ce333ef142290de4298936f1f3159993d656f353",
-                "reference": "ce333ef142290de4298936f1f3159993d656f353",
+                "url": "https://api.github.com/repos/KodiComponents/Navigation/zipball/c1c2a91ca8b0ed2f111c87c6bcabd07e834c53df",
+                "reference": "c1c2a91ca8b0ed2f111c87c6bcabd07e834c53df",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "5.*",
                 "kodicomponents/support": "0.*",
                 "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "autoload": {
@@ -1057,20 +1110,20 @@
                 "menu",
                 "navigation"
             ],
-            "time": "2016-03-24 15:09:49"
+            "time": "2016-05-30 07:13:45"
         },
         {
             "name": "kodicomponents/support",
-            "version": "v0.1.4",
+            "version": "v0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KodiComponents/Support.git",
-                "reference": "726d151906651cd3250c0b7341e02b69dde1adaf"
+                "reference": "97aaef0d2c781af3981a6801136c10e0a3f329c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KodiComponents/Support/zipball/726d151906651cd3250c0b7341e02b69dde1adaf",
-                "reference": "726d151906651cd3250c0b7341e02b69dde1adaf",
+                "url": "https://api.github.com/repos/KodiComponents/Support/zipball/97aaef0d2c781af3981a6801136c10e0a3f329c5",
+                "reference": "97aaef0d2c781af3981a6801136c10e0a3f329c5",
                 "shasum": ""
             },
             "require": {
@@ -1101,20 +1154,20 @@
                 "menu",
                 "navigation"
             ],
-            "time": "2016-05-18 09:55:22"
+            "time": "2016-05-27 08:45:53"
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.32",
+            "version": "v5.2.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f688217113f70b01d0e127da9035195415812bef"
+                "reference": "d2b6b0fe32fab610d356c22e74a6ffd101b0f513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f688217113f70b01d0e127da9035195415812bef",
-                "reference": "f688217113f70b01d0e127da9035195415812bef",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d2b6b0fe32fab610d356c22e74a6ffd101b0f513",
+                "reference": "d2b6b0fe32fab610d356c22e74a6ffd101b0f513",
                 "shasum": ""
             },
             "require": {
@@ -1230,7 +1283,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-05-17 13:24:40"
+            "time": "2016-05-30 17:42:01"
         },
         {
             "name": "laravelcollective/html",
@@ -1288,19 +1341,20 @@
         },
         {
             "name": "laravelrus/sleepingowl",
-            "version": "4.36.133-beta",
+            "version": "4.40.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelRUS/SleepingOwlAdmin.git",
-                "reference": "91af336aa995a89e53f03a07752978487dfcd893"
+                "reference": "3755a6e267fba8085cc0a2b39bb7375c8256d96d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/91af336aa995a89e53f03a07752978487dfcd893",
-                "reference": "91af336aa995a89e53f03a07752978487dfcd893",
+                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/3755a6e267fba8085cc0a2b39bb7375c8256d96d",
+                "reference": "3755a6e267fba8085cc0a2b39bb7375c8256d96d",
                 "shasum": ""
             },
             "require": {
+                "davejamesmiller/laravel-breadcrumbs": "^3.0",
                 "doctrine/dbal": "~2.3",
                 "erusev/parsedown": "1.*",
                 "illuminate/support": "5.*",
@@ -1343,7 +1397,7 @@
                 "crud",
                 "laravel"
             ],
-            "time": "2016-05-18 14:15:54"
+            "time": "2016-06-01 09:46:06"
         },
         {
             "name": "league/flysystem",
@@ -2081,16 +2135,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "807dde98589f9b2b00624dca326740380d78dbbc"
+                "reference": "0343b2cedd0edb26cdc791212a8eb645c406018b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/807dde98589f9b2b00624dca326740380d78dbbc",
-                "reference": "807dde98589f9b2b00624dca326740380d78dbbc",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/0343b2cedd0edb26cdc791212a8eb645c406018b",
+                "reference": "0343b2cedd0edb26cdc791212a8eb645c406018b",
                 "shasum": ""
             },
             "require": {
@@ -2110,7 +2164,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2137,7 +2191,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-05 06:56:13"
+            "time": "2016-04-12 18:27:47"
         },
         {
             "name": "symfony/finder",
@@ -2325,16 +2379,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "1289d16209491b584839022f29257ad859b8532d"
+                "reference": "dff51f72b0706335131b00a7f49606168c582594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
-                "reference": "1289d16209491b584839022f29257ad859b8532d",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/dff51f72b0706335131b00a7f49606168c582594",
+                "reference": "dff51f72b0706335131b00a7f49606168c582594",
                 "shasum": ""
             },
             "require": {
@@ -2346,7 +2400,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2380,20 +2434,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/polyfill-php56",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "4d891fff050101a53a4caabb03277284942d1ad9"
+                "reference": "3edf57a8fbf9a927533344cef65ad7e1cf31030a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/4d891fff050101a53a4caabb03277284942d1ad9",
-                "reference": "4d891fff050101a53a4caabb03277284942d1ad9",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/3edf57a8fbf9a927533344cef65ad7e1cf31030a",
+                "reference": "3edf57a8fbf9a927533344cef65ad7e1cf31030a",
                 "shasum": ""
             },
             "require": {
@@ -2403,7 +2457,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2436,20 +2490,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/polyfill-util",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "8de62801aa12bc4dfcf85eef5d21981ae7bb3cc4"
+                "reference": "ef830ce3d218e622b221d6bfad42c751d974bf99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/8de62801aa12bc4dfcf85eef5d21981ae7bb3cc4",
-                "reference": "8de62801aa12bc4dfcf85eef5d21981ae7bb3cc4",
+                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/ef830ce3d218e622b221d6bfad42c751d974bf99",
+                "reference": "ef830ce3d218e622b221d6bfad42c751d974bf99",
                 "shasum": ""
             },
             "require": {
@@ -2458,7 +2512,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2488,7 +2542,7 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2016-01-20 09:13:37"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/process",
@@ -2942,16 +2996,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "0.9.4",
+            "version": "0.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b"
+                "reference": "4db079511a283e5aba1b3c2fb19037c645e70fc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/70bba85e4aabc9449626651f48b9018ede04f86b",
-                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/4db079511a283e5aba1b3c2fb19037c645e70fc2",
+                "reference": "4db079511a283e5aba1b3c2fb19037c645e70fc2",
                 "shasum": ""
             },
             "require": {
@@ -3003,7 +3057,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2015-04-02 19:54:00"
+            "time": "2016-05-22 21:52:33"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -3969,16 +4023,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96"
+                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/0047c8366744a16de7516622c5b7355336afae96",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/eca51b7b65eb9be6af88ad7cc91685f1556f5c9a",
+                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a",
                 "shasum": ""
             },
             "require": {
@@ -3987,7 +4041,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -4014,7 +4068,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-05-26 21:46:24"
         }
     ],
     "aliases": [],

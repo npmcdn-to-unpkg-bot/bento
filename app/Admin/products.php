@@ -54,4 +54,4 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
     });
 })
     ->addMenuPage(App\Models\Product::class, 10)
-    ->setIcon('fa fa-bank');
+    ->setIcon('fa fa-shopping-basket');

@@ -1,66 +1,25 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<div class="modal modal_small">
+    <div class="container">
+        <form class="container__col-left login login_or-register login_in-modal" metho="POST" action="{{ url('login') }}">
+            {{ csrf_field() }}
+            <div class="login__title">Авторизация</div>
+            <div class="jus-cont">
+                <input type="text" class="input jus-cont__item login__item" placeholder="Ваш e-mail" name="email" value="{{old("email")}}">
+                <a href="" class="jus-cont__item login__item login-social-button_vk login-social-button">Войти через Вконтакте</a>
+                <input type="password" class="input jus-cont__item login__item" placeholder="Ваш пароль" name="password">
+                <a href="" class="jus-cont__item login__item login-social-button_fb login-social-button">Войти через Facebook</a>
+                <input type="hidden" name="remember" value="1">
+                <button class="button button_red button_small jus-cont__item login__item">Войти</button>
+                <br>
+                <a href="{{ url('password/reset') }}" class="jus-cont__item login__item login__forgot">Забыли пароль?</a>
+            </div>
+        </form>
+        <div class="container__col-right">
+            <div class="new-user">
+                <div class="new-user__title">Новый пользователь</div>
+                <div class="new-user__text">Еще нет своей учетной записи?<br>Зарегестрируйтесь!</div>
+                <a href="" class="new-user__link button button_gray button_small">Регистрация</a>
             </div>
         </div>
     </div>
 </div>
-@endsection

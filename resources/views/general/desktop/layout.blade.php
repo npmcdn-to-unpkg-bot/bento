@@ -24,8 +24,8 @@
 					<img src="{{url('img/user-menu-caret.png')}}" alt="" class="user-menu__icon">
 				</div>
 				<div class="user-menu__dropdown">
-					<a href="" class="user-menu__item user-menu__item_login">Вход</a>
-					<a href="" class="user-menu__item user-menu__item_registration">Регистрация</a>
+					<a href="{{url('login')}}" class="open-dialog-link user-menu__item">Вход</a>
+					<a href="{{url('register')}}" class="open-dialog-link user-menu__item">Регистрация</a>
 					<a href="" class="user-menu__item">Избранное</a>
 					<a href="" class="user-menu__item">Мои сравнения</a>
 					<a href="" class="user-menu__item">Корзина</a>
