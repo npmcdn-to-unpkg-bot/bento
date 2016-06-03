@@ -40,6 +40,13 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
+    public function sendFailedLoginResponse()
+    {
+        return response()->json([
+            'email'=>['Неверные имя пользователя и пароль']
+        ], 422);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *

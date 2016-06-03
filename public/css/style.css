@@ -8,6 +8,84 @@ strong{
 }
 /* $block__#element_$modififier */
 
+/*row*/
+.row {
+	margin-right: -20px;
+	margin-left: -20px;
+}
+
+.row:after{
+	content:'';
+	display: block;
+	clear: both;
+}
+
+.row__col-right {
+	float: right;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.row__col-1,
+.row__col-2,
+.row__col-3,
+.row__col-4,
+.row__col-5,
+.row__col-6,
+.row__col-7,
+.row__col-8,
+.row__col-9,
+.row__col-10,
+.row__col-11,
+.row__col-12{
+	box-sizing: border-box;
+	padding-right: 20px;
+	padding-left: 20px;
+	float: left;
+}
+
+.row__col-1{
+	width: 8.3333333%;
+}
+.row__col-2{
+	width: 16.666666%;
+}
+.row__col-3{
+	width: 25%;
+}
+.row__col-4{
+	width: 33.3333333%;
+}
+.row__col-5{
+	width: 41.6666666%;
+}
+.row__col-6{
+	width: 50%;
+}
+.row__col-7{
+	width: 58.3333333%;
+}
+.row__col-8{
+	width: 66.6666666%;
+}
+.row__col-9{
+	width: 75%;
+}
+.row__col-10{
+	width: 83.333333%;
+}
+.row__col-11{
+	width: 91.666666%;
+}
+.row__col-12{
+	width: 100%;
+}
+
+/*offset*/
+.offset_bottom_10{
+	margin-bottom: 10px;
+}
+
 /*jus-cont*/
 
 .jus-cont{
@@ -1098,6 +1176,10 @@ strong{
 	vertical-align: middle;
 }
 
+.input_100 {
+	width: 100%;
+}
+
 /*rating*/
 
 .rating{
@@ -1424,14 +1506,9 @@ strong{
 .modal{
 	width: 850px;
 	padding: 15px;
-}
-
-.modal_big{
-	width: 980px;
-}
-
-.modal_small{
-	width: 760px;
+	box-sizing: border-box;
+	background: #f9f9f9;
+	overflow: hidden;
 }
 
 .modal__title{
@@ -1594,24 +1671,22 @@ strong{
 }
 
 /*registration*/
-.registration{
-	text-align: center;
-}
+
 .registration__title{
+	text-align: center;
 	font-size: 18px;
 	color: #343434;
 	font-weight: 300;
 	margin-bottom: 30px;
-}
-.registration__item{
-	width: 300px;
-	margin-bottom: 10px;
 }
 
 .registration__button{
 	margin-bottom: 40px;
 	margin-top: 40px;
 	font-size: 16px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /*reg-social*/
@@ -1645,6 +1720,7 @@ strong{
 
 .date-picker__item{
 	cursor: pointer;
+	background: white;
 }
 
 .date-picker__day{
@@ -1662,12 +1738,8 @@ strong{
 
 }
 
-.login_in-modal{
-	width: 425px;
-}
-
 .login_or-register{
-	padding-right: 70px;
+	padding-right: 50px;
 	border-right:1px solid #e5e5e5; 
 	position: relative;
 }
@@ -1695,13 +1767,11 @@ strong{
 	font-weight: 300;
 	color: #6d6d6d;
 }
-.login__item{
-	width: 190px;
-	margin-bottom: 10px;
-}
+
 .login__forgot{
 	height: 35px;
 	line-height: 35px;
+	display: block;
 	text-align: right;
 	text-decoration: none;
 	color: #ff4848;
@@ -1832,4 +1902,15 @@ html[xmlns] .flexslider .slides {
 a.flex-active{
   background-color: #ff4848;
   border-color: #ff4848;
+}
+
+/*error*/
+.error {
+	font-size: 12px;
+	color: #ff6868;
+}
+
+/*.fancybox-iframe*/
+.fancybox-iframe {
+	overflow: hidden;
 }

@@ -20,15 +20,20 @@
 			<div class="user-menu container__col-right">
 				<div class="user-menu__box">
 					<img class="user-menu__icon" src="{{url('img/user-menu-icon.png')}}" alt="">
-					МОЙ АККАУНТ
+					@if (auth()->user()) {{auth()->user()->first_name}} {{auth()->user()->last_name}} @else МОЙ АККАУНТ @endif
 					<img src="{{url('img/user-menu-caret.png')}}" alt="" class="user-menu__icon">
 				</div>
 				<div class="user-menu__dropdown">
-					<a href="{{url('login')}}" class="open-dialog-link user-menu__item">Вход</a>
-					<a href="{{url('register')}}" class="open-dialog-link user-menu__item">Регистрация</a>
+					@if (!auth()->user())
+					<a href="#login" class="fancybox user-menu__item user-menu__item_login">Вход</a>
+					<a href="#register" class="fancybox user-menu__item user-menu__item_registration">Регистрация</a>
+					@endif
 					<a href="" class="user-menu__item">Избранное</a>
 					<a href="" class="user-menu__item">Мои сравнения</a>
 					<a href="" class="user-menu__item">Корзина</a>
+					@if (auth()->user())
+					<a href="{{url('logout')}}" class="user-menu__item">Выход</a>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -106,58 +111,22 @@
 			</div>
 		</div>
 	</div>
+	<div class="floating-shoping-cart">
+		@include('general.carts.cart')
+	</div>
 
-	<!-- floating shoping cart -->
-		<form class="floating-shoping-cart">
-			<div class="floating-shoping-cart__user">
-				<img src="{{url('img/login-icon.png')}}" alt="" class="floating-shoping-cart__icon">
-				<a href="" class="floating-shoping-cart__login">ВХОД</a>
-				<a href="" class="floating-shoping-cart__register">РЕГИСТРАЦИЯ</a>
-			</div>
-			<div class="floating-shoping-cart__title">
-				<img src="{{url('img/cart.png')}}" alt="" class="floating-shoping-cart__icon">
-				ВАША КОРЗИНА
-			</div>
-			<table class="floating-shoping-cart__items">
-				<tr class="floating-shoping-cart__item">
-					<td class="floating-shoping-cart__item-count"><input type="number" class="number number_small" name="" value="10"></td>
-					<td class="floating-shoping-cart__item-name">Японский десерт "Маракуйя"</td>
-					<td class="floating-shoping-cart__item-price">150грн</td>
-					<td><a href="" class="floating-shoping-cart__item-remove"></a></td>
-				</tr>
-				<tr class="floating-shoping-cart__item">
-					<td class="floating-shoping-cart__item-count"><input type="number" class="number number_small" name="" value="2"></td>
-					<td class="floating-shoping-cart__item-name">Японский десерт "Маракуйя"</td>
-					<td class="floating-shoping-cart__item-price">150грн</td>
-					<td><a href="" class="floating-shoping-cart__item-remove"></a></td>
-				</tr>		
-			</table>
-			<table class="cart-total">
-				<tr>
-					<td class="cart-total__label">Сумма</td>
-					<td class="cart-total__value">300 грн</td>
-				</tr>
-				<tr>
-					<td class="cart-total__label">Скидка</td>
-					<td class="cart-total__value">-20 грн</td>
-				</tr>
-				<tr>
-					<td class="cart-total__label">Доставка</td>
-					<td class="cart-total__value">25 грн</td>
-				</tr>
-				<tr class="cart-total__result">
-					<td class="cart-total__label">ИТОГО</td>
-					<td class="cart-total__value">300 грн</td>
-				</tr>						
-			</table>
-			<a href="" class="floating-shoping-cart__checkout button button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
-		</form>
-	<!-- floating shoping cart -->
-
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="{{url('bower/jquery/dist/jquery.min.js')}}"></script>
 	<script src="{{url('bower/fancybox/source/jquery.fancybox.pack.js')}}"></script>
 	<script src="{{url('bower/flexslider/jquery.flexslider-min.js')}}"></script>
 	<script src="{{url('bower/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
 	<script src="{{url('js/main.js')}}"></script>
+
+
+	@if (!auth()->user())
+	<div style="display: none;">
+		@include('general.modal.register')
+		@include('general.modal.login')
+	</div>
+	@endif
 </body>
 </html>

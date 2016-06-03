@@ -1,4 +1,4 @@
-@extends('general.desktop.layout')
+@extends('general.layout.desktop')
 
 @section('content')
 	<div class="container">

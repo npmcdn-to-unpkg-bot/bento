@@ -21,11 +21,66 @@
 
 	// controllers
 
-	function GetOpenDialog(event){
+	function AjaxFormSend (event) {
 		event.preventDefault();
-		$.get(this.href, function (data) {
-			$.fancybox(data)
+		form = this;
+		$.ajax({
+			url: form.action,
+			method: form.method,
+			data: $(form).serializeArray(),
+			type: 'json',
+			success: function (data) {
+				window.location.href = form.action
+			},
+			error: function (data) {
+				console.log(data)
+				$(form).find('.error').remove()
+				$.each(data.responseJSON, function (name, errors){
+					$.each(errors, function(key, error){
+						$(form)
+							.find('[name="'+name+'"]')
+							.after($('<div class="error" />').text(error))
+					})
+				})
+			}
 		});
+	}
+
+	function SendDataIdViaAjax (event) {
+		event.preventDefault();
+		$.ajax({
+			url: this.href,
+			method: "POST",
+			data: {
+				id: $(this).attr('data-id'),
+				_token: $(this).attr('data-token')
+			},
+			success: function (data){
+				$('.floating-shoping-cart').html(data);
+			},
+			error: function (data){
+				$.fancybox(data.responseText)
+			}
+		})
+	}
+
+	function SendInputViaAjax (event) {
+		event.preventDefault();
+		$.ajax({
+			url: $(this).attr('data-action'),
+			method: "POST",
+			data: {
+				id: $(this).attr('data-id'),
+				_token: $(this).attr('data-token'),
+				value: $(this).val()
+			},
+			success: function (data){
+				$('.floating-shoping-cart').html(data);
+			},
+			error: function (data){
+				$.fancybox(data.responseText)
+			}
+		})
 	}
 
 	var topElement = $('.main-slider');
@@ -54,9 +109,17 @@
 	}
 
 	// listners
-
-	$(".open-dialog-link").on("click", GetOpenDialog);
+	$(document).on('submit','.ajax-form',AjaxFormSend);
+	$(document).on('click','.ajax-send-id',SendDataIdViaAjax);
+	$(document).on('change','.ajax-send-input',SendInputViaAjax);
 	$(window)
 		.on("scroll resize", PositionFloatingShopingCart)
 		.imagesLoaded(PositionFloatingShopingCart);
+
+	function initListeners(){
+		$('.fancybox').fancybox();
+	}
+
+	$(document).ready(initListeners);
+
 })($)

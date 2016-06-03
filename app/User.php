@@ -27,4 +27,8 @@ class User extends Authenticatable
     public function places () {
         return $this->hasMany('App\Models\Place');
     }
+
+    public function cart () {
+        return $this->hasOne('App\Models\Cart');
+    }
 }
