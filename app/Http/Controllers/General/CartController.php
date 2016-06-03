@@ -21,7 +21,9 @@ class CartController extends Controller
 			$cart->products()->attach($request->id,['quantity'=>1]);
 		}
 
-		return view('general.carts.cart')->withCookie(cookie()->forever('cart', $cart->hash));
+		return response()
+			->view('general.carts.cart',['cart'=>$cart])
+			->withCookie(cookie()->forever('cart', $cart->hash));
 	}
 
 	public function update(Request $request) {

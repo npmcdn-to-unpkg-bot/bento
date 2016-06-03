@@ -10,7 +10,7 @@
 		<img src="{{url('img/cart.png')}}" alt="" class="floating-shoping-cart__icon">
 		ВАША КОРЗИНА
 	</div>
-	@if ($cart = App\Models\Cart::cart())
+	@if (isset($cart) || $cart = App\Models\Cart::cart())
 	<table class="floating-shoping-cart__items">
 		@foreach ($cart->products as $product)
 		<tr class="floating-shoping-cart__item">
