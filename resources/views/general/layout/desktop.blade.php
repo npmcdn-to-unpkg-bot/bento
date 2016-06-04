@@ -126,6 +126,7 @@
 	<div style="display: none;">
 		@include('general.modal.register')
 		@include('general.modal.login')
+		@include('general.modal.checkout')
 	</div>
 	@endif
 </body>

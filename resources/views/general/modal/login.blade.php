@@ -1,6 +1,16 @@
 <script>
     $(document).ready(function(){
-        @if (Request::is('login')) $.fancybox('#login') @endif
+        @if (Request::is('login'))
+        $.fancybox('#login',{
+            closeBtn: false,
+            helpers: { 
+                overlay : {closeClick: false}
+            },
+            keys: {
+                close: false
+            }
+        })
+        @endif
     })
 </script>
 <div id="login" class="modal" style="width: 760px;">

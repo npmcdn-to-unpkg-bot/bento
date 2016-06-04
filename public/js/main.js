@@ -30,10 +30,16 @@
 			data: $(form).serializeArray(),
 			type: 'json',
 			success: function (data) {
-				window.location.href = form.action
+				if (data){
+					if (data.redirect)
+						window.location.href = data.redirect
+					if (data.modal)
+						$.fancybox(data.modal)
+				}else{
+					window.location.href = form.action
+				}
 			},
 			error: function (data) {
-				console.log(data)
 				$(form).find('.error').remove()
 				$.each(data.responseJSON, function (name, errors){
 					$.each(errors, function(key, error){

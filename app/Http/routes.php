@@ -31,3 +31,9 @@ Route::get('blog/{slug?}',                'General\BlogController@index');
 Route::post('cart/add',                   'General\CartController@add');
 Route::post('cart/update',                'General\CartController@update');
 Route::post('cart/delete',                'General\CartController@delete');
+
+Route::post('order/fast',                 'General\OrderController@fast');
+
+Route::group(['middleware'=>'auth'],function(){
+	// Route::post('order/fast'                  'General\OrderController@fast');
+});

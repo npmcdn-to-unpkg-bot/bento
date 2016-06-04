@@ -13,29 +13,46 @@ class Cart extends Model
 
 	public static function cart() {
 
-		if (auth()->user()
-			&&!auth()->user()->cart()->has('products')
-			&&request()->cookie('cart'))
-				auth()->user()->cart->delete();
 
-		if (auth()->user())
-			return auth()->user()->cart;
+		$hash = request()->cookie('cart');
 
-		if (request()->cookie('cart'))
-			return self::where('hash', request()->cookie('cart'))->first();
+		$user = auth()->user();
 
-		return false;
+		$cart_from_hash = $hash ? self::where('hash', $hash)->first() : false;
+
+		$cart_from_user = $user ? $user->cart : false;
+
+		if (!$user)
+			return $cart_from_hash;
+
+		if ($cart_from_hash==$cart_from_user
+			||!$cart_from_hash
+			||!$cart_from_hash->products->first() )
+			return $cart_from_user;
+
+		if ($cart_from_user){
+			$cart_from_user->products()->sync([]);
+		 	$cart_from_user->delete();
+		}
+
+		$cart_from_hash->user_id = $user->id;
+		$cart_from_hash->hash = '';
+		$cart_from_hash->save();
+		return $cart_from_hash;
+
 	}
 
 	public static function init() {
 
 		$hash = request()->cookie('cart') ? request()->cookie('cart') : str_random(20);
 
-		$cart = self::firstOrNew([
-			'hash' => $hash
-		]);
+		$cart = new self;
 		
-		$cart->user_id = auth()->user() ? auth()->user()->id : 0 ;
+		if (auth()->user()){
+			$cart->user_id = auth()->user()->id;
+		}else{
+			$cart->hash = $hash;
+		}
 
 		$cart->save();
 
@@ -43,7 +60,9 @@ class Cart extends Model
 	}
 
 	public function sum() {
-		return $this->products->map(function($product){return $product->price*$product->pivot->quantity;})->sum();
+		return $this->products->map(function($product){
+			return $product->price*$product->pivot->quantity;
+		})->sum();
 	}
 
     public function user() {

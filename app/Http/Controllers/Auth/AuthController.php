@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -45,6 +46,19 @@ class AuthController extends Controller
         return response()->json([
             'email'=>['Неверные имя пользователя и пароль']
         ], 422);
+    }
+
+    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    {
+        if ($throttles) {
+            $this->clearLoginAttempts($request);
+        }
+
+        if (method_exists($this, 'authenticated')) {
+            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+        }
+
+        return response()->json(['redirect'=>redirect()->intended($this->redirectPath())->getTargetUrl()]);
     }
 
     /**
