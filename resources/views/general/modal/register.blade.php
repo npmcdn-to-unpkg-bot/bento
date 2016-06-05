@@ -13,13 +13,13 @@
         @endif
     })
 </script>
-<div id="register" class="modal" style="width: 980px;">
+<div id="register" class="modal">
     <div class="row">
-        <form class="row__col-8 registration ajax-form" action="{{ url('register') }}" method="POST">
+        <form class="row__col-8 row__col-mob-12 registration ajax-form" action="{{ url('register') }}" method="POST">
             {{csrf_field()}}
             <div class="registration__title">Регистрация нового пользователя</div>
             <div class="row">
-                <div class="row__col-6">
+                <div class="row__col-6 row__col-mob-12">
                     <div class="offset_bottom_10">
                         <input type="text" class="input input_100" name="first_name" value="{{old('first_name')}}" placeholder="Ваше имя">
                     </div>
@@ -36,7 +36,7 @@
                         <input type="text" class="input input_100" name="bento_card" value="{{old('bento_card')}}" placeholder="Карта Bento">
                     </div>
                 </div>
-                <div class="row__col-6">
+                <div class="row__col-6 row__col-mob-12">
                     <div class="offset_bottom_10">
                         <input type="text" class="input input_100" name="email" value="{{old('email')}}" placeholder="Ваш e-mail">
                     </div>
@@ -85,7 +85,7 @@
             </div>
             <button class="registration__button button button_red">ЗАРЕГЕСТРИРОВАТЬСЯ</button>
         </form>
-        <div class="row__col-4 reg-social reg-social_in-modal">
+        <div class="row__col-4 row__col-mob-12 reg-social reg-social_in-modal">
             <div class="reg-social__title">Связь с социальными сетями</div>
             <a href="" class="reg-social__item login-social-button login-social-button_vk login-social-button_big">Войти через Вконтакте</a>
             <a href="" class="reg-social__item login-social-button login-social-button_fb login-social-button_big">Войти через Facebook</a>

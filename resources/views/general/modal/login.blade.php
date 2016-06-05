@@ -13,13 +13,13 @@
         @endif
     })
 </script>
-<div id="login" class="modal" style="width: 760px;">
+<div id="login" class="modal">
     <div class="row">
-        <form class="row__col-8 login login_or-register login_in-modal ajax-form" method="POST" action="{{ url('login') }}">
+        <form class="row__col-8 row__col-mob-12 login login_or-register login_in-modal ajax-form" method="POST" action="{{ url('login') }}">
             {{ csrf_field() }}
             <div class="login__title">Авторизация</div>
             <div class="row">
-                <div class="row__col-6">
+                <div class="row__col-6 row__col-mob-12">
                 <div class="offset_bottom_10">
                     <input type="text" class="input input_100" placeholder="Ваш e-mail" name="email" value="{{old("email")}}">
                 </div>
@@ -35,17 +35,13 @@
                 </div>
                     
                 </div>
-                <div class="row__col-6">
-                    <div class="offset_bottom_10">
-                        <a href="" class="input_100 login-social-button_vk login-social-button">Войти через Вконтакте</a>
-                    </div>
-                    <div class="offset_bottom_10">
-                        <a href="" class="input_100 login-social-button_fb login-social-button">Войти через Facebook</a>
-                    </div>
+                <div class="row__col-6 row__col-mob-12">
+                    <a href="" class="reg-social__item login-social-button login-social-button_vk login-social-button_big">Войти через Вконтакте</a>
+                    <a href="" class="reg-social__item login-social-button login-social-button_fb login-social-button_big">Войти через Facebook</a>
                 </div>
             </div>
         </form>
-        <div class="row__col-right">
+        <div class="row__col-right row__col-mob-12">
             <div class="new-user">
                 <div class="new-user__title">Новый пользователь</div>
                 <div class="new-user__text">Еще нет своей учетной записи?<br>Зарегестрируйтесь!</div>

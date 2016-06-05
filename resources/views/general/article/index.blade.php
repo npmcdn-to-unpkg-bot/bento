@@ -1,4 +1,4 @@
-@extends('general.layout.desktop')
+@extends(Agent::isMobile() ? 'general.layout.mobile' : 'general.layout.desktop')
 
 @section('content')
 <div class="container">

@@ -10,6 +10,11 @@ use App\Models\Cart;
 
 class CartController extends Controller
 {
+
+	public function index() {
+		return view('general.carts.cart');
+	}
+
 	public function add(Request $request) {
 
 		$cart = Cart::cart() ? Cart::cart() : Cart::init();
@@ -20,10 +25,8 @@ class CartController extends Controller
 		}else{
 			$cart->products()->attach($request->id,['quantity'=>1]);
 		}
-
-		return response()
-			->view('general.carts.cart',['cart'=>$cart])
-			->withCookie(cookie()->forever('cart', $cart->hash));
+	
+		return response(200)->withCookie(cookie()->forever('cart', $cart->hash));
 	}
 
 	public function update(Request $request) {
@@ -31,13 +34,13 @@ class CartController extends Controller
 			$product->pivot->quantity=$request->value;
 			$product->pivot->save();
 		}
-		return view('general.carts.cart');
+		return response(200);
 	}
 
 	public function delete(Request $request) {
 		Cart::cart()
 			->products()
 			->detach($request->id);
-		return view('general.carts.cart');
+		return response(200);
 	}
 }

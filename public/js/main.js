@@ -35,6 +35,8 @@
 						window.location.href = data.redirect
 					if (data.modal)
 						$.fancybox(data.modal)
+
+					reloadFloatingShoppingCart()
 				}else{
 					window.location.href = form.action
 				}
@@ -52,7 +54,7 @@
 		});
 	}
 
-	function SendDataIdViaAjax (event) {
+	function addOrRemoveCartItem (event) {
 		event.preventDefault();
 		$.ajax({
 			url: this.href,
@@ -62,7 +64,7 @@
 				_token: $(this).attr('data-token')
 			},
 			success: function (data){
-				$('.floating-shoping-cart').html(data);
+				reloadFloatingShoppingCart()
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
@@ -70,7 +72,7 @@
 		})
 	}
 
-	function SendInputViaAjax (event) {
+	function updateCartItem (event) {
 		event.preventDefault();
 		$.ajax({
 			url: $(this).attr('data-action'),
@@ -81,7 +83,7 @@
 				value: $(this).val()
 			},
 			success: function (data){
-				$('.floating-shoping-cart').html(data);
+				reloadFloatingShoppingCart()
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
@@ -89,11 +91,18 @@
 		})
 	}
 
+
 	var topElement = $('.main-slider');
 	var bottomElement = $('.footer');
 	var floatingShopingCart = $('.floating-shoping-cart')
 
-	function PositionFloatingShopingCart(){
+	function reloadFloatingShoppingCart () {
+		$.get('/cart/index',function(data){
+			$('.shoping-cart').replaceWith(data);
+		})
+	}
+
+	function positionFloatingShopingCart(){
 		var upperLimit = topElement.offset().top + topElement.outerHeight();
 		var lowerLimit = bottomElement.offset().top;
 
@@ -114,16 +123,24 @@
 		});
 	}
 
+	function dataToggle (event) {
+		event.preventDefault()
+		$($(this).attr('href')).slideToggle();
+
+	}
+
 	// listners
 	$(document).on('submit','.ajax-form',AjaxFormSend);
-	$(document).on('click','.ajax-send-id',SendDataIdViaAjax);
-	$(document).on('change','.ajax-send-input',SendInputViaAjax);
-	$(window)
-		.on("scroll resize", PositionFloatingShopingCart)
-		.imagesLoaded(PositionFloatingShopingCart);
+	$(document).on('click','.ajax-send-id', addOrRemoveCartItem);
+	$(document).on('change','.ajax-send-input',updateCartItem);
+	if (floatingShopingCart.length)
+		$(window)
+			.on("scroll resize", positionFloatingShopingCart)
+			.imagesLoaded(positionFloatingShopingCart);
 
 	function initListeners(){
 		$('.fancybox').fancybox();
+		$('[data-toggle]').click(dataToggle);
 	}
 
 	$(document).ready(initListeners);
