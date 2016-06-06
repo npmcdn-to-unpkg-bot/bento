@@ -36,5 +36,6 @@ Route::post('cart/delete',                'General\CartController@delete');
 Route::post('order/fast',                 'General\OrderController@fast');
 
 Route::group(['middleware'=>'auth'],function(){
-	// Route::post('order/fast'                  'General\OrderController@fast');
+	Route::get('checkout',                'General\OrderController@index');
+	Route::post('checkout',               'General\OrderController@full');
 });

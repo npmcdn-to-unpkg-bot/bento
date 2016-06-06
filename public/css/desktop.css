@@ -92,6 +92,10 @@ strong{
 	margin-bottom: 10px;
 }
 
+.offset_bottom_30 {
+	margin-bottom: 30px;
+}
+
 /*jus-cont*/
 
 .jus-cont{
@@ -1136,6 +1140,14 @@ strong{
 
 .input_100 {
 	width: 100%;
+}
+
+.input_textarea {
+	height: 200px;
+	width: 500px;
+	padding: 10px;
+	line-height: normal;
+	resize: none;
 }
 
 /*rating*/

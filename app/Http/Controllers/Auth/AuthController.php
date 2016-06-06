@@ -74,6 +74,7 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
+            'phone' => 'required|max:255',
             'trafic_source' => 'required|max:255',
             'bento_card' => 'required|max:255',
             'place' => 'required|max:255'
@@ -92,6 +93,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
+            'phone' => $data['phone'],
             'trafic_source' => $data['trafic_source'],
             'bento_card' => $data['bento_card'],
             'password' => bcrypt($data['password'])

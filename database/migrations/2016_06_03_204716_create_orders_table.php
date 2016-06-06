@@ -16,6 +16,8 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->index();
+            $table->integer('place_id')->index();
+            $table->string('comment');
             $table->string('phone');
             $table->string('first_name');
         });
