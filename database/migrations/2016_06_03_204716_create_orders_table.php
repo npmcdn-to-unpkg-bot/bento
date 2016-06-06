@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
         Schema::create('order_product', function (Blueprint $table) {
             $table->integer('product_id')->index();
             $table->integer('order_id')->index();
+            $table->integer('quantity');
         });
     }
 

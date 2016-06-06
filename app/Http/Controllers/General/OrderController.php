@@ -21,7 +21,11 @@ class OrderController extends Controller
     	$order->phone = $request->phone;
     	$order->first_name = $request->first_name;
     	$order->save();
-    	$order->products()->sync(Cart::cart()->products);
+    	$order->products()->sync(
+            Cart::cart()->products->keyBy('id')->map(function($product){
+                return ['quantity'=>$product->pivot->quantity];
+            })->all()
+        );
     	Cart::cart()->delete();
 
 		return response()->json(['modal'=>'Ваш заказ принят']);
