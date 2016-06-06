@@ -118,7 +118,7 @@
 		</div>
 	</div>
 	<div class="floating-shoping-cart">
-		@include('general.carts.cart')
+		@include('general.cart.block')
 	</div>
 
 	<script src="{{url('bower/jquery/dist/jquery.min.js')}}"></script>
@@ -130,9 +130,9 @@
 
 	@if (!auth()->user())
 	<div style="display: none;">
-		@include('general.modal.register')
-		@include('general.modal.login')
-		@include('general.modal.checkout')
+		@include('general.auth.register')
+		@include('general.auth.login')
+		@include('general.checkout.modal')
 	</div>
 	@endif
 </body>

@@ -140,7 +140,7 @@
 
 	function initListeners(){
 		$('.fancybox').fancybox();
-		$('[data-toggle]').click(dataToggle);
+		$('[data-toggle="slide"]').click(dataToggle);
 	}
 
 	$(document).ready(initListeners);

@@ -9,59 +9,77 @@
 	<link rel="stylesheet" href="{{url('css/mobile.css')}}">
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="row__col-mob-6 text_center">
-				<a href="{{url('/')}}" class="logo logo_dark logo_in-header">
-					<img src="{{url('img/dark-logo.png')}}" alt="">
-				</a>
-			</div>
-			<div class="row__col-mob-6 text_center">
-				<div class="call-us offset-mob_top_30">
-					<div class="call-us__title">ПРИЕМ ЗАКАЗОВ</div>
-					<div class="call-us__phone">
-						048<span class="call-us__red">-</span>77<span class="call-us__red">-</span>55<span class="call-us__red">-</span>000
-					</div>
-					<div class="call-us__schedule">
-						с 10:00 до 22:30 ежедневно
+	<div class="floating-menu">
+		<div class="container">
+			<div class="row">
+				<div class="row__col-mob-2">
+					<a href="{{url('/')}}" class="logo logo_dark floating-menu__item">
+						<img src="{{url('img/dark-logo.png')}}" alt="">
+					</a>
+				</div>
+				<div class="row__col-mob-10">
+					<div class="row">
+						@if (auth()->user())
+						<div class="row__col-mob-6 floating-menu__border-left">
+							<a href="" class="floating-menu__item">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a>
+						</div>
+						@else
+						<div class="row__col-mob-3 floating-menu__border-left">
+							<a href="#login" class="fancybox floating-menu__item">
+								<img height="30px" src="/img/floating-menu__item/login.png" alt=""><br>
+								Вход
+							</a>
+						</div>
+						<div class="row__col-mob-3 floating-menu__border-left">
+							<a href="#register" class="fancybox floating-menu__item">
+								<img height="30px" src="/img/floating-menu__item/register.png" alt=""><br>
+								Регистрация
+							</a>
+						</div>
+						@endif
+						<div class="row__col-mob-3 floating-menu__border-left">
+							<a href="#shoping-cart" class="floating-menu__item" data-toggle="slide">
+								<img height="30px" src="/img/floating-menu__item/cart.png" alt=""><br>
+								Заказ
+							</a>
+							<div id="shoping-cart" class="toggle-menu">
+								@include('general.cart.block')
+							</div>
+						</div>
+						<div class="row__col-mob-3 floating-menu__border-left">
+							<a href="#main-menu" class="floating-menu__item" data-toggle="slide">
+								<img height="30px" src="/img/floating-menu__item/menu.png" alt=""><br>
+								Меню
+							</a>
+							<div id="main-menu" class="main-menu toggle-menu">
+								@foreach (App\Models\Category::all() as $category)
+								<a href="/menu/{{$category->slug}}" class="main-menu__item">{{$category->name}}</a>
+								@endforeach
+								<hr>
+								<a href="" class="main-menu__item">ДОСТАВКА И ОПЛАТА</a>
+								<a href="" class="main-menu__item">НОВОСТИ И АКЦИИ</a>
+								<a href="" class="main-menu__item">НАШИ КОНТАКТЫ</a>
+								<hr>
+								<a href="" class="main-menu__item">О ресторане</a>
+								<a href="" class="main-menu__item">Оставить отзыв</a>
+								<a href="" class="main-menu__item">Вакансии</a>
+								<a href="" class="main-menu__item">Партнеры</a>
+								<a href="{{url('blog')}}" class="main-menu__item">Блог</a>
+								<hr>
+								@if (!auth()->user())
+								<a href="#login" class="fancybox main-menu__item">Вход</a>
+								<a href="#register" class="fancybox main-menu__item">Регистрация</a>
+								@endif
+								<a href="" class="main-menu__item">Избранное</a>
+								<a href="" class="main-menu__item">Мои сравнения</a>
+								<a href="" class="main-menu__item">Корзина</a>
+								@if (auth()->user())
+								<a href="{{url('logout')}}" class="main-menu__item">Выход</a>
+								@endif
+							</div>				
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="row offset-mob_bottom_30">
-			<div class="row__col-mob-6">
-				<div class="text_center">
-					<a href="#main-menu" class="sandwich" data-toggle="slide">МЕНЮ</a>
-				</div>
-				<div id="main-menu" class="main-menu">
-					<a href="" class="main-menu__item">МЕНЮ</a>
-					<a href="" class="main-menu__item">ДОСТАВКА И ОПЛАТА</a>
-					<a href="" class="main-menu__item">НОВОСТИ И АКЦИИ</a>
-					<a href="" class="main-menu__item">НАШИ КОНТАКТЫ</a>
-					<hr>
-					<a href="" class="main-menu__item">О ресторане</a>
-					<a href="" class="main-menu__item">Оставить отзыв</a>
-					<a href="" class="main-menu__item">Вакансии</a>
-					<a href="" class="main-menu__item">Партнеры</a>
-					<a href="{{url('blog')}}" class="main-menu__item">Блог</a>
-					<hr>
-					@if (!auth()->user())
-					<a href="#login" class="fancybox main-menu__item">Вход</a>
-					<a href="#register" class="fancybox main-menu__item">Регистрация</a>
-					@endif
-					<a href="" class="main-menu__item">Избранное</a>
-					<a href="" class="main-menu__item">Мои сравнения</a>
-					<a href="" class="main-menu__item">Корзина</a>
-					@if (auth()->user())
-					<a href="{{url('logout')}}" class="main-menu__item">Выход</a>
-					@endif
-				</div>				
-			</div>
-			<div class="row__col-mob-6 text_center">
-				<form class="search">
-					<input type="text" placeholder="Поиск..." class="search__input">
-					<button class="search__submit"></button>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -72,7 +90,6 @@
 			<li><img src="{{url('sample-images/slide-1.jpg')}}" alt=""></li>
 		</ul>
 	</div>
-	@include('general.carts.cart')
 	@yield('content')
 	<div class="container-fluid container-fluid_darkgray footer">
 		<div class="container container_fix">
@@ -113,9 +130,9 @@
 
 	@if (!auth()->user())
 	<div style="display: none;">
-		@include('general.modal.register')
-		@include('general.modal.login')
-		@include('general.modal.checkout')
+		@include('general.auth.register')
+		@include('general.auth.login')
+		@include('general.checkout.modal')
 	</div>
 	@endif
 </body>

@@ -12,7 +12,7 @@ class CartController extends Controller
 {
 
 	public function index() {
-		return view('general.carts.cart');
+		return view('general.cart.block');
 	}
 
 	public function add(Request $request) {

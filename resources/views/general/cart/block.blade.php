@@ -1,5 +1,5 @@
-@if (!auth()->user())
 <div class="shoping-cart">
+	@if (!auth()->user())
 	<div class="shoping-cart__user">
 		<img src="{{url('img/login-icon.png')}}" alt="" class="shoping-cart__icon">
 		<a href="#login" class="fancybox shoping-cart__login">ВХОД</a>
@@ -42,5 +42,5 @@
 		</tr>						
 	</table>
 	<a @if (auth()->user()) href="{{url('checkout')}}" @else href="#checkout" @endif class="fancybox shoping-cart__checkout button button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
+	@endif
 </div>
-@endif
