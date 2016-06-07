@@ -1,11 +1,15 @@
 @extends(Agent::isMobile() ? 'general.layout.mobile' : 'general.layout.desktop')
 
+@section('title') {{ $product->name }} @endsection
+@section('meta-title') {{$product->meta_title ? $product->meta_title : $product->name }} @endsection
+@section('meta-desctiption') {{$product->meta_description ? $product->meta_description : $product->description }} @endsection
+
 @section('content')
 	<div class="container product-cart">
 		<table>
 			<tr>
 				<td class="product-cart__image-wrap" rowspan="999">
-					<img src="/width/720?image={{$product->image}}" alt="" class="product-cart__image">
+					<a href="{{url($product->image)}}" class="fancybox"><img src="/width/720?image={{$product->image}}" alt="" class="product-cart__image"></a>
 				</td>
 				<td class="product-cart__name">{{$product->name}}</td>
 			</tr>
@@ -45,12 +49,8 @@
 			</tr>
 			<tr>
 				<td class="product-cart__share-buttons-wrap">
-					Расказать друзьям:
-					<div class="share-buttons">
-						<a href="" class="share-buttons__item share-buttons__item_fb"></a>
-						<a href="" class="share-buttons__item share-buttons__item_vk"></a>
-						<a href="" class="share-buttons__item share-buttons__item_ml"></a>
-						<a href="" class="share-buttons__item share-buttons__item_tw"></a>
+					<div class="offset_top_30">
+						Расказать друзьям: <div class="share-buttons">@include('general.share')</div>
 					</div>
 				</td>
 			</tr>

@@ -1,5 +1,9 @@
 @extends(Agent::isMobile() ? 'general.layout.mobile' : 'general.layout.desktop')
 
+@section('title') Главная @endsection
+@section('meta-title') @endsection
+@section('meta-desctiption') @endsection
+
 @section('content')
 	<div class="container">
 		<div class="title">
