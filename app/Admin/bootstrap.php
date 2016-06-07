@@ -4,7 +4,8 @@ function makeSlug ($model) {
 	$name = Request::get('name') ? Request::get('name') : Request::get('title');
     $slug = str_slug($name);
     $i = 1;
-    while ( get_class($model)::where('slug', $slug)->first() )
+    $class = get_class($model);
+    while ( $class::where('slug', $slug)->first() )
         $slug = str_slug($name) . '-' . $i++;
 
     $model->slug = $slug;
