@@ -20,6 +20,7 @@ class NewsController extends Controller
                 'sidebar' => [
                     'title' => 'БЛОГ',
                     'articles' => Blog::orderBy('created_at')->paginate(3),
+                    'url' => url('blog')
                 ]
             ]);
         }else{
@@ -34,6 +35,7 @@ class NewsController extends Controller
             'sidebar' => [
                 'title' => 'НОВОСТИ И АКЦИИ',
                 'articles' => News::orderBy('created_at')->paginate(3),
+                'url' => url('news')
             ]
         ]);
     }
