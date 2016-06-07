@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>@yield('title')</title>
+	<meta name="csrf-token" content="{{csrf_token()}}">
 	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{url('css/desktop.css')}}">
@@ -56,8 +57,8 @@
 					с 10:00 до 22:30 ежедневно
 				</div>
 			</div>
-			<form class="row__col-right search search_in-header">
-				<input type="text" placeholder="Поиск..." class="search__input">
+			<form action="{{url('search')}}" class="row__col-right search search_in-header">
+				<input name="q" type="text" placeholder="Поиск..." class="search__input" value="{{Request::get('q')}}">
 				<button class="search__submit"></button>
 			</form>
 		</div>

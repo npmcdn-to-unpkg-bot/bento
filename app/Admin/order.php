@@ -16,6 +16,9 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
             AdminColumn::custom()->setCallback(function($order) { 
                 return $order->sum(); 
             })->setLabel('Сумма'),
+            AdminColumn::text('payment_method')->setLabel('Способ оплаты'),
+            AdminColumn::text('payed')->setLabel('Статус оплаты'),
+            AdminColumn::text('status')->setLabel('Статус')
         ]);
         $display->paginate(15);
         return $display;
@@ -23,10 +26,26 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
     // Create And Edit
     $model->onCreateAndEdit(function() {
         return $form = AdminForm::panel()->addBody(
-
+            AdminFormElement::radio('payed', 'Статус оплаты')->setOptions([
+                'Ожидает оплаты'                    => 'Ожидает оплаты',
+                'Оплачен'                           => 'Оплачен'
+            ]),
+            AdminFormElement::radio('status', 'Статус заказа')->setOptions([
+                'В обработке'                       => 'В обработке',
+                'Принят'                            => 'Принят',
+                'Приготовлен'                       => 'Приготовлен',
+                'В пути'                            => 'В пути',
+                'Доставлен'                         => 'Доставлен',
+                'Не обработан (отклонен)'           => 'Не обработан (отклонен)'
+            ]),
+            AdminFormElement::radio('payment_method','Способ оплаты')->setOptions([
+                'Наличными при получении'           => 'Наличными при получении',
+                'Онлайн оплата visa/mastercard'     => 'Онлайн оплата visa/mastercard'
+            ]),
+            AdminFormElement::textarea('comment', 'Коментарий к заказу')
         );
         return $form;
     });
 })
-    ->addMenuPage(App\Models\Order::class, 20)
+    ->addMenuPage(App\Models\Order::class, 21)
     ->setIcon('fa fa-money');

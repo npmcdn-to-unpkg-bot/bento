@@ -27,6 +27,7 @@ Route::get('/',                           'General\HomeController@index');
 Route::get('menu/{slug}',                 'General\ProductController@index');
 Route::get('news/{slug?}',                'General\NewsController@index');
 Route::get('blog/{slug?}',                'General\BlogController@index');
+Route::get('search',                      'General\SearchController@index');
 
 Route::get('cart/index',                  'General\CartController@index');
 Route::post('cart/add',                   'General\CartController@add');

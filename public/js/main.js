@@ -30,16 +30,14 @@
 			data: $(form).serializeArray(),
 			type: 'json',
 			success: function (data) {
-				if (data){
-					if (data.redirect)
-						window.location.href = data.redirect
-					if (data.modal)
-						$.fancybox(data.modal)
+				reloadFloatingShoppingCart()
 
-					reloadFloatingShoppingCart()
-				}else{
+				if (data.redirect)
+					window.location.href = data.redirect
+				else if (data.modal)
+					$.fancybox(data.modal)
+				else
 					window.location.href = form.action
-				}
 			},
 			error: function (data) {
 				$(form).find('.error').remove()
@@ -59,9 +57,10 @@
 		$.ajax({
 			url: this.href,
 			method: "POST",
+			type: 'json',
 			data: {
 				id: $(this).attr('data-id'),
-				_token: $(this).attr('data-token')
+				_token: $('meta[name="csrf-token"]').attr('content')
 			},
 			success: function (data){
 				reloadFloatingShoppingCart()
@@ -77,9 +76,10 @@
 		$.ajax({
 			url: $(this).attr('data-action'),
 			method: "POST",
+			type: 'json',
 			data: {
 				id: $(this).attr('data-id'),
-				_token: $(this).attr('data-token'),
+				_token: $('meta[name="csrf-token"]').attr('content'),
 				value: $(this).val()
 			},
 			success: function (data){

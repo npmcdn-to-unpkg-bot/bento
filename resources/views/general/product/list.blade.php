@@ -42,7 +42,7 @@
 					<td>
 						<a href="" class="product__compare button button_small"></a>
 						<a href="" class="product__wish button button_small"></a>
-						<a href="{{url('cart/add')}}" data-id="{{$product->id}}" data-token="{{csrf_token()}}" class="ajax-send-id product__buy button button_small">В КОРЗИНУ</a>
+						<a href="{{url('cart/add')}}" data-id="{{$product->id}}" class="ajax-send-id product__buy button button_small">В КОРЗИНУ</a>
 					</td>
 				</tr>
 			</table>		

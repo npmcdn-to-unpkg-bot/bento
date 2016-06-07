@@ -15,11 +15,11 @@
 		@foreach ($cart->products as $product)
 		<tr class="shoping-cart__item">
 			<td class="shoping-cart__item-count">
-				<input type="number" data-action="{{url('cart/update')}}" data-id="{{$product->id}}" data-token="{{csrf_token()}}" class="ajax-send-input number number_small" name="" value="{{$product->pivot->quantity}}">
+				<input type="number" data-action="{{url('cart/update')}}" data-id="{{$product->id}}" class="ajax-send-input number number_small" name="" value="{{$product->pivot->quantity}}">
 			</td>
 			<td class="shoping-cart__item-name">{{$product->name}}</td>
 			<td class="shoping-cart__item-price">{{$product->price*$product->pivot->quantity}}грн</td>
-			<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" data-token="{{csrf_token()}}" class="ajax-send-id shoping-cart__item-remove"></a></td>
+			<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="ajax-send-id shoping-cart__item-remove"></a></td>
 		</tr>
 		@endforeach
 	</table>
