@@ -55,16 +55,16 @@
 		<div class="container">
 			<div class="row">
 				<div class="row__col-9 row__col-mob-12">
-					<div class="title">
-						<div class="title__text">НОВОСТИ И АКЦИИ</div>
-					</div>
-					@include('general.article.slider',['articles'=>[]])
+					@include('general.article.slider',[
+						'articles'=> App\Models\News\Article::orderBy('created_at')->take(3)->get(),
+						'title' => 'НОВОСТИ И АКЦИИ'
+					])
 				</div>
 				<div class="row__col-3 row__col-mob-12">
-					<div class="title">
-						<div class="title__text">БЛОГ</div>
-					</div>
-					@include(Agent::isMobile() ? 'general.article.slider' : 'general.article.block',['articles'=>[]])
+					@include(Agent::isMobile() ? 'general.article.slider' : 'general.article.block',[
+						'articles'=> App\Models\Blog\Article::orderBy('created_at')->take(3)->get(),
+						'title'=>'БЛОГ'
+					])
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,6 @@
+<div class="title">
+	<div class="title__text">{{$title}}</div>
+</div>
 <div class="articles-slider">
 	<ul class="slides">
 		<li>

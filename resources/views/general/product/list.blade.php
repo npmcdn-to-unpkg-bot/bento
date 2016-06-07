@@ -6,7 +6,7 @@
 			<table class="product">
 				<tr>
 					<td class="product__images-wrap">
-						<a href="{{url('menu/'.$product->id)}}">
+						<a href="{{$product->url()}}">
 							<img src="/fit/210/140?image={{$product->image}}" alt="" class="product__image">
 							@if ($product->left_label) <img src="{{url($product->left_label->image)}}" alt="" class="product__left-label"> @endif
 							@if ($product->right_label) <img src="{{url($product->right_label->image)}}" alt="" class="product__right-label"> @endif
@@ -15,12 +15,12 @@
 				</tr>
 				<tr>
 					<td class="product__title-wrap">
-						<a href="{{url('menu/'.$product->id)}}" class="product__title">{{$product->name}}</a>
+						<a href="{{$product->url()}}" class="product__title">{{$product->name}}</a>
 					</td>
 				</tr>
 				<tr>
 					<td class="product__ingredients-wrap">
-						<a href="{{url('menu/'.$product->id)}}" class="product__ingredients">{{$product->ingredients->implode('name',', ')}}</a>
+						<a href="{{$product->url()}}" class="product__ingredients">{{$product->ingredients->implode('name',', ')}}</a>
 					</td>
 				</tr>
 				<tr>

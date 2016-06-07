@@ -1,19 +1,14 @@
+<div class="title">
+	<div class="title__text">{{$title}}</div>
+</div>
 <div class="l-articles">
 	<div class="l-articles__title">Наиболее популярные</div>
+	@foreach($articles as $article)
 	<div class="l-articles__item">
-		<img src="sample-images/thumbnail-article-1.jpg" alt="" class="l-articles__image">
-		<div class="l-articles__text">Как сделать вкусный десерт</div>
-		<a href="" class="l-articles__more">Читать</a>
+		<img src="/fit/85/85?image={{$article->image}}" alt="" class="l-articles__image">
+		<div class="l-articles__text">{{$article->title}}</div>
+		<a href="{{$article->url()}}" class="l-articles__more">Читать</a>
 	</div>
-	<div class="l-articles__item">
-		<img src="sample-images/thumbnail-article-2.jpg" alt="" class="l-articles__image">
-		<div class="l-articles__text">Как сделать вкусный десерт</div>
-		<a href="" class="l-articles__more">Читать</a>
-	</div>
-	<div class="l-articles__item">
-		<img src="sample-images/thumbnail-article-1.jpg" alt="" class="l-articles__image">
-		<div class="l-articles__text">Как сделать вкусный десерт</div>
-		<a href="" class="l-articles__more">Читать</a>
-	</div>								
-	<a href="" class="l-articles__all">Смотреть все новости</a>
+	@endforeach
+	<a href="{{$article->allUrl()}}" class="l-articles__all">Смотреть все новости</a>
 </div>

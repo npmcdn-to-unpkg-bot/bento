@@ -63,4 +63,9 @@ class Product extends Model
             return 100*$fats/$this->weight();
         }
     }
+
+    public function url () {
+        return url('menu/'.$this->slug);
+    }
+    
 }

@@ -119,7 +119,7 @@
 		}
 
 		floatingShopingCart.css({
-			height: lowerLimit - floatingShopingCart.offset().top,
+			height: lowerLimit - floatingShopingCart.offset().top - 2,
 		});
 	}
 

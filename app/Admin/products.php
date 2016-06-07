@@ -49,9 +49,17 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
 
                 $model->ingredients()->sync($ingredients);
             }));
-
         return $form;
     });
+
+    $model->creating(function($model, $product){
+        makeSlug($model, $product);
+    });
+
+    $model->updating(function($model, $product){
+        makeSlug($model, $product);
+    });
+
 })
     ->addMenuPage(App\Models\Product::class, 10)
     ->setIcon('fa fa-shopping-basket');
