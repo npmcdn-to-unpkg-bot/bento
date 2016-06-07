@@ -22,7 +22,10 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
             AdminFormElement::select('right_label_id', 'Правый лейбл')->setModelForOptions('App\Models\Label')->setDisplay('name'),
             AdminFormElement::multiselect('categories', 'Категории')->setModelForOptions('App\Models\Category')->setDisplay('name'),
             AdminFormElement::text('meta_title', 'meta-title'),
-            AdminFormElement::textarea('meta_description', 'meta-description')
+            AdminFormElement::textarea('meta_description', 'meta-description'),
+            AdminFormElement::custom()->setCallback(function($model){
+                makeSlug($model);
+            })
         );
 
         $form->addItem(AdminFormElement::custom()
@@ -54,13 +57,6 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
         return $form;
     });
 
-    $model->creating(function($model, $product){
-        makeSlug($model, $product);
-    });
-
-    $model->updating(function($model, $product){
-        makeSlug($model, $product);
-    });
 
 })
     ->addMenuPage(App\Models\Product::class, 10)

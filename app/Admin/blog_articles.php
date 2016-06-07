@@ -19,16 +19,14 @@ AdminSection::registerModel(App\Models\Blog\Article::class, function ($model) {
             AdminFormElement::textarea('entry', 'Краткое содержание')->required(),
             AdminFormElement::ckeditor('content', 'Содержание')->required(),
             AdminFormElement::text('meta_title', 'meta-title'),
-            AdminFormElement::textarea('meta_description', 'meta-description')
+            AdminFormElement::textarea('meta_description', 'meta-description'),
+            AdminFormElement::custom()->setCallback(function($model){
+                makeSlug($model);
+            })
         );
         return $form;
     });
-    $model->creating(function($model, $article){
-        makeSlug($model, $article);
-    });
-    $model->updating(function($model, $article){
-        makeSlug($model, $article);
-    });
+
 })  
     ->addMenuPage(App\Models\Blog\Article::class, 50)
     ->setUrl('admin/blog')

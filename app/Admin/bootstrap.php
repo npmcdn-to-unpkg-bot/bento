@@ -1,14 +1,13 @@
 <?php
 
-function makeSlug ($model, $item) {
-    $slug = str_slug($item->name ? $item->name : $item->title);
+function makeSlug ($model) {
+	$name = Request::get('name') ? Request::get('name') : Request::get('title');
+    $slug = str_slug($name);
     $i = 1;
-    $class = $model->getClass();
-    while ( $class::where('slug', $slug)->first() )
-        $slug = str_slug($item->name ? $item->name : $item->title) . '-' . $i++;
+    while ( get_class($model)::where('slug', $slug)->first() )
+        $slug = str_slug($name) . '-' . $i++;
 
-    $item->slug = $slug;
-    $item->save();
+    $model->slug = $slug;
 }
 
 // PackageManager::load('admin-default')
