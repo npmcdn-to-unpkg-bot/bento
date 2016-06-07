@@ -135,8 +135,8 @@
 	$(document).on('change','.ajax-send-input',updateCartItem);
 	if (floatingShopingCart.length)
 		$(window)
-			.on("scroll resize", positionFloatingShopingCart)
-			.imagesLoaded(positionFloatingShopingCart);
+			.imagesLoaded(positionFloatingShopingCart)
+			.on("scroll resize", positionFloatingShopingCart);
 
 	function initListeners(){
 		$('.fancybox').fancybox();

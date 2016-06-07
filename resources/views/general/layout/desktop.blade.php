@@ -90,6 +90,9 @@
 			<li><img src="{{url('sample-images/slide-1.jpg')}}" alt=""></li>
 		</ul>
 	</div>
+	<div class="floating-shoping-cart">
+		@include('general.cart.block')
+	</div>
 	@yield('content')
 	<div class="container-fluid container-fluid_darkgray footer">
 		<div class="container container_fix">
@@ -119,9 +122,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="floating-shoping-cart">
-		@include('general.cart.block')
 	</div>
 
 	<script src="{{url('bower/jquery/dist/jquery.min.js')}}"></script>

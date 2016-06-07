@@ -1363,9 +1363,8 @@ strong{
 
 .floating-shoping-cart{
 	width: 280px;
-	position: fixed;
+	position: absolute;
 	right: 0;
-	top: 250px;
 	background-color: white;
 	padding: 0 13px;
 	overflow-y: auto;
@@ -1899,4 +1898,22 @@ a.flex-active{
 
 #login {
 	width: 760px;
+}
+
+/*main-slider*/
+
+.main-slider img{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: auto;
+}
+
+.main-slider{
+	width: 100%;
+	padding-bottom: 28%;
+	overflow: hidden;
+	height: 0;
+	background: black;
 }
