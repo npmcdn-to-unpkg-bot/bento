@@ -63,7 +63,8 @@
 				<div class="row__col-3 row__col-mob-12">
 					@include(Agent::isMobile() ? 'general.article.slider' : 'general.article.block',[
 						'articles'=> App\Models\Blog\Article::orderBy('created_at')->take(3)->get(),
-						'title'=>'БЛОГ'
+						'title'=>'БЛОГ',
+						'url'=>url('blog')
 					])
 				</div>
 			</div>

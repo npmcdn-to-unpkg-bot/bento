@@ -10,5 +10,5 @@
 		<a href="{{$article->url()}}" class="l-articles__more">Читать</a>
 	</div>
 	@endforeach
-	<a href="{{$article->allUrl()}}" class="l-articles__all">Смотреть все новости</a>
+	<a href="{{$url}}" class="l-articles__all">Смотреть все новости</a>
 </div>
