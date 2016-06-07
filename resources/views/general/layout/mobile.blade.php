@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>@yield('title')</title>
+	<meta name="title" content="@yield('meta-title')">
+	<meta name="description" content="@yield('meta-description')">
 	<meta name="csrf-token" content="{{csrf_token()}}">
 	<meta name="viewport" content="width=720px, user-scalable=no">
 	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">

@@ -17,7 +17,9 @@ AdminSection::registerModel(App\Models\Blog\Article::class, function ($model) {
             AdminFormElement::text('title', 'Заголовок')->required(),
             AdminFormElement::image('image', 'Картинка'),
             AdminFormElement::textarea('entry', 'Краткое содержание')->required(),
-            AdminFormElement::ckeditor('content', 'Содержание')->required()
+            AdminFormElement::ckeditor('content', 'Содержание')->required(),
+            AdminFormElement::text('meta_title', 'meta-title'),
+            AdminFormElement::textarea('meta_description', 'meta-description')
         );
         return $form;
     });

@@ -20,7 +20,9 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
             AdminFormElement::text('order', 'Порядок сортировки'),
             AdminFormElement::select('left_label_id', 'Левый лейбл')->setModelForOptions('App\Models\Label')->setDisplay('name'),
             AdminFormElement::select('right_label_id', 'Правый лейбл')->setModelForOptions('App\Models\Label')->setDisplay('name'),
-            AdminFormElement::multiselect('categories', 'Категории')->setModelForOptions('App\Models\Category')->setDisplay('name')
+            AdminFormElement::multiselect('categories', 'Категории')->setModelForOptions('App\Models\Category')->setDisplay('name'),
+            AdminFormElement::text('meta_title', 'meta-title'),
+            AdminFormElement::textarea('meta_description', 'meta-description')
         );
 
         $form->addItem(AdminFormElement::custom()
