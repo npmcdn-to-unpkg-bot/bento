@@ -33,8 +33,8 @@ AdminSection::registerModel(App\Models\Sale::class, function ($model) {
             AdminFormElement::time('end', 'конец')->setFormat('H:i')->setDefaultValue('00:00'),
             AdminFormElement::checkbox('stackable', 'Суммируется с другими скидками')->setDefaultValue(true),
             AdminFormElement::text('value', 'Скидка в %'),
-            AdminFormElement::multiselect('users', 'Пользователи')->setModelForOptions('App\User')->setDisplay('email')->setHelpText('Оставьте пустым если скидка действует для всех пользователей'),
-            AdminFormElement::multiselect('products', 'Товары')->setModelForOptions('App\Models\Product')->setDisplay('name')->setHelpText('Оставьте пустым если скидка действует для всех товаров'),
+            AdminFormElement::multiselect('users', 'Пользователи')->setModelForOptions('App\User')->setDisplay('email'),
+            AdminFormElement::multiselect('products', 'Товары')->setModelForOptions('App\Models\Product')->setDisplay('name'),
             AdminFormElement::text('order', 'Порядок')->setReadonly(true)
         );
         return $form;

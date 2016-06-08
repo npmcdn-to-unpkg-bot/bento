@@ -72,4 +72,15 @@ class Cart extends Model
     public function products() {
     	return $this->belongsToMany('App\Models\Product')->withPivot('quantity');
     }
+
+    public function gift() {
+    	return Gift::where('start','<=',$this->cart()->sum())
+    		->orderBy('start','desc')
+    		->first();
+    }
+    public function next_gift() {
+    	return Gift::where('start','>',$this->cart()->sum())
+    		->orderBy('start','asc')
+    		->first();
+    }
 }

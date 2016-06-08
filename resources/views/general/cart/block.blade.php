@@ -22,6 +22,14 @@
 			<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="ajax-send-id shoping-cart__item-remove"></a></td>
 		</tr>
 		@endforeach
+		@if ($cart->gift() && $product = $cart->gift()->product)
+			<tr class="shoping-cart__item">
+				<td class="shoping-cart__item-count">1</td>
+				<td class="shoping-cart__item-name">{{$product->name}}</td>
+				<td class="shoping-cart__item-price">0грн</td>
+				<td></td>
+			</tr>
+		@endif
 	</table>
 	<table class="cart-total">
 		<tr>
@@ -42,5 +50,8 @@
 		</tr>						
 	</table>
 	<a @if (auth()->user()) href="{{url('checkout')}}" @else href="#checkout" @endif class="fancybox shoping-cart__checkout button button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
+	@endif
+	@if ($cart->next_gift())
+		<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
 	@endif
 </div>
