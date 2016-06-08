@@ -61,7 +61,7 @@ class Cart extends Model
 
 	public function sum() {
 		return $this->products->map(function($product){
-			return $product->price*$product->pivot->quantity;
+			return $product->new_price()*$product->pivot->quantity;
 		})->sum();
 	}
 

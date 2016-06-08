@@ -16,6 +16,7 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
             AdminFormElement::text('name', 'Название')->required(),
             AdminFormElement::image('image', 'Картинка')->required(),
             AdminFormElement::ckeditor('description', 'Описание'),
+            AdminFormElement::textaddon('old_price', 'Cтарая цена')->setAddon('грн.')->placeAfter(),
             AdminFormElement::textaddon('price', 'Цена')->required()->setAddon('грн.')->placeAfter(),
             AdminFormElement::text('order', 'Порядок сортировки'),
             AdminFormElement::select('left_label_id', 'Левый лейбл')->setModelForOptions('App\Models\Label')->setDisplay('name'),

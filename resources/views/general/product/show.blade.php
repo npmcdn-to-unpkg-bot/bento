@@ -26,7 +26,12 @@
 				</td>
 			</tr>
 			<tr><td class="product-cart__text">{!!$product->description!!}</td></tr>
-			<tr><td><span class="product-cart__weight">{{$product->price*1.2}}гр.</span><span class="product-cart__price">{{$product->price}} грн</span></td></tr>
+			<tr><td><span class="product-cart__weight">{{$product->weight()}}гр.</span>
+			<span class="product__price">
+				@if($product->old_price)<del>{{$product->old_price}} грн</del> @endif
+				{{$product->new_price()}} грн
+			</span>
+			</td></tr>
 			<tr>
 				<td>
 					<a href="" class="product-cart__compare button button_small"></a>

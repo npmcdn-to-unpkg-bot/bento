@@ -18,13 +18,13 @@ AdminSection::registerModel(App\User::class, function ($model) {
     // Create And Edit
     $model->onCreateAndEdit(function() {
         return $form = AdminForm::panel()->addBody(
-            AdminFormElement::text('email', 'Email')->required(),
+            AdminFormElement::text('email', 'Email')->required()->setReadonly(true),
             AdminFormElement::text('first_name', 'Имя')->required(),
             AdminFormElement::text('last_name', 'Фамилия')->required(),
             AdminFormElement::date('birth_day', 'День рождения')->required(),
             AdminFormElement::text('phone', 'Телефон')->required(),
             AdminFormElement::text('bento_card', 'Карта bento'),
-            AdminFormElement::text('trafic_source', 'Где он узнал о bento')
+            AdminFormElement::text('trafic_source', 'Где он узнал о bento')->setReadonly(true)
         );
         return $form;
     });

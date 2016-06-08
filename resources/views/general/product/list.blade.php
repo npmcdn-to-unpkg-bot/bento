@@ -25,7 +25,9 @@
 				</tr>
 				<tr>
 					<td class="product__price-wrap">
-						<span class="product__price">{{$product->price}}
+						<span class="product__price">
+						@if($product->old_price)<del>{{$product->old_price}} <span class="product__curency">грн</span></del> @endif
+						{{$product->new_price()}}
 							<span class="product__curency">грн</span>
 						</span>
 					</td>

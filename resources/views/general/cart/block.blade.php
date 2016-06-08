@@ -18,7 +18,7 @@
 				<input type="number" data-action="{{url('cart/update')}}" data-id="{{$product->id}}" class="ajax-send-input number number_small" name="" value="{{$product->pivot->quantity}}">
 			</td>
 			<td class="shoping-cart__item-name">{{$product->name}}</td>
-			<td class="shoping-cart__item-price">{{$product->price*$product->pivot->quantity}}грн</td>
+			<td class="shoping-cart__item-price">{{$product->new_price()*$product->pivot->quantity}}грн</td>
 			<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="ajax-send-id shoping-cart__item-remove"></a></td>
 		</tr>
 		@endforeach
