@@ -76,12 +76,14 @@
 			</tr>
 		</table>
 	</div>
-	<div class="container">
-		<div class="title">
-			<span class="title__text">РЕКОМЕНДАЦИИ ОТ <strong>BENTO</strong></span>
+	@if ($recommendations = App\Models\Setting::get('recommendations'))
+		<div class="container">
+			<div class="title">
+				<span class="title__text">РЕКОМЕНДАЦИИ ОТ <strong>BENTO</strong></span>
+			</div>
+			@include('general.product.list',['products' => App\Models\Product::find($recommendations)])
 		</div>
-		@include('general.product.list',['products' => App\Models\Product::orderBy('created_at')->take(3)->get()])
-	</div>
+	@endif
 	@include('general.review.slider')
 	@include('general.block.advantages')
 @endsection

@@ -4,23 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Order extends Cart
 {
-    public function products() {
-    	return $this->belongsToMany('App\Models\Product')->withPivot('quantity');;
-    }
+
+	public static function get() {
+		//
+	}
+
+	public static function init() {
+		//
+	}
 
     public function user() {
     	return $this->belongsTo('App\User');
     }
 
-	public function sum() {
-		return $this->products->map(function($product){
-			return $product->price*$product->pivot->quantity;
-		})->sum();
-	}
-
 	public function count() {
 		return $this->products()->sum('order_product.quantity');
 	}
+
 }

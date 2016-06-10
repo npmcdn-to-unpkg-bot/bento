@@ -32,6 +32,14 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Cart');
     }
 
+    public function wishlist () {
+        return $this->hasOne('App\Models\Wishlist');
+    }
+
+    public function comparelist () {
+        return $this->hasOne('App\Models\Comparelist');
+    }
+
     public function orders () {
         return $this->hasMany('App\Models\Order');
     }

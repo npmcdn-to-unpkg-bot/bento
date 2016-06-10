@@ -15,9 +15,13 @@ class CartController extends Controller
 		return view('general.cart.block');
 	}
 
+	public function block() {
+		return view('general.cart.block');
+	}
+
 	public function add(Request $request) {
 
-		$cart = Cart::cart() ? Cart::cart() : Cart::init();
+		$cart = Cart::get() ? Cart::get() : Cart::init();
 	
 		if ($product = $cart->products()->find($request->id)) {
 			$product->pivot->quantity++;
@@ -26,11 +30,11 @@ class CartController extends Controller
 			$cart->products()->attach($request->id,['quantity'=>1]);
 		}
 	
-		return response(200)->withCookie(cookie()->forever('cart', $cart->hash));
+		return response(200);
 	}
 
 	public function update(Request $request) {
-		if ($product = Cart::cart()->products()->find($request->id)) {
+		if ($product = Cart::get()->products()->find($request->id)) {
 			$product->pivot->quantity=$request->value;
 			$product->pivot->save();
 		}
@@ -38,7 +42,7 @@ class CartController extends Controller
 	}
 
 	public function delete(Request $request) {
-		Cart::cart()
+		Cart::get()
 			->products()
 			->detach($request->id);
 		return response(200);

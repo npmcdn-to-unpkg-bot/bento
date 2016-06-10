@@ -31,11 +31,11 @@ class OrderController extends Controller
         $order->first_name = $user->first_name;
         $order->save();
         $order->products()->sync(
-            Cart::cart()->products->keyBy('id')->map(function($product){
+            Cart::get()->products->keyBy('id')->map(function($product){
                 return ['quantity'=>$product->pivot->quantity];
             })->all()
         );
-        Cart::cart()->delete();    
+        Cart::get()->delete();    
 
         return redirect('/');
 
@@ -51,11 +51,11 @@ class OrderController extends Controller
         $order->first_name = $request->first_name;
         $order->save();
         $order->products()->sync(
-            Cart::cart()->products->keyBy('id')->map(function($product){
+            Cart::get()->products->keyBy('id')->map(function($product){
                 return ['quantity'=>$product->pivot->quantity];
             })->all()
         );
-        Cart::cart()->delete();
+        Cart::get()->delete();
 
         return response()->json(['modal'=>'Ваш заказ принят']);
     }

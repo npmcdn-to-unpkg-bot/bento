@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Request;
+use App\Models\Setting;
 
 class Cart extends Model
 {
-	protected $fillable = [
-		'hash'
-	];
+	protected $fillable = [ 'hash'	];
 
-	public static function cart() {
+	public static function get() {
 
 
-		$hash = request()->cookie('cart');
+		$hash = request()->cookie('laravel_session');
 
 		$user = auth()->user();
 
@@ -44,16 +43,13 @@ class Cart extends Model
 
 	public static function init() {
 
-		$hash = request()->cookie('cart') ? request()->cookie('cart') : str_random(20);
-
 		$cart = new self;
 		
-		if (auth()->user()){
+		if (auth()->user())
 			$cart->user_id = auth()->user()->id;
-		}else{
-			$cart->hash = $hash;
-		}
-
+		else
+			$cart->hash = request()->cookie('laravel_session');
+		
 		$cart->save();
 
 		return $cart;
@@ -74,13 +70,18 @@ class Cart extends Model
     }
 
     public function gift() {
-    	return Gift::where('start','<=',$this->cart()->sum())
+    	return Gift::where('start','<=',$this->sum())
     		->orderBy('start','desc')
     		->first();
     }
     public function next_gift() {
-    	return Gift::where('start','>',$this->cart()->sum())
+    	return Gift::where('start','>',$this->sum())
     		->orderBy('start','asc')
     		->first();
+    }
+    public function delivery(){
+    	return $this->sum() >= Setting::get('free_delivery_order_sum') 
+    		? 0 
+    		: Setting::get('delivery_price');
     }
 }

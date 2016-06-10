@@ -32,8 +32,8 @@
 						<a href="#login" class="fancybox user-menu__item user-menu__item_login">Вход</a>
 						<a href="#register" class="fancybox user-menu__item user-menu__item_registration">Регистрация</a>
 						@endif
-						<a href="" class="user-menu__item">Избранное</a>
-						<a href="" class="user-menu__item">Мои сравнения</a>
+						<a href="#wishlist" class="fancybox user-menu__item">Избранное</a>
+						<a href="#comparelist" class="fancybox user-menu__item">Мои сравнения</a>
 						<a href="" class="user-menu__item">Корзина</a>
 						@if (auth()->user())
 						<a href="{{url('logout')}}" class="user-menu__item">Выход</a>
@@ -131,12 +131,14 @@
 	<script src="{{url('js/main.js')}}"></script>
 
 
-	@if (!auth()->user())
 	<div style="display: none;">
+	@include('general.comparelist.modal');
+	@include('general.wishlist.modal');
+	@if (!auth()->user())
 		@include('general.auth.register')
 		@include('general.auth.login')
 		@include('general.checkout.modal')
-	</div>
 	@endif
+	</div>
 </body>
 </html>
