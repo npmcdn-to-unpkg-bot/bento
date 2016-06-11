@@ -35,12 +35,10 @@ Route::post('cart/update',                'General\CartController@update');
 Route::post('cart/delete',                'General\CartController@delete');
 
 Route::get('wishlist',                    'General\WishlistController@index');
-Route::post('wishlist/add',               'General\WishlistController@add');
-Route::post('wishlist/delete',            'General\WishlistController@delete');
+Route::post('wishlist/toggle',            'General\WishlistController@toggle');
 
 Route::get('comparelist',                 'General\ComparelistController@index');
-Route::post('comparelist/add',            'General\ComparelistController@add');
-Route::post('comparelist/delete',         'General\ComparelistController@delete');
+Route::post('comparelist/toggle',         'General\ComparelistController@toggle');
 
 Route::post('order/fast',                 'General\OrderController@fast');
 

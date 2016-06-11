@@ -34,9 +34,9 @@
 			</td></tr>
 			<tr>
 				<td>
-					<a href="" class="product-cart__compare button button_small"></a>
-					<a href="" class="product-cart__wish button button_small"></a>
-					<a href="{{url('cart/add')}}" data-id="{{$product->id}}" class="ajax-send-id product-cart__buy button button_small">В КОРЗИНУ</a>				
+					<a href="{{url('comparelist/toggle')}}" data-id="{{$product->id}}" class="button_comparelist product-cart__compare button button_small"></a>
+					<a href="{{url('wishlist/toggle')}}" data-id="{{$product->id}}" class="button_wishlist product-cart__wish button button_small"></a>
+					<a href="{{url('cart/add')}}" data-id="{{$product->id}}" class="button_cart product-cart__buy button button_small">В КОРЗИНУ</a>				
 				</td>
 			</tr>
 			<tr>

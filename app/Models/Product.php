@@ -36,7 +36,7 @@ class Product extends Model
             $carbs = $this->ingredients->map(function ($item) {
                     return $item->pivot->weight*$item->carbs/100;
                 })->sum();
-            return 100*$carbs/$this->weight();
+            return ceil(100*$carbs/$this->weight());
         }
     }
 
@@ -45,7 +45,7 @@ class Product extends Model
             $kcal = $this->ingredients->map(function ($item) {
                     return $item->pivot->weight*$item->kcal/100;
                 })->sum();
-            return 100*$kcal/$this->weight();
+            return ceil(100*$kcal/$this->weight());
         }
     }
 
@@ -54,7 +54,7 @@ class Product extends Model
             $proteins = $this->ingredients->map(function ($item) {
                     return $item->pivot->weight*$item->proteins/100;
                 })->sum();
-            return 100*$proteins/$this->weight();
+            return ceil(100*$proteins/$this->weight());
         }
     }
 
@@ -63,7 +63,7 @@ class Product extends Model
             $fats = $this->ingredients->map(function ($item) {
                     return $item->pivot->weight*$item->fats/100;
                 })->sum();
-            return 100*$fats/$this->weight();
+            return ceil(100*$fats/$this->weight());
         }
     }
 

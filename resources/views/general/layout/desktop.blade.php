@@ -7,6 +7,7 @@
 	<meta name="description" content="@yield('meta-description')">
 	<meta name="csrf-token" content="{{csrf_token()}}">
 	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{url('css/desktop.css')}}">
 </head>
@@ -24,18 +25,18 @@
 				<div class="user-menu row__col-right">
 					<div class="user-menu__box">
 						<img class="user-menu__icon" src="{{url('img/user-menu-icon.png')}}" alt="">
-						@if (auth()->user()) {{auth()->user()->first_name}} {{auth()->user()->last_name}} @else МОЙ АККАУНТ @endif
+						@if ($user) {{$user->first_name}} {{$user->last_name}} @else МОЙ АККАУНТ @endif
 						<img src="{{url('img/user-menu-caret.png')}}" alt="" class="user-menu__icon">
 					</div>
 					<div class="user-menu__dropdown">
-						@if (!auth()->user())
+						@if (!$user)
 						<a href="#login" class="fancybox user-menu__item user-menu__item_login">Вход</a>
 						<a href="#register" class="fancybox user-menu__item user-menu__item_registration">Регистрация</a>
 						@endif
 						<a href="#wishlist" class="fancybox user-menu__item">Избранное</a>
 						<a href="#comparelist" class="fancybox user-menu__item">Мои сравнения</a>
 						<a href="" class="user-menu__item">Корзина</a>
-						@if (auth()->user())
+						@if ($user)
 						<a href="{{url('logout')}}" class="user-menu__item">Выход</a>
 						@endif
 					</div>
@@ -134,7 +135,7 @@
 	<div style="display: none;">
 	@include('general.comparelist.modal');
 	@include('general.wishlist.modal');
-	@if (!auth()->user())
+	@if (!$user)
 		@include('general.auth.register')
 		@include('general.auth.login')
 		@include('general.checkout.modal')

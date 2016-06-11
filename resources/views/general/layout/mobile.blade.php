@@ -7,6 +7,7 @@
 	<meta name="description" content="@yield('meta-description')">
 	<meta name="csrf-token" content="{{csrf_token()}}">
 	<meta name="viewport" content="width=720px, user-scalable=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{url('css/mobile.css')}}">
@@ -22,9 +23,9 @@
 				</div>
 				<div class="row__col-mob-10">
 					<div class="row">
-						@if (auth()->user())
+						@if ($user)
 						<div class="row__col-mob-6 floating-menu__border-left">
-							<a href="" class="floating-menu__item">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a>
+							<a href="" class="floating-menu__item">{{$user->first_name}} {{$user->last_name}}</a>
 						</div>
 						@else
 						<div class="row__col-mob-3 floating-menu__border-left">
@@ -69,14 +70,14 @@
 								<a href="" class="main-menu__item">Партнеры</a>
 								<a href="{{url('blog')}}" class="main-menu__item">Блог</a>
 								<hr>
-								@if (!auth()->user())
+								@if (!$user)
 								<a href="#login" class="fancybox main-menu__item">Вход</a>
 								<a href="#register" class="fancybox main-menu__item">Регистрация</a>
 								@endif
 								<a href="" class="main-menu__item">Избранное</a>
 								<a href="" class="main-menu__item">Мои сравнения</a>
 								<a href="" class="main-menu__item">Корзина</a>
-								@if (auth()->user())
+								@if ($user)
 								<a href="{{url('logout')}}" class="main-menu__item">Выход</a>
 								@endif
 							</div>				
@@ -131,7 +132,7 @@
 	<script src="{{url('js/main.js')}}"></script>
 
 
-	@if (!auth()->user())
+	@if (!$user)
 	<div style="display: none;">
 		@include('general.auth.register')
 		@include('general.auth.login')

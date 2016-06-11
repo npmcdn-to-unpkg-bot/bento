@@ -1,22 +1,51 @@
 <div id="comparelist" class="modal">
 	<div class="modal__title">СРАВНЕНИЕ ТОВАРОВ</div>
-	@if ($comparelist = App\Models\Comparelist::get())
-		@foreach($comparelist->products as $i => $product)
-			@if ($i%2==0) <div class="row"> @endif
-			<div class="row__col-6">
-				<div class="compare-product">
-					<img src="/width/100/?image={{$product->image}}" alt="" class="compare-product__image">
-					<div class="compare-product__title">{{$product->name}}</div>
-					<div class="compare-product__ingredients">{{$product->ingredients->implode('name',', ')}}</div>
-					<div class="compare-product__price">
-						@if($product->old_price) <del>{{$product->old_price}} грн</del> @endif
-						{{$product->new_price()}} грн
-					</div>
-					<a href="{{url('cart/add')}}" data-id="{{$product->id}}" class="ajax-send-id compare-product__buy button button_small">В КОРЗИНУ</a>
-					<a href="{{url('comparelist/delete')}}" data-id="{{$product->id}}" class="ajax-send-id compare-product__remove"></a>
-				</div>
-			</div>
-			@if (($i+1)%2==0||$comparelist->products->last()==$product) </div> @endif
+	<table class="products-table">
+		<tr>
+			<th rowspan="2"></th>
+			<th rowspan="2"></th>
+			<th rowspan="2" style="width: 200px;">Название</th>
+			<th class="text_center" rowspan="2" style="width: 110px;" >Вес</th>
+			<th class="text_center" colspan="4">Пищевая ценность на 100 г.</th>
+			<th class="text_center" rowspan="2" style="width: 110px;">Цена</th>
+			<th class="text_center" rowspan="2" style="width: 150px;"></th>
+		</tr>
+		<tr>
+			<th class="text_center" style="width: 110px;">Белки</th>
+			<th class="text_center" style="width: 110px;">Жиры</th>
+			<th class="text_center" style="width: 110px;">Углеводы</th>
+			<th class="text_center" style="width: 110px;">ККал</th>
+		</tr>
+		@if ($wishlist = $comparelist)
+		@foreach ($wishlist->products as $product)
+		<tr>
+			<td class="products-table__remove-wrap"><a href="{{url('comparelist/toggle')}}" data-id="{{$product->id}}" class="button_comparelist product-table__remove"></a></td>
+			<td class="products-table__image-wrap"><img src="width/100?image={{$product->image}}" alt=""></td>
+			<td class="products-table__name-wrap">
+				{{$product->name}}
+				<div class="products-table__ingredients">{{$product->ingredients->implode('name',', ')}}</div>
+			</td>
+			<td class="text_center">{{ $product->weight() }} г.</td>
+			<td class="text_center">{{ $product->carbs() }} г.</td>
+			<td class="text_center">{{ $product->fats() }} г.</td>
+			<td class="text_center">{{ $product->proteins() }} г.</td>
+			<td class="text_center">{{ $product->kcal() }} ккал</td>
+			<td class="text_center">
+				@if($product->old_price)<del>{{$product->old_price}} грн</del> <br>@endif
+				{{$product->new_price()}} грн</td>
+			<td class="products-table__buy-wrap">
+				<a 
+					href="{{url('cart/add')}}" 
+					data-id="{{$product->id}}" 
+					class="button_cart  @if($cart->has($product)) button_red @endif products-table__buy button button_small"
+					>В КОРЗИНУ</a></td>
+		</tr>
 		@endforeach
-	@endif
+		@endif
+	</table>
+
+	<div class="modal__buttons">
+		<a href="#" onclick="$.fancybox.close()" class="button button_small button_gray">Продолжить покупки</a>
+		<a href="" class="button button_small button_red">Перейти в корзину</a>
+	</div>
 </div>

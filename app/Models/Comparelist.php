@@ -52,6 +52,12 @@ class Comparelist extends Model
 		return $comparelist;
 	}
 
+	public static function has($product) {
+		if ($comparelist = self::get())
+			return $comparelist->products()->where('id', $product->id)->first();
+		return false;
+	}
+
 	public function products () {
 		return $this->belongsToMany('App\Models\Product');
 	}

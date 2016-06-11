@@ -157,6 +157,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ViewComposerProvider::class,
 
     ],
 
@@ -205,6 +206,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Cart' => App\Models\Cart::class,
+        'Wishlist' => App\Models\Wishlist::class,
+        'Comparelist' => App\Models\Comparelist::class,
 
     ],
 

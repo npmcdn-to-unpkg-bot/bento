@@ -452,6 +452,60 @@ strong{
 	border-bottom: 5px solid #ff4848;
 }
 
+/*button*/
+
+.button{
+	cursor: pointer;
+	display: inline-block;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-weight: 600;
+	vertical-align: middle;
+	text-align: center;
+	background-color: white;
+	color: #ff4848;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;	
+	height: 45px;
+	min-width: 45px;
+	line-height: 45px;
+	padding: 0 15px;
+	font-size: 20px;	
+}
+
+.button_small{
+	border-radius: 3px;
+	height: 37px;
+	min-width: 37px;
+	line-height: 37px;
+	padding: 0 10px;
+	font-size: 16px;
+}
+
+.button_big{
+	border-radius: 5px;	
+	height: 55px;
+	min-width: 55px;
+	line-height: 55px;
+	padding: 0 20px;
+	font-size: 24px;
+}
+
+.button_red{
+	border: none;
+	background-color: #ff4848;
+	color: white;
+}
+
+.button_gray{
+	color: white;
+	color: #4c4a4a;
+}
+
+.button_red:hover{
+	background-color: #ff6868;
+}
+
 /*product__left-label*/
 
 .product{
@@ -572,67 +626,20 @@ strong{
 	color: #777;
 }
 .product__compare{
-	background: url(../img/opposite5.png) no-repeat center;
+	padding: 0;
+	line-height: 34px;
+	color: #a1a1a1;
 }
 .product__wish{
-	background: url(../img/like.png) no-repeat center;
+	padding: 0;
+	color: #a1a1a1;
+}
+.product__wish.button_red,
+.product__compare.button_red{
+	color: white;
 }
 .product__buy{
 	width: 168px;
-}
-
-/*button*/
-
-.button{
-	cursor: pointer;
-	display: inline-block;
-	box-sizing: border-box;
-	text-decoration: none;
-	font-weight: 600;
-	vertical-align: middle;
-	text-align: center;
-	background-color: white;
-	color: #ff4848;
-	border: 1px solid #c2c2c2;
-	border-radius: 4px;	
-	height: 45px;
-	min-width: 45px;
-	line-height: 45px;
-	padding: 0 15px;
-	font-size: 20px;	
-}
-
-.button_small{
-	border-radius: 3px;
-	height: 37px;
-	min-width: 37px;
-	line-height: 37px;
-	padding: 0 10px;
-	font-size: 16px;
-}
-
-.button_big{
-	border-radius: 5px;	
-	height: 55px;
-	min-width: 55px;
-	line-height: 55px;
-	padding: 0 20px;
-	font-size: 24px;
-}
-
-.button_red{
-	border: none;
-	background-color: #ff4848;
-	color: white;
-}
-
-.button_gray{
-	color: white;
-	color: #4c4a4a;
-}
-
-.button_red:hover{
-	background-color: #ff6868;
 }
 
 /*visit-us*/
@@ -1502,9 +1509,9 @@ strong{
 	text-align: right;
 }
 
-/*compare-product*/
+/*wishlist*/
 
-.compare-product{
+.wishlist{
 	box-sizing: border-box;
 	border:1px solid #e0e0e0;
 	border-radius:3px;
@@ -1512,26 +1519,26 @@ strong{
 	padding: 25px 15px 25px 150px;
 	position: relative;
 }
-.compare-product__image{
+.wishlist__image{
 	position: absolute;
 	left: 25px;
 	top: 50%;
 	transform: translateY(-50%);
 }
-.compare-product__title{
+.wishlist__title{
 	font-size: 16px;
 	font-weight: 600;
 	color: #767676;
 	margin-bottom: 8px;
 }
-.compare-product__ingredients{
+.wishlist__ingredients{
 	color: #7a7a7a;
 	font-weight: 300;
 	line-height: 14px;
 	font-size: 12px;
 	margin-bottom: 5px;
 }
-.compare-product__price{
+.wishlist__price{
 	font-size: 16px;
 	font-weight: 600;
 	color: #ff4848;
@@ -1540,11 +1547,11 @@ strong{
 	display: inline-block;
 	margin-right: 10px;
 }
-.compare-product__buy{
+.wishlist__buy{
 	width: 170px;
 }
 
-.compare-product__remove{
+.wishlist__remove{
 	position: absolute;
 	display: block;
 	background-image: url(../img/delete.png);
@@ -1587,6 +1594,14 @@ strong{
 }
 .products-table__buy{
 	width: 225px;
+}
+
+.products-table__ingredients {
+	display: block;
+	color: #7a7a7a;
+	font-weight: 300;
+	line-height: 14px;
+	font-size: 12px;
 }
 
 .products-table__price-wrap{
@@ -1892,6 +1907,10 @@ a.flex-active{
 	overflow: hidden;
 }
 
+#comparelist {
+	width: 980px;
+}
+
 #register {
 	width: 980px;
 }
@@ -1922,4 +1941,9 @@ a.flex-active{
 .footer {
 	position: relative;
 	z-index: 10;
+}
+
+/*text*/
+.text_center {
+	text-align: center;
 }

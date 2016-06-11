@@ -1,5 +1,5 @@
 <div class="shoping-cart">
-	@if (!auth()->user())
+	@if (!$user)
 		<div class="shoping-cart__user">
 			<img src="{{url('img/login-icon.png')}}" alt="" class="shoping-cart__icon">
 			<a href="#login" class="fancybox shoping-cart__login">ВХОД</a>
@@ -10,7 +10,7 @@
 		<img src="{{url('img/cart.png')}}" alt="" class="shoping-cart__icon">
 		ВАША КОРЗИНА
 	</div>
-	@if ($cart = App\Models\Cart::get())
+	@if ($cart)
 		<table class="shoping-cart__items">
 			@foreach ($cart->products as $product)
 			<tr class="shoping-cart__item">
@@ -19,7 +19,7 @@
 				</td>
 				<td class="shoping-cart__item-name">{{$product->name}}</td>
 				<td class="shoping-cart__item-price">{{$product->new_price()*$product->pivot->quantity}}грн</td>
-				<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="ajax-send-id shoping-cart__item-remove"></a></td>
+				<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="button_cart_delete shoping-cart__item-remove"></a></td>
 			</tr>
 			@endforeach
 			@if ($cart->gift() && $product = $cart->gift()->product)
@@ -49,7 +49,7 @@
 				<td class="cart-total__value">{{$cart->sum() - 20 + $cart->delivery()}} грн</td>
 			</tr>						
 		</table>
-		<a @if (auth()->user()) href="{{url('checkout')}}" @else href="#checkout" @endif class="fancybox shoping-cart__checkout button button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
+		<a @if ($user) href="{{url('checkout')}}" @else href="#checkout" @endif class="fancybox shoping-cart__checkout button button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
 		@if ($cart->next_gift())
 			<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
 		@endif

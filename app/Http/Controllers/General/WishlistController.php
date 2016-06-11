@@ -15,21 +15,16 @@ class WishlistController extends Controller
     	return view('general.wishlist.modal');
     }
 
-	public function add(Request $request) {
+
+	public function toggle(Request $request) {
 
 		$wishlist = Wishlist::get() ? Wishlist::get() : Wishlist::init();
 
-		$wishlist->products()->detach($request->id);
+		if ($wishlist->products()->where('id',$request->id)->first())
+			$wishlist->products()->detach($request->id);
+		else
+			$wishlist->products()->attach($request->id);
 	
-		$wishlist->products()->attach($request->id);
-	
-		return response(200);
-	}
-
-	public function delete(Request $request) {
-		Wishlist::get()
-			->products()
-			->detach($request->id);
 		return response(200);
 	}
 

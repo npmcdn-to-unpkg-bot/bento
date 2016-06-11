@@ -35,7 +35,7 @@ class CartController extends Controller
 
 	public function update(Request $request) {
 		if ($product = Cart::get()->products()->find($request->id)) {
-			$product->pivot->quantity=$request->value;
+			$product->pivot->quantity=$request->value > 0 ? $request->value : 1;
 			$product->pivot->save();
 		}
 		return response(200);

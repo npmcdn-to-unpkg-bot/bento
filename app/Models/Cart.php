@@ -55,6 +55,12 @@ class Cart extends Model
 		return $cart;
 	}
 
+	public static function has($product) {
+		if ($cart = self::get())
+			return $cart->products()->where('id', $product->id)->first();
+		return false;
+	}
+
 	public function sum() {
 		return $this->products->map(function($product){
 			return $product->new_price()*$product->pivot->quantity;

@@ -42,9 +42,7 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="{{url('comparelist/add')}}" data-id="{{$product->id}}" class="ajax-send-id product__compare button button_small"></a>
-						<a href="{{url('wishlist/add')}}" data-id="{{$product->id}}" class="ajax-send-id product__wish button button_small"></a>
-						<a href="{{url('cart/add')}}" data-id="{{$product->id}}" class="ajax-send-id product__buy button button_small">В КОРЗИНУ</a>
+						@include('general.product.buttons')
 					</td>
 				</tr>
 			</table>		

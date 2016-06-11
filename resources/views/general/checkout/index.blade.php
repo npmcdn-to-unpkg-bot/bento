@@ -9,11 +9,11 @@
 			{{csrf_field()}}
 			<div class="offset_bottom_30">
 				<div class="offset_bottom_10"><b>Телефон</b></div>
-				<input type="text" name="phone" class="input" value="{{auth()->user()->phone}}">
+				<input type="text" name="phone" class="input" value="{{$user->phone}}">
 			</div>
 			<div class="offset_bottom_30">
 				<div class="offset_bottom_10"><b>Адрес</b></div>
-				@foreach (auth()->user()->places as $i => $place)
+				@foreach ($user->places as $i => $place)
 				<div class="offset_bottom_10">
 					<label><input type="radio" name="place" @if($i==0) checked @endif value="{{$place->text}}"> {{$place->name}} {{$place->text}}</label>
 				</div>

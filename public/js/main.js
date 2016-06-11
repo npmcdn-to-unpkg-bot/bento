@@ -52,7 +52,7 @@
 		});
 	}
 
-	function addOrRemoveCartItem (event) {
+	function addCartItem (event) {
 		event.preventDefault();
 		link = this;
 		$.ajax({
@@ -64,12 +64,71 @@
 				_token: $('meta[name="csrf-token"]').attr('content')
 			},
 			success: function (data){
-				if (link.href.indexOf('cart')!=-1)
-					reloadFloatingShoppingCart()
-				if (link.href.indexOf('wishlist')!=-1)
-					reloadWishlistModal()
-				if (link.href.indexOf('comparelist')!=-1)
-					reloadComparelistModal()
+				reloadFloatingShoppingCart()
+				$('.button.button_cart_add[data-id="'+$(link).attr('data-id')+'"]').addClass('button_red')
+			},
+			error: function (data){
+				$.fancybox(data.responseText)
+			}
+		})
+	}
+
+	function removeCartItem (event) {
+		event.preventDefault();
+		link = this;
+		$.ajax({
+			url: link.href,
+			method: "POST",
+			type: 'json',
+			data: {
+				id: $(link).attr('data-id'),
+				_token: $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function (data){
+				reloadFloatingShoppingCart()
+				$('.button.button_cart_add[data-id="'+$(link).attr('data-id')+'"]').removeClass('button_red')
+			},
+			error: function (data){
+				$.fancybox(data.responseText)
+			}
+		})
+	}
+
+	function addOrRemoveWishlistItem (event) {
+		event.preventDefault();
+		link = this;
+		$.ajax({
+			url: link.href,
+			method: "POST",
+			type: 'json',
+			data: {
+				id: $(link).attr('data-id'),
+				_token: $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function (data){
+				reloadWishlistModal()
+				$('.button.button_wishlist[data-id="'+$(link).attr('data-id')+'"]').toggleClass('button_red')
+			},
+			error: function (data){
+				$.fancybox(data.responseText)
+			}
+		})
+	}
+
+	function addOrRemoveComparelistItem (event) {
+		event.preventDefault();
+		link = this;
+		$.ajax({
+			url: link.href,
+			method: "POST",
+			type: 'json',
+			data: {
+				id: $(link).attr('data-id'),
+				_token: $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function (data){
+				reloadComparelistModal()
+				$('.button.button_comparelist[data-id="'+$(link).attr('data-id')+'"]').toggleClass('button_red')
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
@@ -149,7 +208,10 @@
 
 	// listners
 	$(document).on('submit','.ajax-form',AjaxFormSend);
-	$(document).on('click','.ajax-send-id', addOrRemoveCartItem);
+	$(document).on('click','.button_cart_add', addCartItem);
+	$(document).on('click','.button_cart_delete', removeCartItem);
+	$(document).on('click','.button_wishlist', addOrRemoveWishlistItem);
+	$(document).on('click','.button_comparelist', addOrRemoveComparelistItem);
 	$(document).on('change','.ajax-send-input',updateCartItem);
 	if (floatingShopingCart.length)
 		$(window)

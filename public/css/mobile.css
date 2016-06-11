@@ -1385,9 +1385,9 @@ strong{
 	text-align: right;
 }
 
-/*compare-product*/
+/*wishlist*/
 
-.compare-product{
+.wishlist{
 	box-sizing: border-box;
 	width: 415px;
 	border:1px solid #e0e0e0;
@@ -1396,26 +1396,26 @@ strong{
 	padding: 25px 15px 25px 150px;
 	position: relative;
 }
-.compare-product__image{
+.wishlist__image{
 	position: absolute;
 	left: 25px;
 	top: 50%;
 	transform: translateY(-50%);
 }
-.compare-product__title{
+.wishlist__title{
 	font-size: 24px;
 	font-weight: 600;
 	color: #767676;
 	margin-bottom: 8px;
 }
-.compare-product__ingredients{
+.wishlist__ingredients{
 	color: #7a7a7a;
 	font-weight: 300;
 	line-height: 14px;
 	font-size: 12px;
 	margin-bottom: 5px;
 }
-.compare-product__price{
+.wishlist__price{
 	font-size: 24px;
 	font-weight: 600;
 	color: #ff4848;
@@ -1424,11 +1424,11 @@ strong{
 	display: inline-block;
 	margin-right: 10px;
 }
-.compare-product__buy{
+.wishlist__buy{
 	width: 170px;
 }
 
-.compare-product__remove{
+.wishlist__remove{
 	position: absolute;
 	display: block;
 	background-image: url(../img/delete.png);

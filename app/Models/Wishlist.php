@@ -53,6 +53,12 @@ class Wishlist extends Model
 		return $wishlist;
 	}
 
+	public static function has($product) {
+		if ($wishlist = self::get())
+			return $wishlist->products()->where('id', $product->id)->first();
+		return false;
+	}
+
 	public function products () {
 		return $this->belongsToMany('App\Models\Product','wishlist_product');
 	}

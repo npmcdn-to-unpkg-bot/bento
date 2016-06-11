@@ -15,21 +15,16 @@ class ComparelistController extends Controller
     	return view('general.comparelist.modal');
     }
 
-	public function add(Request $request) {
+	public function toggle(Request $request) {
 
 		$comparelist = Comparelist::get() ? Comparelist::get() : Comparelist::init();
-	
-		$comparelist->products()->detach($request->id);
 
-		$comparelist->products()->attach($request->id);
+		if ($comparelist->products()->where('id',$request->id)->first())
+			$comparelist->products()->detach($request->id);
+		else
+			$comparelist->products()->attach($request->id);
 	
 		return response(200);
 	}
 
-	public function delete(Request $request) {
-		Comparelist::get()
-			->products()
-			->detach($request->id);
-		return response(200);
-	}
 }
