@@ -50,11 +50,14 @@
 			</tr>						
 		</table>
 			<a href="{{url('checkout')}}" class="button button_100 offset_bottom_10 offset_top_10 button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
+			
 		@if(!$user)
 			<a href="#checkout" class="fancybox button button_100 offset_bottom_10 offset_top_10 button_red button_small">ОФОРМИТЬ В 1 КЛИК</a>
 		@endif
+
 		@if ($cart->next_gift())
 			<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
 		@endif
+
 	@endif
 </div>

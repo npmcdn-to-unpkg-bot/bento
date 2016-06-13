@@ -8,14 +8,27 @@
 	@include('general.cart.table')
 	<div class="row offset_top_60">
 		<div class="row__col-8 row__col-offset-2">
-			@if ($user)
-				@include('general.checkout.authorized')
-			@else
+			<div class="offset_bottom_30 text_center">
+				<a href="#checkout" class="fancybox button button_red button_small">ОФОРМИТЬ В 1 КЛИК</a>
+			</div>
+			<form action="{{url('checkout')}}" method="POST">
+				{{csrf_field()}}
+
+				@if ($user)
+					@include('general.checkout.authorized')
+				@else
+					@include('general.checkout.registration')
+				@endif
+
+				<textarea name="comment" class="input input_textarea input_100 offset_bottom_30" placeholder="Примечания: приготовить сдачу..."></textarea>
+
+				@include('general.checkout.payment')
+
 				<div class="offset_bottom_30 text_center">
-					<a href="#checkout" class="fancybox button button_red button_small">ОФОРМИТЬ В 1 КЛИК</a>
+					<button class="button button_red button_small">ОФОРМИТЬ ЗАКАЗ</button>
 				</div>
-				@include('general.checkout.registration')
-			@endif
+
+			</form>
 		</div>
 	</div>
 </div>

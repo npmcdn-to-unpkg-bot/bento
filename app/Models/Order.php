@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Cart
 {
 
+	protected $fillable = [
+		'place',
+		'phone',
+		'persons',
+		'time',
+		'comment',
+	];
+
 	public static function get() {
 		//
 	}

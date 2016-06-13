@@ -16,32 +16,28 @@ class OrderController extends Controller
     }
 
     public function full(Request $request) {
-        $this->validate($request,[
-            'place'=>'required',
-            'phone'=>'required'
-        ]);
-        
-        $user = auth()->user();
-        $order = $user->orders()->create([]);
 
-        $place = $user->places()->firstOrCreate(['text'=>$request->place]);
-        $order->place = $request->place;
+        if ($user = auth()->user()){
+            $this->validate($request,[
+                'place'=>'required',
+                'phone'=>'required',
+                'payment'=>'required'
+            ]);
+            
+            $place = $user->places()->firstOrCreate(['text'=>$request->place]);
+            if ($user->phone!=$request->phone)
+                $phone = $user->phones()->firstOrCreate(['text'=>$request->phone]);
 
-        if ($user->phone!=$request->phone)
-            $phone = $user->phones()->firstOrCreate(['text'=>$request->phone]);
-        $order->phone = $request->phone;
-        
-        $order->persons = $request->persons;
-        $order->time = $request->time;
-        $order->comment = $request->comment;
-        $order->first_name = $user->first_name;
-        $order->save();
-        $order->products()->sync(
-            Cart::get()->products->keyBy('id')->map(function($product){
-                return ['quantity'=>$product->pivot->quantity];
-            })->all()
-        );
-        Cart::get()->delete();    
+
+            Cart::get()->checkout($request);
+
+        }else{
+            $this->validate($request,[
+                'place'=>'required',
+                'phone'=>'required',
+                'payment'=>'required'
+            ]);
+        }
 
         return redirect('/');
 

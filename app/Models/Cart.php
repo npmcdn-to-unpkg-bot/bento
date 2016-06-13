@@ -68,4 +68,29 @@ class Cart extends Model
     		? 0 
     		: Setting::get('delivery_price');
     }
+
+    public function checkout ($data){
+
+    	if (!$user = auth()->user())
+    		return false;
+
+        $order = $user->orders()->create([]);
+
+        $order->fill($data->only(
+			'place',
+			'phone',
+			'persons',
+			'time',
+			'comment'
+        ));
+        $order->first_name = $user->first_name;
+        $order->save();
+        $order->products()->sync(
+            $this->products->keyBy('id')->map(function($product){
+                return ['quantity'=>$product->pivot->quantity];
+            })->all()
+        );
+        $this->delete();
+        return $order;
+    }
 }

@@ -12,7 +12,7 @@
 						@if($product->old_price) <del>{{$product->old_price}} грн</del> @endif
 						{{$product->new_price()}} грн
 					</div>
-					<a href="{{url('cart/add')}}" data-id="{{$product->id}}" class="button_cart wishlist__buy button button_small">В КОРЗИНУ</a>
+					<div class="wishlist__buy">@include('general.product.add_to_cart')</div>
 					<a href="{{url('wishlist/toggle')}}" data-id="{{$product->id}}" class="button_wishlist wishlist__remove"></a>
 				</div>
 			</div>

@@ -1549,7 +1549,7 @@ strong{
 }
 .wishlist__image{
 	position: absolute;
-	left: 25px;
+	left: 32px;
 	top: 50%;
 	transform: translateY(-50%);
 }
@@ -1583,8 +1583,9 @@ strong{
 	position: absolute;
 	display: block;
 	background-image: url(../img/delete.png);
-	width: 11px;
-	height: 11px;
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
 	top: 50%;
 	left: 10px;
 	transform: translateY(-50%);
@@ -1992,4 +1993,12 @@ a.flex-active{
 
 .optional-input__checkbox:checked + .optional-input__input {
 	color: black;
+}
+
+/*sub-title*/
+.sub-title	 {
+	color:  #3f3e3f;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 18px;
 }

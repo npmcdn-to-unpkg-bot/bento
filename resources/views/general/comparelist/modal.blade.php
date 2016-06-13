@@ -34,11 +34,8 @@
 				@if($product->old_price)<del>{{$product->old_price}} грн</del> <br>@endif
 				{{$product->new_price()}} грн</td>
 			<td class="products-table__buy-wrap">
-				<a 
-					href="{{url('cart/add')}}" 
-					data-id="{{$product->id}}" 
-					class="button_cart  @if($cart->has($product)) button_red @endif products-table__buy button button_small"
-					>В КОРЗИНУ</a></td>
+				@include('general.product.add_to_cart')
+			</td>
 		</tr>
 		@endforeach
 		@endif
