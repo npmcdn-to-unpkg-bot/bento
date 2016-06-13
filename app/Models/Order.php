@@ -13,6 +13,7 @@ class Order extends Cart
 		'persons',
 		'time',
 		'comment',
+		'payment_method'
 	];
 
 	public static function get() {

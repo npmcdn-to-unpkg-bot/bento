@@ -113,6 +113,10 @@ strong{
 	margin-bottom: 30px;
 }
 
+.offset_bottom_60 {
+	margin-bottom: 60px;
+}
+
 /*jus-cont*/
 
 .jus-cont{
@@ -198,6 +202,7 @@ strong{
 }
 
 .user-menu__box{
+	text-decoration: none;
 	font-size: 15px;
 	line-height: 45px;
 	color: #7e7e7e;
@@ -450,18 +455,26 @@ strong{
 /*title*/
 .title{
 	color: #0c0a0b;
-	font-size: 36px;
 	border-bottom:1px solid #bebebe;
 	margin-top: 46px;
 	margin-bottom: 40px;
 }
 
 .title__text{
+	font-size: 36px;
 	position: relative;
 	bottom: -1px;
 	display: inline-block;
 	line-height: 63px;
+	padding-right: 50px;
 	border-bottom: 5px solid #ff4848;
+}
+
+.title_small .title__text {
+	font-size: 18px;
+	border-bottom: 2px solid #ff4848;
+	padding-right: 25px;
+	line-height: 28px;
 }
 
 /*button*/
@@ -1596,7 +1609,6 @@ strong{
 .products-table{
 	width: 100%;
 	font-size: 15px;
-	margin-bottom: 5px;
 }
 
 .products-table th{
@@ -1980,6 +1992,10 @@ a.flex-active{
 	text-align: center;
 }
 
+.text_right {
+	text-align: right;
+}
+
 /*optional-input*/
 .optional-input {
 
@@ -2001,4 +2017,32 @@ a.flex-active{
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 18px;
+}
+
+/*history-total*/
+
+.history-total {
+	background-color: #c2c2c2;
+	height: 40px;
+	line-height: 40px;
+	color: white;
+	font-weight: bold;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-size: 16px;
+}
+.history-total__value {
+	color: #ff4848;
+}
+
+/*toggle-arrow*/
+.toggle-arrow {
+	transition: .5s;
+	display: inline-block;
+	transform: rotate(180deg);
+	cursor: pointer;
+}
+
+.toggle-arrow__active {
+	transform: rotate(0);
 }

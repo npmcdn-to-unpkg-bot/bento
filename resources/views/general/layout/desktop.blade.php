@@ -23,11 +23,11 @@
 					<a href="{{url('blog')}}" class="about-menu__item">Блог</a>
 				</div>
 				<div class="user-menu row__col-right">
-					<div class="user-menu__box">
+					<a href="{{ $user ? url('account') : '#'}}" class="user-menu__box">
 						<img class="user-menu__icon" src="{{url('img/user-menu-icon.png')}}" alt="">
 						@if ($user) {{$user->first_name}} {{$user->last_name}} @else МОЙ АККАУНТ @endif
 						<img src="{{url('img/user-menu-caret.png')}}" alt="" class="user-menu__icon">
-					</div>
+					</a>
 					<div class="user-menu__dropdown">
 						@if (!$user)
 						<a href="#login" class="fancybox user-menu__item user-menu__item_login">Вход</a>

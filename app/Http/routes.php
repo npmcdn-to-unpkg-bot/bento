@@ -37,6 +37,7 @@ Route::post('cart/delete',                 'General\CartController@delete');
 Route::get ('checkout',                    'General\CartController@index');
 Route::post('checkout',                    'General\OrderController@full');
 
+
 Route::get ('wishlist',                    'General\WishlistController@index');
 Route::post('wishlist/toggle',             'General\WishlistController@toggle');
 
@@ -45,3 +46,6 @@ Route::post('comparelist/toggle',          'General\ComparelistController@toggle
 
 Route::post('order/fast',                  'General\OrderController@fast');
 
+Route::group(['middleware'=>'auth'],function(){
+	Route::get ('account',                     'General\AccountController@index');
+});

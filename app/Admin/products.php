@@ -11,7 +11,7 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
         return $display;
     });
     // Create And Edit
-    $model->onCreateAndEdit(function() {
+    $model->onCreateAndEdit(function() use ($model) {
         $form = AdminForm::panel()->addBody(
             AdminFormElement::text('name', 'Название')->required(),
             AdminFormElement::image('image', 'Картинка')->required(),
@@ -30,7 +30,7 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
         );
 
         $form->addItem(AdminFormElement::custom()
-            ->setDisplay(function($model){
+            ->setDisplay(function($product){
 
                 if (old()) {
                     $old = old('ingredient');
@@ -39,7 +39,7 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
                         $inputs[$id]['weight'] = $old['weight'][$key];
                     }
                 }else{
-                    foreach ($model->ingredients as $ingredient){
+                    foreach ($product->ingredients as $ingredient){
                         $inputs[$ingredient->id]['id'] = $ingredient->id;
                         $inputs[$ingredient->id]['weight'] = $ingredient->pivot->weight;
                     }
@@ -47,14 +47,26 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
                 $inputs[]=['id'=>'','weight'=>''];
                 return view('admin.ingredients', ['inputs'=>$inputs]);
             })
-            ->setCallback(function($model){
+            ->setCallback(function($product) use ($form, $model) {
                 $inputs = Request::input('ingredient');
                 $ingredients = [];
                 foreach ($inputs['id'] as $key => $id)
                     if ($id != 0) $ingredients[$id]['weight'] = $inputs['weight'][$key];
 
-                $model->ingredients()->sync($ingredients);
+
+                $model->created(function($model,$product) use ($form, $ingredients) {
+                    $product = $form->getModel();
+                    $product->ingredients()->sync($ingredients);
+                });
+
+                $model->updated(function($model,$product) use ($form, $ingredients) {
+                    $product = $form->getModel();
+                    $product->ingredients()->sync($ingredients);
+                });
+
             }));
+
+
         return $form;
     });
 

@@ -5,7 +5,7 @@
 		<label>
 		<img src="/img/cash.png" alt="">
 		<div class="offset_top_10">
-			<input type="radio" checked class="" name="payment"> Наличными при получении
+			<input type="radio" checked class="" value="Наличными при получении" name="payment_method"> Наличными при получении
 		</div>
 		</label>
 	</div>
@@ -13,7 +13,7 @@
 		<label>
 		<img src="/img/visa-mcard.png" alt="">
 		<div class="offset_top_10">
-			<input type="radio" class="" name="payment"> visa/mastercard
+			<input type="radio" class="" value="Онлайн оплата visa/mastercard" name="payment_method"> visa/mastercard
 		</div>
 		</label>
 	</div>

@@ -75,8 +75,6 @@ class AuthController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'phone' => 'required|max:255',
-            'trafic_source' => 'required|max:255',
-            'bento_card' => 'required|max:255',
             'place' => 'required|max:255'
         ]);
     }

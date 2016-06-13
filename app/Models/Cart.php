@@ -69,10 +69,9 @@ class Cart extends Model
     		: Setting::get('delivery_price');
     }
 
-    public function checkout ($data){
+    public function checkout ($data, $user){
 
-    	if (!$user = auth()->user())
-    		return false;
+    	if (!$user) return false;
 
         $order = $user->orders()->create([]);
 
@@ -81,7 +80,8 @@ class Cart extends Model
 			'phone',
 			'persons',
 			'time',
-			'comment'
+			'comment',
+            'payment_method'
         ));
         $order->first_name = $user->first_name;
         $order->save();
