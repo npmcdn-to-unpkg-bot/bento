@@ -17,11 +17,6 @@ class BlogController extends Controller
             return view('general.article.index',[
                 'title' => 'БЛОГ',
                 'articles' => Blog::orderBy('created_at')->paginate(3),
-                'sidebar' => [
-                    'title' => 'НОВОСТИ И АКЦИИ',
-                    'articles' => News::orderBy('created_at')->paginate(3),
-                    'url' => url('news')
-                ]
             ]);
         }else{
             return $this->show($slug);
@@ -32,11 +27,6 @@ class BlogController extends Controller
     {
         return view('general.article.show',[
             'article' => Blog::where('slug', $slug)->first(),
-            'sidebar' => [
-                'title' => 'БЛОГ',
-                'articles' => Blog::orderBy('created_at')->paginate(3),
-                'url' => url('blog')
-            ]
         ]);
     }
 

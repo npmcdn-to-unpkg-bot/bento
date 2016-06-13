@@ -11,10 +11,6 @@
 |
 */
 
-Route::get ('/', function () {
-    return 'welcome';
-});
-
 Route::get ('fit/{width}/{height}',        'General\ImageController@fit');
 Route::get ('resize/{width}/{height}',     'General\ImageController@resize');
 Route::get ('width/{width}',               'General\ImageController@width');
@@ -47,5 +43,7 @@ Route::post('comparelist/toggle',          'General\ComparelistController@toggle
 Route::post('order/fast',                  'General\OrderController@fast');
 
 Route::group(['middleware'=>'auth'],function(){
-	Route::get ('account',                     'General\AccountController@index');
+	Route::get ('account',                 'General\AccountController@index');
 });
+
+Route::get ('{slug}',                      'General\PageController@index');

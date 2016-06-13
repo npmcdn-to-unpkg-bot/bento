@@ -17,11 +17,6 @@ class NewsController extends Controller
             return view('general.article.index',[
                 'title' => 'НОВОСТИ И АКЦИИ',
                 'articles' => News::orderBy('created_at')->paginate(3),
-                'sidebar' => [
-                    'title' => 'БЛОГ',
-                    'articles' => Blog::orderBy('created_at')->paginate(3),
-                    'url' => url('blog')
-                ]
             ]);
         }else{
             return $this->show($slug);
@@ -32,11 +27,6 @@ class NewsController extends Controller
     {
         return view('general.article.show',[
             'article' => News::where('slug', $slug)->first(),
-            'sidebar' => [
-                'title' => 'НОВОСТИ И АКЦИИ',
-                'articles' => News::orderBy('created_at')->paginate(3),
-                'url' => url('news')
-            ]
         ]);
     }
 
