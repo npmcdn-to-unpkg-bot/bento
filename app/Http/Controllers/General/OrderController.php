@@ -17,16 +17,22 @@ class OrderController extends Controller
 
     public function full(Request $request) {
         $this->validate($request,[
-            'place'=>'required'
+            'place'=>'required',
+            'phone'=>'required'
         ]);
         
         $user = auth()->user();
+        $order = $user->orders()->create([]);
 
         $place = $user->places()->firstOrCreate(['text'=>$request->place]);
+        $order->place = $request->place;
 
-        $order = $user->orders()->create([]);
-        $order->place_id = $place->id;
-        $order->phone = $user->phone;
+        if ($user->phone!=$request->phone)
+            $phone = $user->phones()->firstOrCreate(['text'=>$request->phone]);
+        $order->phone = $request->phone;
+        
+        $order->persons = $request->persons;
+        $order->time = $request->time;
         $order->comment = $request->comment;
         $order->first_name = $user->first_name;
         $order->save();

@@ -49,7 +49,10 @@
 				<td class="cart-total__value">{{$cart->sum() - 20 + $cart->delivery()}} грн</td>
 			</tr>						
 		</table>
-		<a @if ($user) href="{{url('checkout')}}" @else href="#checkout" @endif class="fancybox shoping-cart__checkout button button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
+			<a href="{{url('checkout')}}" class="button button_100 offset_bottom_10 offset_top_10 button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
+		@if(!$user)
+			<a href="#checkout" class="fancybox button button_100 offset_bottom_10 offset_top_10 button_red button_small">ОФОРМИТЬ В 1 КЛИК</a>
+		@endif
 		@if ($cart->next_gift())
 			<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
 		@endif

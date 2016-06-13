@@ -162,9 +162,14 @@
 	var floatingShopingCart = $('.floating-shoping-cart')
 
 	function reloadFloatingShoppingCart () {
-		$.get('/cart/index',function(data){
-			$('.shoping-cart').replaceWith(data);
-		})
+		if (cart = $('.shoping-cart'))
+			$.get('/cart',function(data){
+				cart.replaceWith(data);
+			})
+		if (cart_table = $('.shoping-cart-table'))
+			$.get('/cart/table',function(data){
+				cart_table.replaceWith(data);
+			})
 	}
 
 	function reloadComparelistModal(){

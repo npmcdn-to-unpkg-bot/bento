@@ -11,31 +11,10 @@ class Wishlist extends Model
 
 	public static function get() {
 
-		$hash = request()->cookie('laravel_session');
-
-		$user = auth()->user();
-
-		$wishlist_from_hash = $hash ? self::where('hash', $hash)->first() : false;
-
-		$wishlist_from_user = $user ? $user->wishlist : false;
-
-		if (!$user)
-			return $wishlist_from_hash;
-
-		if ($wishlist_from_hash==$wishlist_from_user
-			||!$wishlist_from_hash
-			||!$wishlist_from_hash->products->first() )
-			return $wishlist_from_user;
-
-		if ($wishlist_from_user){
-			$wishlist_from_user->products()->sync([]);
-		 	$wishlist_from_user->delete();
-		}
-
-		$wishlist_from_hash->user_id = $user->id;
-		$wishlist_from_hash->hash = '';
-		$wishlist_from_hash->save();
-		return $wishlist_from_hash;
+		if (auth()->user())
+			return auth()->user()->wishlist;
+		else
+			return self::where('hash', request()->cookie('laravel_session'))->first();
 
 	}
 

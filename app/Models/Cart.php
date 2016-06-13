@@ -12,32 +12,10 @@ class Cart extends Model
 
 	public static function get() {
 
-
-		$hash = request()->cookie('laravel_session');
-
-		$user = auth()->user();
-
-		$cart_from_hash = $hash ? self::where('hash', $hash)->first() : false;
-
-		$cart_from_user = $user ? $user->cart : false;
-
-		if (!$user)
-			return $cart_from_hash;
-
-		if ($cart_from_hash==$cart_from_user
-			||!$cart_from_hash
-			||!$cart_from_hash->products->first() )
-			return $cart_from_user;
-
-		if ($cart_from_user){
-			$cart_from_user->products()->sync([]);
-		 	$cart_from_user->delete();
-		}
-
-		$cart_from_hash->user_id = $user->id;
-		$cart_from_hash->hash = '';
-		$cart_from_hash->save();
-		return $cart_from_hash;
+		if (auth()->user())
+			return auth()->user()->cart;
+		else
+			return self::where('hash', request()->cookie('laravel_session'))->first();
 
 	}
 

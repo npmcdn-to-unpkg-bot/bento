@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function sales () {
         return $this->belongsToMany('App\Models\Sale');
     }
+
+    public function phones () {
+        return $this->hasMany('App\Models\Phone');
+    }
 }

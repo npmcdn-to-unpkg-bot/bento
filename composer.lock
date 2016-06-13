@@ -1158,16 +1158,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.36",
+            "version": "v5.2.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "236d7c0c5b67a2348ac7831391031d93000de3ab"
+                "reference": "bf199036b0e222a27e2133d841aee0d4238f804d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/236d7c0c5b67a2348ac7831391031d93000de3ab",
-                "reference": "236d7c0c5b67a2348ac7831391031d93000de3ab",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/bf199036b0e222a27e2133d841aee0d4238f804d",
+                "reference": "bf199036b0e222a27e2133d841aee0d4238f804d",
                 "shasum": ""
             },
             "require": {
@@ -1283,7 +1283,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-06-06 15:18:48"
+            "time": "2016-06-10 22:38:47"
         },
         {
             "name": "laravelcollective/html",
@@ -1341,16 +1341,16 @@
         },
         {
             "name": "laravelrus/sleepingowl",
-            "version": "4.40.8",
+            "version": "4.41.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelRUS/SleepingOwlAdmin.git",
-                "reference": "f84e928c8dc6280da4e737445fb62fb497cbe30a"
+                "reference": "c3455ceda648b7fdedb729aa0d70849a0f1858cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/f84e928c8dc6280da4e737445fb62fb497cbe30a",
-                "reference": "f84e928c8dc6280da4e737445fb62fb497cbe30a",
+                "url": "https://api.github.com/repos/LaravelRUS/SleepingOwlAdmin/zipball/c3455ceda648b7fdedb729aa0d70849a0f1858cd",
+                "reference": "c3455ceda648b7fdedb729aa0d70849a0f1858cd",
                 "shasum": ""
             },
             "require": {
@@ -1397,7 +1397,7 @@
                 "crud",
                 "laravel"
             ],
-            "time": "2016-06-09 11:45:00"
+            "time": "2016-06-10 10:03:27"
         },
         {
             "name": "league/flysystem",

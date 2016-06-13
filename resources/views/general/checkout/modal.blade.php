@@ -12,7 +12,7 @@
             </div>
             <input type="hidden" name="remember" value="1">
             <div class="offset_bottom_10">
-                <button class="button button_red button_small input_100">Оформить</button>
+                <button class="button button_red button_small input_100">ОФОРМИТЬ</button>
             </div>
                 
             </div>

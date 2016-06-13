@@ -91,9 +91,11 @@
 			<li><img src="{{url('sample-images/slide-1.jpg')}}" alt=""></li>
 		</ul>
 	</div>
+	@if (!Request::is('checkout'))
 	<div class="floating-shoping-cart">
 		@include('general.cart.block')
 	</div>
+	@endif
 	@yield('content')
 	<div class="container-fluid container-fluid_darkgray footer">
 		<div class="container container_fix">

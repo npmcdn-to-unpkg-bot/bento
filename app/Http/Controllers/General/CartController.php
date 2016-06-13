@@ -12,11 +12,15 @@ class CartController extends Controller
 {
 
 	public function index() {
-		return view('general.cart.block');
+		return view('general.checkout.index');
 	}
 
 	public function block() {
 		return view('general.cart.block');
+	}
+
+	public function table() {
+		return view('general.cart.table');
 	}
 
 	public function add(Request $request) {

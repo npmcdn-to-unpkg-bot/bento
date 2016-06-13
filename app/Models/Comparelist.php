@@ -10,31 +10,10 @@ class Comparelist extends Model
 
 	public static function get() {
 
-		$hash = request()->cookie('laravel_session');
-
-		$user = auth()->user();
-
-		$comparelist_from_hash = $hash ? self::where('hash', $hash)->first() : false;
-
-		$comparelist_from_user = $user ? $user->comparelist : false;
-
-		if (!$user)
-			return $comparelist_from_hash;
-
-		if ($comparelist_from_hash==$comparelist_from_user
-			||!$comparelist_from_hash
-			||!$comparelist_from_hash->products->first() )
-			return $comparelist_from_user;
-
-		if ($comparelist_from_user){
-			$comparelist_from_user->products()->sync([]);
-		 	$comparelist_from_user->delete();
-		}
-
-		$comparelist_from_hash->user_id = $user->id;
-		$comparelist_from_hash->hash = '';
-		$comparelist_from_hash->save();
-		return $comparelist_from_hash;
+		if (auth()->user())
+			return auth()->user()->comparelist;
+		else
+			return self::where('hash', request()->cookie('laravel_session'))->first();
 
 	}
 

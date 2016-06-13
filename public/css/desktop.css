@@ -32,6 +32,10 @@ strong{
 	padding-right: 20px;
 }
 
+.row__col-offset-2 {
+	margin-left: 16.666666%;
+}
+
 .row__col-1,
 .row__col-2,
 .row__col-3,
@@ -89,8 +93,16 @@ strong{
 
 /*offset*/
 
+.offset_top_60{
+	margin-top: 60px;
+}
+
 .offset_top_30 {
 	margin-top: 30px;
+}
+
+.offset_top_10 {
+	margin-top: 10px;
 }
 
 .offset_bottom_10{
@@ -208,11 +220,11 @@ strong{
 	background-color: white;
 	position: absolute;
 	border: 1px solid #e6e6e6;
-	z-index: 9;
 	padding: 7px 12px;
 	min-width: 144px;
 	right: 5px;
 	top: 38px;
+	z-index: 11;
 }
 
 .user-menu:hover .user-menu__dropdown{
@@ -378,7 +390,7 @@ strong{
 	width: 100%;
 	left: 0;
 	top: 45px;
-	z-index: 9;
+	z-index: 11;
 	border-top:1px solid transparent;
 	border-bottom-right-radius: 3px; 
 	border-bottom-left-radius: 3px;
@@ -471,6 +483,10 @@ strong{
 	line-height: 45px;
 	padding: 0 15px;
 	font-size: 20px;	
+}
+
+.button_100 {
+	width: 100%;
 }
 
 .button_small{
@@ -1141,17 +1157,14 @@ strong{
 	background-color: white;
 	border:1px solid #e6e6e6;
 	border-radius: 1px;
-	font-size: 16px;
+	font-size: 12px;
 	font-weight: 300;
 	padding: 0 15px;
+	display: inline-block;
 	height: 40px;
 	line-height: 40px;
 	box-sizing:border-box;
 	vertical-align: middle;
-}
-
-.input_100 {
-	width: 100%;
 }
 
 .input_textarea {
@@ -1160,6 +1173,21 @@ strong{
 	padding: 10px;
 	line-height: normal;
 	resize: none;
+}
+
+.input_100 {
+	width: 100%;
+}
+
+.input_round {
+	border: 1px solid #c2c2c2;
+	border-radius: 5px;
+	font-weight: 400;
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 37px;
+	line-height: 37px;
+	text-align: center;
 }
 
 /*rating*/
@@ -1566,25 +1594,27 @@ strong{
 
 .products-table{
 	width: 100%;
-	border-top:1px solid #ededed;
 	font-size: 15px;
 	margin-bottom: 5px;
 }
 
 .products-table th{
+	text-align: center;
 	vertical-align: middle;
 	height: 38px;
-	border-bottom: 1px solid #ededed;
+	background-color: #f4f4f4;
+	border: none;
 }
 
 .products-table td{
+	text-align: center;
 	vertical-align: middle;
 	height: 100px;
 	border-bottom: 1px solid #ededed;
 }
 
 .products-table__remove-wrap{
-	width: 11px;
+	width: 20px;
 }
 .products-table__image-wrap{
 	width: 125px;
@@ -1615,11 +1645,12 @@ strong{
 	padding-right: 20px;
 }
 
-.product-table__remove{
+.products-table__remove{
 	background-image: url(../img/delete.png);
-	width: 11px;
-	height: 11px;
+	width: 20px;
+	height: 20px;
 	display: inline-block;
+	background-size: 100%;
 }
 
 .products-table__buy{
@@ -1946,4 +1977,19 @@ a.flex-active{
 /*text*/
 .text_center {
 	text-align: center;
+}
+
+/*optional-input*/
+.optional-input {
+
+}
+.optional-input__checkbox {
+	display: none;
+}
+.optional-input__input {
+	color: #969696;
+}
+
+.optional-input__checkbox:checked + .optional-input__input {
+	color: black;
 }
