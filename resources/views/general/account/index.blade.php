@@ -7,45 +7,74 @@
 		<span class="title__text">ЛИЧНЫЙ КАБИНЕТ</span>
 	</div>
 
+	<div class="row">
+		<div class="row__col-2"><img class="image_round" src="/fit/170/170?image={{$user->image ? $user->image : 'img/avatar.png'}}" alt=""></div>
+		<div class="row__col-10">
+			Личные данные / <a href="{{url('account/edit')}}">редактировать</a>
+			<hr>
+			<div style="width: 600px;">
+				<div class="row offset_bottom_10">
+					<div class="row__col-1 text_center"><i class="fa fa-red fa-user"></i></div>
+					<div class="row__col-11">Вы: {{$user->first_name}} {{$user->last_name}}</div>
+				</div>
+				@if ($user->birth_day > Carbon\Carbon::now()->addYear(-100))
+				<div class="row offset_bottom_10">
+					<div class="row__col-1 text_center"><i class="fa fa-red fa-calendar"></i></div>
+					<div class="row__col-11">Дата рождения: {{$user->birth_day->format('d.m.Y')}}</div>
+				</div>
+				@endif
+				@if ($user->phone) 
+				<div class="row offset_bottom_10">
+					<div class="row__col-1 text_center"><i class="fa fa-red fa-phone"></i></div>
+					<div class="row__col-6">Номер телефона: {{$user->phone}}</div>
+					<div class="row__col-5">
+						<div class="slide-info">
+							<span onclick="$('#phones').slideToggle()" class="slide-info__link">дополнительные номера</span>
+							<div id="phones" style="display: none;position: absolute;" class="slide-info__content">
+								@foreach($user->phones as $phone)
+								<div>{{$phone->name}} {{$phone->text}}</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+				</div>
+				@endif
+				<div class="row offset_bottom_10">
+					<div class="row__col-1 text_center"><i class="fa fa-red fa-envelope"></i></div>
+					<div class="row__col-11">E-mail: {{$user->email}}</div>
+				</div>
+				@if ($user->place) 
+				<div class="row offset_bottom_10">
+					<div class="row__col-1 text_center"><i class="fa fa-red fa-map-marker"></i></div>
+					<div class="row__col-6">Адрес доставки: {{$user->place}}</div>
+					<div class="row__col-5">
+						<div class="slide-info">
+							<span onclick="$('#places').slideToggle()" class="slide-info__link">дополнительные адреса</span>
+							<div id="places" style="display: none;position: absolute;" class="slide-info__content">
+								@foreach($user->places as $place)
+								<div>{{$place->name}} {{$place->text}}</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+				</div>
+				@endif
+			</div>
+		</div>
+	</div>
+
 	<div class="title title_small">
 		<span class="title__text">ТЕКУЩИЕ ЗАКАЗЫ</span>
 	</div>
-	@foreach($user->orders->whereIn('status',[
-		'В обработке',
-		'Принят',
-		'Приготовлен',
-		'В пути'
-	]) as $order)
-		<div class="row offset_bottom_10">
-			<div class="row__col-6"><span class="button button_small button_red">{{$order->status}}</span></div>
-			<div class="row__col-6 text_right">
-				<i class="fa fa-calendar"></i> Заказ от {{$order->created_at->format('d.m.Y')}} 
-				<i class="fa fa-clock-o"></i> {{$order->created_at->format('H:i')}},
-				№ заказа #{{$order->id}}
-			</div>
-		</div>
-		<table class="products-table offset_bottom_60">
-			<tr>
-				<th>Продукт</th>
-				<th>Наименование</th>
-				<th>Цена</th>
-				<th>Количество</th>
-				<th>Итог</th>
-			</tr>
-			@foreach ($order->products as $product)
-			 <tr>
-			 	<td><img src="/width/120?image={{$product->image}}" alt=""></td>
-			 	<td>
-			 		<b>{{$product->name}}</b>
-			 		<div class="products-table__ingredients">{{$product->ingredients->implode('name',', ')}}</div>
-			 	</td>
-			 	<td><span class="input input_round">{{$product->price}}</span></td>
-			 	<td><span class="input input_round">{{$product->pivot->quantity}}</span></td>
-			 	<td><span class="input input_round">{{$product->pivot->quantity*$product->price}}</span></td>
-			 </tr>
-			@endforeach
-		</table>
-	@endforeach
+
+	@include('general.account.orders',[
+		'orders' => $user->orders->whereIn('status',[
+						'В обработке',
+						'Принят',
+						'Приготовлен',
+						'В пути'
+					])
+	])
 
 
 	<div class="title title_small">
@@ -58,7 +87,7 @@
 		</span>
 	</div>
 
-	<div class="container history-total offset_bottom_10">
+	<div class="history-total offset_bottom_10">
 		<div class="row">
 			<div class="row__col-6">
 				Общее количество заказов:
@@ -78,39 +107,13 @@
 	</div>
 
 	<div id="history" style="display: none;">
-		@foreach($user->orders->whereIn('status',[
-			'Доставлен',
-		]) as $order)
-			<div class="row offset_bottom_10">
-				<div class="row__col-6"><span class="button button_small button_red">{{$order->status}}</span></div>
-				<div class="row__col-6 text_right">
-					<i class="fa fa-calendar"></i> Заказ от {{$order->created_at->format('d.m.Y')}} 
-					<i class="fa fa-clock-o"></i> {{$order->created_at->format('H:i')}},
-					№ заказа #{{$order->id}}
-				</div>
-			</div>
-			<table class="products-table offset_bottom_60">
-				<tr>
-					<th>Продукт</th>
-					<th>Наименование</th>
-					<th>Цена</th>
-					<th>Количество</th>
-					<th>Итог</th>
-				</tr>
-				@foreach ($order->products as $product)
-				 <tr>
-				 	<td><img src="/width/120?image={{$product->image}}" alt=""></td>
-				 	<td>
-				 		<b>{{$product->name}}</b>
-				 		<div class="products-table__ingredients">{{$product->ingredients->implode('name',', ')}}</div>
-				 	</td>
-				 	<td><span class="input input_round">{{$product->price}}</span></td>
-				 	<td><span class="input input_round">{{$product->pivot->quantity}}</span></td>
-				 	<td><span class="input input_round">{{$product->pivot->quantity*$product->price}}</span></td>
-				 </tr>
-				@endforeach
-			</table>
-		@endforeach
+
+	@include('general.account.orders',[
+		'orders' => $user->orders->whereIn('status',[
+						'Доставлен',
+					])
+	])
+
 	</div>
 
 </div>

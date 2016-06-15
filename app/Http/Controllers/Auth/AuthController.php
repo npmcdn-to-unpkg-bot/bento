@@ -92,14 +92,10 @@ class AuthController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
+            'place' => $data['place'],
             'trafic_source' => $data['trafic_source'],
             'bento_card' => $data['bento_card'],
             'password' => bcrypt($data['password'])
-        ]);
-
-        $user->places()->create([
-            'name' => 'Основной адрес',
-            'text' => $data['place']
         ]);
 
         return $user;

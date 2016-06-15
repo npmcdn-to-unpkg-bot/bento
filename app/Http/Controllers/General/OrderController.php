@@ -25,7 +25,8 @@ class OrderController extends Controller
                 'payment_method'=>'required'
             ]);
             
-            $place = $user->places()->firstOrCreate(['text'=>$request->place]);
+            if ($user->place!=$request->place)
+                $place = $user->places()->firstOrCreate(['text'=>$request->place]);
             if ($user->phone!=$request->phone)
                 $phone = $user->phones()->firstOrCreate(['text'=>$request->phone]);
 
@@ -45,13 +46,9 @@ class OrderController extends Controller
                 'email' => $request->email,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
+                'place' => $request->place,
                 'phone' => $request->phone,
                 'password' => bcrypt($request->password)
-            ]);
-
-            $user->places()->create([
-                'name' => 'Основной адрес',
-                'text' => $request->place
             ]);
 
 
