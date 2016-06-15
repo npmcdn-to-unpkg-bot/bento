@@ -198,9 +198,9 @@
 			FSCart.container.addClass('floating-shoping-cart_fixed')
 
 		FSCart.container.css({
-			height: lowerLimit - FSCart.container.offset().top
+			height: Math.min( lowerLimit - FSCart.container.offset().top, $(window).height() )
 		});
-		
+
 		FSCart.middle.css({
 			"max-height": FSCart.container.height() - FSCart.top.height() - FSCart.bottom.height()
 		})
