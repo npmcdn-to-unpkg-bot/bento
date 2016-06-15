@@ -90,6 +90,7 @@ class Cart extends Model
                 return ['quantity'=>$product->pivot->quantity];
             })->all()
         );
+        $this->products()->sync([]);
         $this->delete();
         return $order;
     }

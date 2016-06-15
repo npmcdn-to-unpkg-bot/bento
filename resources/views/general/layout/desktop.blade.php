@@ -128,6 +128,7 @@
 	</div>
 
 	<script src="{{url('bower/jquery/dist/jquery.min.js')}}"></script>
+	<script src="{{url('bower/smoothscroll-for-websites/SmoothScroll.js')}}"></script>
 	<script src="{{url('bower/fancybox/source/jquery.fancybox.pack.js')}}"></script>
 	<script src="{{url('bower/flexslider/jquery.flexslider-min.js')}}"></script>
 	<script src="{{url('bower/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>

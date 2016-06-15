@@ -1428,16 +1428,38 @@ strong{
 	width: 280px;
 	position: absolute;
 	right: 0;
+	top: auto;
 	background-color: white;
 	padding: 0 13px;
-	overflow-y: auto;
 	border-left: 1px solid #e6e6e6;
 	border-right: 1px solid #e6e6e6;
 	border-radius: 3px;
 	z-index: 9;
 }
 
+.floating-shoping-cart_fixed {
+	position: fixed;
+	top: 0;
+}
+
+.floating-shoping-cart__top {
+	overflow: hidden;
+}
+
+.floating-shoping-cart__middle {
+	overflow-y: scroll;
+	padding-right: 3px;
+}
+.floating-shoping-cart__bottom {
+	overflow: hidden;
+}
+
+
 /*shoping-cart*/
+
+.shoping-cart {
+	overflow: hidden;
+}
 
 .shoping-cart__user{
 	text-align: center;
@@ -1480,7 +1502,6 @@ strong{
 	color: #ff4848;
 	font-weight: 600;
 }
-.shoping-cart__items{}
 
 .shoping-cart__item td{
 	padding-top: 13px;
@@ -2095,4 +2116,47 @@ a.flex-active{
 .form-group {
 	border: 1px solid #e7e7e7;
 	padding: 20px;
+}
+
+/*scrollbar*/
+::-webkit-scrollbar {
+background: transparent;
+	overflow: visible;
+	width: 17px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.2);
+	border: solid #fff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(0, 0, 0, 0.8);
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	border-width: 4px 6px;
+	min-width: 40px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	border-width: 6px 4px;
+	min-height: 40px;
+}
+
+::-webkit-scrollbar-track-piece {
+	background-color: #fff;
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #ADADAD;
+	-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: #999;
 }

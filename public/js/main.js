@@ -156,11 +156,6 @@
 		})
 	}
 
-
-	var topElement = $('.main-slider');
-	var bottomElement = $('.footer');
-	var floatingShopingCart = $('.floating-shoping-cart')
-
 	function reloadFloatingShoppingCart () {
 		if (cart = $('.shoping-cart'))
 			$.get('/cart',function(data){
@@ -184,31 +179,36 @@
 		})
 	}
 
+	// floating shoping cart
+	var FSCart = FSCart||{}
+	FSCart.topElement =  $('.main-slider')
+	FSCart.bottomElement = $('.footer')
+	FSCart.container = $('.floating-shoping-cart')
+	FSCart.top = FSCart.container.find('.floating-shoping-cart__top')
+	FSCart.middle = FSCart.container.find('.floating-shoping-cart__middle')
+	FSCart.bottom = FSCart.container.find('.floating-shoping-cart__bottom')
+
 	function positionFloatingShopingCart(){
-		var upperLimit = topElement.offset().top + topElement.outerHeight();
-		var lowerLimit = bottomElement.offset().top;
+		var upperLimit = FSCart.topElement.offset().top + FSCart.topElement.outerHeight();
+		var lowerLimit = FSCart.bottomElement.offset().top;
 
-		if (upperLimit >= $(window).scrollTop()) {
-			floatingShopingCart.css({
-				top: upperLimit,
-				position: 'absolute'
-			})
-		}else{
-			floatingShopingCart.css({
-				top: 0,
-				position: 'fixed'
-			})
-		}
+		if (upperLimit >= $(window).scrollTop() && FSCart.container.hasClass('floating-shoping-cart_fixed'))
+			FSCart.container.removeClass('floating-shoping-cart_fixed')
+		if (upperLimit < $(window).scrollTop() && !FSCart.container.hasClass('floating-shoping-cart_fixed'))
+			FSCart.container.addClass('floating-shoping-cart_fixed')
 
-		floatingShopingCart.css({
-			height: lowerLimit - floatingShopingCart.offset().top,
+		FSCart.container.css({
+			height: lowerLimit - FSCart.container.offset().top
 		});
+		
+		FSCart.middle.css({
+			"max-height": FSCart.container.height() - FSCart.top.height() - FSCart.bottom.height()
+		})
 	}
 
 	function dataToggle (event) {
 		event.preventDefault()
 		$($(this).attr('href')).slideToggle();
-
 	}
 
 	// listners
@@ -218,7 +218,7 @@
 	$(document).on('click','.button_wishlist', addOrRemoveWishlistItem);
 	$(document).on('click','.button_comparelist', addOrRemoveComparelistItem);
 	$(document).on('change','.ajax-send-input',updateCartItem);
-	if (floatingShopingCart.length)
+	if (FSCart.container.length)
 		$(window)
 			.imagesLoaded(positionFloatingShopingCart)
 			.on("scroll resize", positionFloatingShopingCart);
