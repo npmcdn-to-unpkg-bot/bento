@@ -161,6 +161,7 @@
 			$.get('/cart',function(data){
 				cart.replaceWith(data);
 			})
+		positionFloatingShopingCart();
 		if (cart_table = $('.shoping-cart-table'))
 			$.get('/cart/table',function(data){
 				cart_table.replaceWith(data);
