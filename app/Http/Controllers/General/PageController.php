@@ -11,6 +11,9 @@ use App\Models\Page;
 class PageController extends Controller
 {
     public function index($slug) {
+    	if ($slug=='contacts')
+    		return view('general.pages.contacts');
+    	
         return view('general.article.show',[
             'article' => Page::where('slug', $slug)->first(),
         ]);

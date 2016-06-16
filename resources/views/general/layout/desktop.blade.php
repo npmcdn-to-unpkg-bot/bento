@@ -81,7 +81,7 @@
 			</div>
 			<a href="" class="main-menu__item">ДОСТАВКА И ОПЛАТА</a>
 			<a href="{{url('news')}}" class="main-menu__item">НОВОСТИ И АКЦИИ</a>
-			<a href="" class="main-menu__item">НАШИ КОНТАКТЫ</a>
+			<a href="{{url('contacts')}}" class="main-menu__item">НАШИ КОНТАКТЫ</a>
 		</div>
 	</div>
 	<div class="main-slider container-fluid flexslider">
