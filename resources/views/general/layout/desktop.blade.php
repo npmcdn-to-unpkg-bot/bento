@@ -87,9 +87,18 @@
 	</div>
 	<div class="main-slider container-fluid flexslider">
 		<ul class="slides">
-			<li><img src="{{url('sample-images/slide-1.jpg')}}" alt=""></li>
-			<li><img src="{{url('sample-images/slide-1.jpg')}}" alt=""></li>
-			<li><img src="{{url('sample-images/slide-1.jpg')}}" alt=""></li>
+			@foreach(App\Models\Slide::all() as $slide)
+			<li>
+				<img src="/fit/1838/515?image={{$slide->image}}" alt="">
+				<div class="main-slider__title" data-effect="{{$slide->title_effect}}" data-time="{{$slide->title_time}}">{!!$slide->title!!}</div>
+				<div class="main-slider__text" data-effect="{{$slide->text_effect}}" data-time="{{$slide->text_time}}">{!!$slide->text!!}</div>
+				@if($slide->button)
+				<div class="main-slider__button" data-effect="{{$slide->button_effect}}" data-time="{{$slide->button_time}}">
+				<a href="{{$slide->href}}" class="button button_small button_red">{{$slide->button}}</a>
+				</div>
+				@endif
+			</li>
+			@endforeach
 		</ul>
 	</div>
 	@if (!Request::is('checkout'))

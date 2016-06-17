@@ -2,20 +2,31 @@
 	$('.main-slider').flexslider({
 		controlNav: false,
 		directionNav: false,
-		after: function (){
+		init: function(){
 			$('.main-slider .flex-active-slide [data-effect]').each(function(key,item){
-				var effect = $(item).attr('data-effect')
-				var time = $(item).attr('data-time')
-				$(item)
-					.removeClass(effect)
-					.removeClass('animated')
 				setTimeout(function ( ) {
 					$(item)
-						.addClass(effect)
+						.addClass($(item).attr('data-effect'))
 						.addClass('animated')
-				}, time )
+				}, $(item).attr('data-time') )
 			})
-		}
+		},
+		after: function (){
+			$('.main-slider .flex-active-slide [data-effect]').each(function(key,item){
+				setTimeout(function ( ) {
+					$(item)
+						.addClass($(item).attr('data-effect'))
+						.addClass('animated')
+				}, $(item).attr('data-time') )
+			})
+		},
+		before: function (){
+			$('.main-slider :not(.flex-active-slide) [data-effect]').each(function(key,item){
+				$(item)
+					.removeClass( $(item).attr('data-effect') )
+					.removeClass('animated')
+			})
+		},
 	});
 
 	$('.visit-us__slider').flexslider({

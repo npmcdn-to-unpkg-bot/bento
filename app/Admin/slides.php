@@ -95,7 +95,15 @@ AdminSection::registerModel(App\Models\Slide::class, function ($model) {
                 ->addColumn(function () use ($effects) {
                     return [
                         AdminFormElement::html('<h4>Заголовок</h4>'),
-                        AdminFormElement::text('title', 'Текст')->required(),
+                        AdminFormElement::wysiwyg('title', 'Текст')
+                            ->setEditor('tinymce')
+                            ->setParameters([
+                                'height' => 100,
+                                'plugins' => "textcolor colorpicker",
+                                'toolbar' => "forecolor backcolor",
+                                'menubar' => false
+                            ])
+                            ->required(),
                         AdminFormElement::select('title_effect', 'Эффект')->setOptions($effects)->setSortable(false),
                         AdminFormElement::textaddon('title_time', 'Время появления')->setAddon('мсек.')->placeAfter()
                     ];
@@ -103,7 +111,15 @@ AdminSection::registerModel(App\Models\Slide::class, function ($model) {
                 ->addColumn(function () use ($effects) {
                     return [
                         AdminFormElement::html('<h4>Текст</h4>'),
-                        AdminFormElement::text('text', 'Текст')->required(),
+                        AdminFormElement::wysiwyg('text', 'Текст')
+                            ->setEditor('tinymce')
+                            ->setParameters([
+                                'height' => 100,
+                                'plugins' => "textcolor colorpicker",
+                                'toolbar' => "forecolor backcolor",
+                                'menubar' => false
+                            ])
+                            ->required(),
                         AdminFormElement::select('text_effect', 'Эффект')->setOptions($effects)->setSortable(false),
                         AdminFormElement::textaddon('text_time', 'Время появления')->setAddon('мсек.')->placeAfter()
                     ];
@@ -111,7 +127,14 @@ AdminSection::registerModel(App\Models\Slide::class, function ($model) {
                 ->addColumn(function () use ($effects) {
                     return [
                         AdminFormElement::html('<h4>Кнопка</h4>'),
-                        AdminFormElement::text('button', 'Текст'),
+                        AdminFormElement::wysiwyg('button', 'Текст')
+                            ->setEditor('tinymce')
+                            ->setParameters([
+                                'height' => 136,
+                                'toolbar' => false,
+                                'menubar' => false
+                            ])
+                            ->required(),
                         AdminFormElement::select('button_effect', 'Эффект')->setOptions($effects)->setSortable(false),
                         AdminFormElement::textaddon('button_time', 'Время появления')->setAddon('мсек.')->placeAfter()
                     ];

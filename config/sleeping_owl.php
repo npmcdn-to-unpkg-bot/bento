@@ -111,7 +111,7 @@ return [
     */
 
     'wysiwyg' => [
-        'default'   => 'ckeditor',
+        'default'   => 'tinymce',
 
         /*
          * See http://docs.ckeditor.com/#!/api/CKEDITOR.config
