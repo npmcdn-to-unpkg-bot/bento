@@ -15,6 +15,9 @@
     "tests"
   ],
   "dependencies": {
-    "smoothscroll-for-websites": "^1.4.4"
+    "smoothscroll-for-websites": "^1.4.4",
+    "malihu-custom-scrollbar-plugin": "^3.1.4",
+    "animate.css": "^3.5.2",
+    "owl.carousel": "owl-carousel2#^2.1.5"
   }
 }

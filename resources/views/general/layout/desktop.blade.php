@@ -6,6 +6,7 @@
 	<meta name="title" content="@yield('meta-title')">
 	<meta name="description" content="@yield('meta-description')">
 	<meta name="csrf-token" content="{{csrf_token()}}">
+	<link rel="stylesheet" href="{{url('bower/owl.carousel/dist/assets/owl.carousel.min.css')}}">
 	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
@@ -127,9 +128,12 @@
 		</div>
 	</div>
 
+
+	<link rel="stylesheet" href="{{url('bower/animate.css/animate.min.css')}}">
 	<script src="{{url('bower/jquery/dist/jquery.min.js')}}"></script>
 	<script src="{{url('bower/smoothscroll-for-websites/SmoothScroll.js')}}"></script>
 	<script src="{{url('bower/fancybox/source/jquery.fancybox.pack.js')}}"></script>
+	<script src="{{url('bower/owl.carousel/dist/owl.carousel.min.js')}}"></script>
 	<script src="{{url('bower/flexslider/jquery.flexslider-min.js')}}"></script>
 	<script src="{{url('bower/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
 	<script src="{{url('js/main.js')}}"></script>

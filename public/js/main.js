@@ -1,8 +1,23 @@
 (function(){
 	$('.main-slider').flexslider({
 		controlNav: false,
-		directionNav: false
+		directionNav: false,
+		after: function (){
+			$('.main-slider .flex-active-slide [data-effect]').each(function(key,item){
+				var effect = $(item).attr('data-effect')
+				var time = $(item).attr('data-time')
+				$(item)
+					.removeClass(effect)
+					.removeClass('animated')
+				setTimeout(function ( ) {
+					$(item)
+						.addClass(effect)
+						.addClass('animated')
+				}, time )
+			})
+		}
 	});
+
 	$('.visit-us__slider').flexslider({
 		controlNav: false,
 		animation: "slide",
