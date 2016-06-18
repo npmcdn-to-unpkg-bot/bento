@@ -9,7 +9,7 @@
 		<form action="/menu/{{$category->slug}}#filter" id="filter" class="offset_top_30">
 			@foreach($ingredients as $i => $ingredient)
 			@if ($i%6==0)<div class="row">@endif
-				<div class="row__col-2">
+				<div class="row__col-2 offset_bottom_10">
 					<label>
 						<input type="checkbox" value="{{$ingredient->id}}" @if ( in_array($ingredient->id, $ingredients_checked ) ) checked @endif >
 						{{$ingredient->name}}
