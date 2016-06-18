@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Ingredient;
+use App\Models\Setting;
 use App\Models\Category;
 
 class ProductController extends Controller
@@ -16,13 +18,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($slug)
+    public function index($slug, Request $request)
     {
         $category = Category::where('slug', $slug)->first();
+        
         if ($category) {
+
+            $ingredients = Ingredient::find( Setting::get('ingredient_filters') );
+        
+            $ingredients_checked = array_filter ( explode(',', $request->ingredients ) );
+            
+            $products = $category->products();
+
+            foreach ($ingredients_checked as $id)
+                $products->whereHas('ingredients',function($query)use($id){
+                    $query->where('id', $id);
+                });
+
+            $products = $products->get();
+
             return view('general.product.index',[
-                'products' => $category->products,
-                'category' => $category
+                'products' => $products,
+                'category' => $category,
+                'ingredients' => $ingredients,
+                'ingredients_checked' => $ingredients_checked
             ]);
         }else{
             return $this->show($slug);
