@@ -6,6 +6,7 @@
 	<meta name="title" content="@yield('meta-title')">
 	<meta name="description" content="@yield('meta-description')">
 	<meta name="csrf-token" content="{{csrf_token()}}">
+	@stack('styles')
 	<link rel="stylesheet" href="{{url('bower/owl.carousel/dist/assets/owl.carousel.min.css')}}">
 	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -146,7 +147,7 @@
 	<script src="{{url('bower/flexslider/jquery.flexslider-min.js')}}"></script>
 	<script src="{{url('bower/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
 	<script src="{{url('js/main.js')}}"></script>
-
+	@stack('scripts')
 
 	<div style="display: none;">
 	@include('general.comparelist.modal');

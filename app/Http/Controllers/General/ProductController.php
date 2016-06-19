@@ -30,6 +30,15 @@ class ProductController extends Controller
             
             $products = $category->products();
 
+            $max_possible = $products->max('price');
+            $min_possible = $products->min('price');
+
+            if ($request->min)
+                $products->where('price','>=',$request->min);
+
+            if ($request->max)
+                $products->where('price','<=',$request->max);
+
             foreach ($ingredients_checked as $id)
                 $products->whereHas('ingredients',function($query)use($id){
                     $query->where('id', $id);
@@ -39,6 +48,10 @@ class ProductController extends Controller
 
             return view('general.product.index',[
                 'products' => $products,
+                'max' => $request->max ? $request->max : $max_possible,
+                'min' => $request->min ? $request->min : $min_possible,
+                'max_possible' => $max_possible,
+                'min_possible' => $min_possible,
                 'category' => $category,
                 'ingredients' => $ingredients,
                 'ingredients_checked' => $ingredients_checked

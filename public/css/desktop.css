@@ -56,6 +56,14 @@ body {
 	margin-left: 16.666666%;
 }
 
+.row__col-offset-3 {
+	margin-left: 25%;
+}
+
+.row__col-offset-6 {
+	margin-left: 50%;
+}
+
 .row__col-1,
 .row__col-2,
 .row__col-3,
