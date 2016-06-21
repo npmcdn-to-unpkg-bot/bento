@@ -15,14 +15,7 @@
 			</tr>
 			<tr>
 				<td>
-					<div class="rating">
-						<span class="rating__value" style="width: 66%"></span>
-						<a href="" class="rating__star"></a>
-						<a href="" class="rating__star"></a>
-						<a href="" class="rating__star"></a>
-						<a href="" class="rating__star"></a>
-						<a href="" class="rating__star"></a>
-					</div>
+					@include('general.product.rating')
 				</td>
 			</tr>
 			<tr><td class="product-cart__text">{!!$product->description!!}</td></tr>

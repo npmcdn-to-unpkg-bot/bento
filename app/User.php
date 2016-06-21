@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'first_name', 'last_name', 'trafic_source', 'bento_card', 'birth_day', 'phone', 'place'
+        'email', 'password', 'first_name', 'last_name', 'trafic_source', 'bento_card', 'birth_day', 'phone', 'place', 'image'
     ];
 
     protected $dates = ['created_at','updated_at','birth_day'];
@@ -52,5 +52,9 @@ class User extends Authenticatable
 
     public function phones () {
         return $this->hasMany('App\Models\Phone');
+    }
+
+    public function votes() {
+        return $this->hasMany('App\Models\Vote');
     }
 }

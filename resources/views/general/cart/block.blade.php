@@ -41,11 +41,7 @@
 		<table class="cart-total">
 			<tr>
 				<td class="cart-total__label">Сумма</td>
-				<td class="cart-total__value">{{$cart->sum()}} грн</td>
-			</tr>
-			<tr>
-				<td class="cart-total__label">Скидка</td>
-				<td class="cart-total__value">-20 грн</td>
+				<td class="cart-total__value">{{$cart->sum() - $cart->delivery()}} грн</td>
 			</tr>
 			<tr>
 				<td class="cart-total__label">Доставка</td>
@@ -53,7 +49,7 @@
 			</tr>
 			<tr class="cart-total__result">
 				<td class="cart-total__label">ИТОГО</td>
-				<td class="cart-total__value">{{$cart->sum() - 20 + $cart->delivery()}} грн</td>
+				<td class="cart-total__value">{{$cart->sum()}} грн</td>
 			</tr>						
 		</table>
 			<a href="{{url('checkout')}}" class="button button_100 offset_bottom_10 offset_top_10 button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>

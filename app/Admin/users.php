@@ -16,7 +16,7 @@ AdminSection::registerModel(App\User::class, function ($model) {
         return $display;
     });
     // Create And Edit
-    $model->onCreateAndEdit(function() {
+    $model->onEdit(function() {
         return $form = AdminForm::panel()->addBody(
             AdminFormElement::text('email', 'Email')->required()->setReadonly(true),
             AdminFormElement::text('first_name', 'Имя')->required(),

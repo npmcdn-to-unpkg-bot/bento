@@ -40,9 +40,16 @@ class Cart extends Model
 	}
 
 	public function sum() {
-		return $this->products->map(function($product){
-			return $product->new_price()*$product->pivot->quantity;
-		})->sum();
+
+        $sum = $this->products->map(function($product){
+            return $product->new_price()*$product->pivot->quantity;
+        })->sum();
+
+        $delivery = $sum >= Setting::get('free_delivery_order_sum') 
+            ? 0 
+            : Setting::get('delivery_price');
+            
+		return $sum + $delivery;
 	}
 
     public function user() {
@@ -64,9 +71,16 @@ class Cart extends Model
     		->first();
     }
     public function delivery(){
-    	return $this->sum() >= Setting::get('free_delivery_order_sum') 
-    		? 0 
-    		: Setting::get('delivery_price');
+
+        $sum = $this->products->map(function($product){
+            return $product->new_price()*$product->pivot->quantity;
+        })->sum();
+
+        $delivery = $sum >= Setting::get('free_delivery_order_sum') 
+            ? 0 
+            : Setting::get('delivery_price');
+
+        return $delivery;
     }
 
     public function checkout ($data, $user){
@@ -87,7 +101,10 @@ class Cart extends Model
         $order->save();
         $order->products()->sync(
             $this->products->keyBy('id')->map(function($product){
-                return ['quantity'=>$product->pivot->quantity];
+                return [
+                    'quantity'=>$product->pivot->quantity,
+                    'price'=>$product->new_price()
+                ];
             })->all()
         );
         $this->products()->sync([]);

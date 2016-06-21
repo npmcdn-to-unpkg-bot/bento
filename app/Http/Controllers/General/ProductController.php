@@ -131,4 +131,16 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function vote($id, $value){
+        $vote = auth()
+            ->user()
+            ->votes()
+            ->firstOrNew(['product_id'=>$id]);
+        $vote->value = $value;
+        $vote->save();
+        return response()->json([
+            'width' => Product::find($id)->votes->avg('value')/5*100
+        ]);
+    }
 }

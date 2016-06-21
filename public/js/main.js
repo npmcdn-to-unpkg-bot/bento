@@ -185,12 +185,12 @@
 	function reloadFloatingShoppingCart () {
 		if (cart = $('.shoping-cart'))
 			$.get('/cart',function(data){
-				cart.replaceWith(data);
+				cart.replaceWith(data)
 			})
-		positionFloatingShopingCart();
+		positionFloatingShopingCart()
 		if (cart_table = $('.shoping-cart-table'))
 			$.get('/cart/table',function(data){
-				cart_table.replaceWith(data);
+				cart_table.replaceWith(data)
 			})
 	}
 
@@ -216,6 +216,10 @@
 	FSCart.bottom = FSCart.container.find('.floating-shoping-cart__bottom')
 
 	function positionFloatingShopingCart(){
+		
+		if (!FSCart.container.length)
+			return false;
+
 		var upperLimit = FSCart.topElement.offset().top + FSCart.topElement.outerHeight();
 		var lowerLimit = FSCart.bottomElement.offset().top;
 
@@ -238,17 +242,29 @@
 		$($(this).attr('href')).slideToggle();
 	}
 
+	function multipleFieldDelete(event){
+		event.preventDefault()
+		$(this).parents('.multiple-field').remove()
+	}
+
+	function multipleFieldAdd(event){
+		event.preventDefault()
+		var template = $( $(this).attr('href') ).clone().attr('id','')
+		$(this).parents('.row').before(template)
+	}
+
 	// listners
+	$(document).on('click', '.multiple-field__add', multipleFieldAdd)
+	$(document).on('click', '.multiple-field__delete', multipleFieldDelete)
 	$(document).on('submit','.ajax-form',AjaxFormSend);
 	$(document).on('click','.button_cart_add', addCartItem);
 	$(document).on('click','.button_cart_delete', removeCartItem);
 	$(document).on('click','.button_wishlist', addOrRemoveWishlistItem);
 	$(document).on('click','.button_comparelist', addOrRemoveComparelistItem);
 	$(document).on('change','.ajax-send-input',updateCartItem);
-	if (FSCart.container.length)
-		$(window)
-			.imagesLoaded(positionFloatingShopingCart)
-			.on("scroll resize", positionFloatingShopingCart);
+	$(window)
+		.imagesLoaded(positionFloatingShopingCart)
+		.on("scroll resize", positionFloatingShopingCart);
 
 	function initListeners(){
 		$('.fancybox').fancybox();

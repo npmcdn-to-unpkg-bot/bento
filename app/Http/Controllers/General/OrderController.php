@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Setting;
 use App\User;
 
 class OrderController extends Controller
@@ -54,11 +55,19 @@ class OrderController extends Controller
 
         }
 
-        Cart::get()->checkout($request, $user);
+        $order = Cart::get()->checkout($request, $user);
 
         auth()->login($user);
 
-        return redirect('/');
+        if ($order->payment_method == 'С бонусного счета') {
+            if ($user->bonus_account*Setting::get('spend_points') < $order->sum()) {
+                $order->payment_method = 'Наличными при получении';
+            }else{
+                $order->bonusPay();
+            }
+        }
+
+        return redirect('account');
 
     }
 

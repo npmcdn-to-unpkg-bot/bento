@@ -27,7 +27,8 @@ class AddOrderColumns extends Migration
             ]);
             $table->enum('payment_method',[
                 'Наличными при получении',
-                'Онлайн оплата visa/mastercard'
+                'Онлайн оплата visa/mastercard',
+                'С бонусного счета'
             ]);
 
         });

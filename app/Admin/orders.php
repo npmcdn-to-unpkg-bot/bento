@@ -23,13 +23,8 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
         $display->paginate(15);
         return $display;
     });
-    // Create And Edit
-    $model->onCreateAndEdit(function() {
+    $model->onEdit(function() {
         return $form = AdminForm::panel()->addBody(
-            AdminFormElement::radio('payed', 'Статус оплаты')->setSortable(false)->setOptions([
-                'Ожидает оплаты'                    => 'Ожидает оплаты',
-                'Оплачен'                           => 'Оплачен'
-            ]),
             AdminFormElement::radio('status', 'Статус заказа')->setSortable(false)->setOptions([
                 'В обработке'                       => 'В обработке',
                 'Принят'                            => 'Принят',
@@ -38,14 +33,15 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
                 'Доставлен'                         => 'Доставлен',
                 'Не обработан (отклонен)'           => 'Не обработан (отклонен)'
             ]),
-            AdminFormElement::radio('payment_method','Способ оплаты')->setSortable(false)->setOptions([
-                'Наличными при получении'           => 'Наличными при получении',
-                'Онлайн оплата visa/mastercard'     => 'Онлайн оплата visa/mastercard'
-            ]),
             AdminFormElement::textarea('comment', 'Коментарий к заказу')
         );
         return $form;
     });
+
+    $model->updating(function($model,$order) {
+        $order->updateStatus(Request::get('status'));
+    });
+
 })
     ->addMenuPage(App\Models\Order::class, 21)
     ->setIcon('fa fa-money');

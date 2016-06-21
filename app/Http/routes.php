@@ -43,9 +43,11 @@ Route::post('comparelist/toggle',          'General\ComparelistController@toggle
 Route::post('order/fast',                  'General\OrderController@fast');
 
 Route::group(['middleware'=>'auth'],function(){
-	Route::get ('account',                 'General\AccountController@index');
-	Route::post('account',                 'General\AccountController@store');
-	Route::get ('account/edit',            'General\AccountController@edit');
+	Route::get ('product/{id}/vote/{value}',  'General\ProductController@vote');
+	Route::get ('account',                    'General\AccountController@index');
+	Route::post('account',                    'General\AccountController@store');
+	Route::get ('account/edit',               'General\AccountController@edit');
+	Route::get ('account/order/{id}',         'General\AccountController@order');
 });
 
 Route::get ('{slug}',                      'General\PageController@index');

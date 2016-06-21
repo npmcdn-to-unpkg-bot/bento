@@ -2118,18 +2118,6 @@ a.flex-active{
 	color: #ff4848;
 }
 
-/*toggle-arrow*/
-.toggle-arrow {
-	transition: .5s;
-	display: inline-block;
-	transform: rotate(180deg);
-	cursor: pointer;
-}
-
-.toggle-arrow__active {
-	transform: rotate(0);
-}
-
 /*image*/
 .image_round {
 	border-radius: 50%;
@@ -2214,4 +2202,23 @@ background: transparent;
 
 ::-webkit-scrollbar-thumb:hover {
 	background-color: #999;
+}
+
+
+/*orders-table*/
+.orders-table {
+	width: 100%;
+}
+.orders-table tr {
+	
+}
+.orders-table th,
+.orders-table td {
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.orders-table tr:nth-child(odd) {
+	background-color: #f4f4f4;
 }

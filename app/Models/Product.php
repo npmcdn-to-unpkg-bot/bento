@@ -124,4 +124,8 @@ class Product extends Model
         return ceil($price);
     }
 
+    public function votes() {
+        return $this->hasMany('App\Models\Vote');
+    }
+
 }

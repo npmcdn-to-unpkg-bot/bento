@@ -6,7 +6,7 @@
 	<div class="title">
 		<span class="title__text">ЛИЧНЫЙ КАБИНЕТ</span>
 	</div>
-	<form action="{{url('account')}}" method="POST" ecntype="multipart/form-data">
+	<form action="{{url('account')}}" method="POST" enctype="multipart/form-data">
 	<div class="title title_small">
 		<span class="title__text">ЛИЧНЫЕ ДАННЫЕ</span>
 	</div>
@@ -59,51 +59,63 @@
                 </div>
 			</div>
 		</div>
-	</div>
-	<div class="title title_small">
-		<span class="title__text">ИЗМЕНИТЬ ТЕЛЕФОН</span>
-	</div>
-	<div class="form-group">
 		<div class="row offset_bottom_10">
-			<div class="row__col-2">Основной телефон <span class="error">*</span></div>
+			<div class="row__col-2">Ваш адрес <span class="error">*</span></div>
+			<div class="row__col-5">
+				<input type="text" class="input input_100" placeholder="Набережная 1" name="place" value="{{old()?old('place'):$user->place}}">
+				<div class="error">{{$errors->first('place')}}</div>
+			</div>
+		</div>
+		<div class="row offset_bottom_10">
+			<div class="row__col-2">Ваш телефон <span class="error">*</span></div>
 			<div class="row__col-5">
 				<input type="text" class="input input_100" placeholder="+380123121231" name="phone" value="{{old()?old('phone'):$user->phone}}">
 				<div class="error">{{$errors->first('phone')}}</div>
 			</div>
 		</div>
+	</div>
+	<div class="title title_small">
+		<span class="title__text">ДОПОЛНИТЕЛЬНЫЕ ТЕЛЕФОНЫ</span>
+	</div>
+	<div class="form-group">
 		@foreach($user->phones as $phone)
-		<div class="row offset_bottom_10">
-			<div class="row__col-2">{{$phone->name}}</div>
-			<div class="row__col-5"><span class="input input_100">{{$phone->text}}</span></div>
-			<div class="row__col-1"><a href="#"><img src="/img/delete.png" alt=""></a> <a href="#"><img src="/img/pencil.png" alt=""></a></div>
+		<div class="multiple-field offset_bottom_30">
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Название:</div>
+				<div class="row__col-5"><input name="phones[name][{{$phone->id}}]" class="input input_100" value="{{$phone->name}}"></div>
+			</div>		
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Телефон:</div>
+				<div class="row__col-5"><input name="phones[text][{{$phone->id}}]" class="input input_100" value="{{$phone->text}}"></div>
+				<div class="row__col-1"><a href="#" class="multiple-field__delete"><img src="/img/delete.png" alt=""></a></div>
+			</div>
 		</div>
 		@endforeach
 		<div class="row offset_bottom_10">
-			<div class="row__col-5 row__col-offset-2"><a href="#" class="button button_red button_100 button_small">ДОБАВИТЬ НОВЫЙ ТЕЛЕФОН</a></div>
+			<div class="row__col-5 row__col-offset-2"><a href="#newPhone" class="multiple-field__add button button_red button_100 button_small">ДОБАВИТЬ НОВЫЙ ТЕЛЕФОН</a></div>
 		</div>
 	</div>
 
 	<div class="title title_small">
-		<span class="title__text">АДРЕСС ДОСТАВКИ</span>
+		<span class="title__text">ДОПОЛНИТЕЛЬНЫЕ АДРЕСА</span>
 	</div>
 
 	<div class="form-group">
-		<div class="row offset_bottom_10">
-			<div class="row__col-2">Основной адрес <span class="error">*</span></div>
-			<div class="row__col-5">
-				<input type="text" class="input input_100" placeholder="+380123121231" name="place" value="{{old()?old('place'):$user->place}}">
-				<div class="error">{{$errors->first('place')}}</div>
-			</div>
-		</div>
 		@foreach($user->places as $place)
-		<div class="row offset_bottom_10">
-			<div class="row__col-2">{{$place->name}}</div>
-			<div class="row__col-5"><span class="input input_100">{{$place->text}}</span></div>
-			<div class="row__col-1"><a href="#"><img src="/img/delete.png" alt=""></a> <a href="#"><img src="/img/pencil.png" alt=""></a></div>
+		<div class="multiple-field offset_bottom_30">
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Название:</div>
+				<div class="row__col-5"><input name="places[name][{{$place->id}}]" class="input input_100" value="{{$place->name}}"></div>
+			</div>
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Адрес:</div>
+				<div class="row__col-5"><input name="places[text][{{$place->id}}]" class="input input_100" value="{{$place->text}}"></div>
+				<div class="row__col-1"><a href="#" class="multiple-field__delete"><img src="/img/delete.png" alt=""></a></div>
+			</div>
 		</div>
 		@endforeach
 		<div class="row offset_bottom_10">
-			<div class="row__col-5 row__col-offset-2"><a href="#" class="button button_red button_100 button_small">ДОБАВИТЬ НОВЫЙ АДРЕСС</a></div>
+			<div class="row__col-5 row__col-offset-2"><a href="#newPlace" class="multiple-field__add button button_red button_100 button_small">ДОБАВИТЬ НОВЫЙ АДРЕСС</a></div>
 		</div>
 	</div>
 
@@ -127,10 +139,37 @@
 		</div>
 	</div>
 
-	<div class="text_right offset_bottom_30"><button type="submit" class="button button_red button_small">СОХРАНИТЬ ИЗМЕНЕНИЯ</button></div>
+	<div class="text_right offset_bottom_30 offset_top_30"><button type="submit" class="button button_red button_small">СОХРАНИТЬ ИЗМЕНЕНИЯ</button></div>
 
 	</form>
 
+	<div style="display: none;">
+
+		<div id="newPhone" class="multiple-field offset_bottom_30">
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Название:</div>
+				<div class="row__col-5"><input name="phones[name][]" class="input input_100" value=""></div>
+			</div>
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Телефон:</div>
+				<div class="row__col-5"><input name="phones[text][]" class="input input_100" value=""></div>
+				<div class="row__col-1"><a href="#" class="multiple-field__delete"><img src="/img/delete.png" alt=""></a></div>
+			</div>
+		</div>
+
+		<div id="newPlace" class="multiple-field offset_bottom_30">
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Название:</div>
+				<div class="row__col-5"><input name="places[name][]" class="input input_100" value=""></div>
+			</div>
+			<div class="row offset_bottom_10">
+				<div class="row__col-2">Адрес:</div>
+				<div class="row__col-5"><input name="places[text][]" class="input input_100" value=""></div>
+				<div class="row__col-1"><a href="#" class="multiple-field__delete"><img src="/img/delete.png" alt=""></a></div>
+			</div>
+		</div>
+
+	</div>
 
 </div>
 
