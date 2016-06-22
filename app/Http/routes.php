@@ -48,6 +48,7 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::post('account',                    'General\AccountController@store');
 	Route::get ('account/edit',               'General\AccountController@edit');
 	Route::get ('account/order/{id}',         'General\AccountController@order');
+	Route::get ('pay/{id}',                   'General\OrderController@pay');
 });
 
 Route::get ('{slug}',                      'General\PageController@index');

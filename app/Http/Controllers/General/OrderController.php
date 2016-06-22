@@ -10,9 +10,11 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Setting;
 use App\User;
+use App\Http\Controllers\Payment;
 
 class OrderController extends Controller
 {
+
     public function index() {
         return view('general.checkout.index');
     }
@@ -67,6 +69,9 @@ class OrderController extends Controller
             }
         }
 
+        if ($order->payment_method == 'Онлайн оплата visa/mastercard')
+            return redirect('pay/'.$order->id);
+
         return redirect('account');
 
     }
@@ -88,6 +93,19 @@ class OrderController extends Controller
         Cart::get()->delete();
 
         return response()->json(['modal'=>'Ваш заказ принят']);
+    }
+
+    public function pay($id) {
+
+        $order = auth()->user()->orders()->find($id);
+
+        if (!$order||$order->payed=="Оплачен")
+            abort(404);
+
+        return view('general.checkout.redirect', [
+            'order' => $order,
+            'payment' => Payment::new()
+        ]);
     }
 
 }

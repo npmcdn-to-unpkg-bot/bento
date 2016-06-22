@@ -9,11 +9,14 @@ use App\Http\Controllers\Controller;
 use Image;
 use Storage;
 use App\Models\Order;
+use App\Http\Controllers\Payment;
 
 class AccountController extends Controller
 {
     public function index() {
-    	return view('general.account.index');
+    	return view('general.account.index',[
+            'payment' => Payment::new()
+        ]);
     }
 
     public function edit() {
@@ -77,6 +80,9 @@ class AccountController extends Controller
     }
 
     public function order($id) {
-        return view('general.account.order.show', ['order' => Order::find($id)]);
+        return view('general.account.order.show', [
+            'order' => Order::find($id),
+            'payment' => Payment::new()
+        ]);
     }
 }
