@@ -104,7 +104,7 @@ class OrderController extends Controller
 
         return view('general.checkout.redirect', [
             'order' => $order,
-            'payment' => Payment::new()
+            'payment' => Payment::newInstance()
         ]);
     }
 
