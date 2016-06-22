@@ -16,3 +16,12 @@
 		@endforeach
 	</ul>
 </div>
+
+@push('scripts')
+<script>
+	$('.articles-slider').flexslider({
+		animation: "slide",
+		directionNav: false
+	});
+</script>
+@endpush

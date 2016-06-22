@@ -24,3 +24,21 @@
 		</ul>
 	</div>
 </div>
+
+@push('scripts')
+<script>
+	$('.reviews__slider').flexslider({
+		animation: "slide",
+		@if (Agent::isMobile())
+		itemWidth: 680,
+		minItems: 1,
+		maxItems: 1,
+		@else
+		itemWidth: 570,
+		minItems: 2,
+		maxItems: 2,
+		@endif
+		directionNav: false
+	});
+</script>
+@endpush

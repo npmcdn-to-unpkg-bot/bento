@@ -12,8 +12,8 @@
 			ВАША КОРЗИНА
 		</div>
 	</div>
-	@if ($cart)
 	<div class="floating-shoping-cart__middle">
+	@if ($cart)
 		<div class="shoping-cart__items">
 			<table>
 				@foreach ($cart->products as $product)
@@ -36,8 +36,10 @@
 				@endif
 			</table>
 		</div>
+	@endif
 	</div>
 	<div class="floating-shoping-cart__bottom">
+	@if($cart)
 		<table class="cart-total">
 			<tr>
 				<td class="cart-total__label">Сумма</td>
@@ -61,6 +63,6 @@
 		@if ($cart->next_gift())
 			<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
 		@endif
-	</div>
 	@endif
+	</div>
 </div>

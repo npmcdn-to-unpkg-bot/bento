@@ -29,22 +29,6 @@
 		},
 	});
 
-	$('.visit-us__slider').flexslider({
-		controlNav: false,
-		animation: "slide",
-	    prevText: "",
-	    nextText: ""	
-	})
-	$('.articles-slider').flexslider({
-		animation: "slide",
-		directionNav: false
-	});
-	$('.reviews__slider').flexslider({
-		animation: "slide",
-		itemWidth: 575,
-		directionNav: false
-	});
-
 	// controllers
 
 	function AjaxFormSend (event) {
@@ -186,8 +170,11 @@
 		if (cart = $('.shoping-cart'))
 			$.get('/cart',function(data){
 				cart.replaceWith(data)
+				FSCart.init()
+				positionFloatingShopingCart()
 			})
-		positionFloatingShopingCart()
+
+
 		if (cart_table = $('.shoping-cart-table'))
 			$.get('/cart/table',function(data){
 				cart_table.replaceWith(data)
@@ -206,14 +193,17 @@
 		})
 	}
 
-	// floating shoping cart
+
 	var FSCart = FSCart||{}
-	FSCart.topElement =  $('.main-slider')
-	FSCart.bottomElement = $('.footer')
-	FSCart.container = $('.floating-shoping-cart')
-	FSCart.top = FSCart.container.find('.floating-shoping-cart__top')
-	FSCart.middle = FSCart.container.find('.floating-shoping-cart__middle')
-	FSCart.bottom = FSCart.container.find('.floating-shoping-cart__bottom')
+	FSCart.init = function () {
+		this.topElement =  $('.main-slider')
+		this.bottomElement = $('.footer')
+		this.container = $('.floating-shoping-cart')
+		this.top = this.container.find('.floating-shoping-cart__top')
+		this.middle = this.container.find('.floating-shoping-cart__middle')
+		this.bottom = this.container.find('.floating-shoping-cart__bottom')
+	}
+	FSCart.init();
 
 	function positionFloatingShopingCart(){
 		

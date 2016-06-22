@@ -7,6 +7,7 @@
 	<meta name="description" content="@yield('meta-description')">
 	<meta name="csrf-token" content="{{csrf_token()}}">
 	<meta name="viewport" content="width=720px, user-scalable=no">
+	@stack('styles')
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{url('bower/fancybox/source/jquery.fancybox.css')}}">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
@@ -130,7 +131,7 @@
 	<script src="{{url('bower/flexslider/jquery.flexslider-min.js')}}"></script>
 	<script src="{{url('bower/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
 	<script src="{{url('js/main.js')}}"></script>
-
+	@stack('scripts')
 
 	@if (!$user)
 	<div style="display: none;">
