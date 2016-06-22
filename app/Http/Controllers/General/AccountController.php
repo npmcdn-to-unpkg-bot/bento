@@ -82,7 +82,7 @@ class AccountController extends Controller
     public function order($id) {
         return view('general.account.order.show', [
             'order' => Order::find($id),
-            'payment' => Payment::new()
+            'payment' => Payment::newInstance()
         ]);
     }
 }
