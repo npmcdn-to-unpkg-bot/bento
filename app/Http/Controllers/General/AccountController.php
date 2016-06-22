@@ -15,7 +15,7 @@ class AccountController extends Controller
 {
     public function index() {
     	return view('general.account.index',[
-            'payment' => Payment::new()
+            'payment' => Payment::newInstance()
         ]);
     }
 
