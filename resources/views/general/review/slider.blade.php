@@ -1,26 +1,13 @@
 <div class="reviews">
 	<div class="container reviews__slider">
 		<ul class="slides">
+			@foreach (App\Models\Review::where('published',1)->get() as $review)
 			<li>
-				<img src="{{url('sample-images/review-1.jpg')}}" alt="" class="reviews__image">
-				<div class="reviews__text">Очень люблю заказывать суши именно в Bento. Быстрая доставка, лучший сервис. Спасибо Вам большое за лучшие суши в городе</div>
-				<div class="reviews__name">Анна Седакова</div>
+				<img src="/fit/170/170?image={{$review->user->image ? $review->user->image : 'img/avatar.png' }}" alt="" class="reviews__image">
+				<div class="reviews__text">{{$review->text}}</div>
+				<div class="reviews__name">{{$review->user->first_name}} {{$review->user->last_name}}</div>
 			</li>
-			<li>
-				<img src="{{url('sample-images/review-2.jpg')}}" alt="" class="reviews__image">
-				<div class="reviews__text">Очень люблю заказывать суши именно в Bento. Быстрая доставка, лучший сервис. Спасибо Вам большое за лучшие суши в городе</div>
-				<div class="reviews__name">Илья Берёзкин</div>
-			</li>
-			<li>
-				<img src="{{url('sample-images/review-1.jpg')}}" alt="" class="reviews__image">
-				<div class="reviews__text">Очень люблю заказывать суши именно в Bento. Быстрая доставка, лучший сервис. Спасибо Вам большое за лучшие суши в городе</div>
-				<div class="reviews__name">Анна Седакова</div>
-			</li>
-			<li>
-				<img src="{{url('sample-images/review-2.jpg')}}" alt="" class="reviews__image">
-				<div class="reviews__text">Очень люблю заказывать суши именно в Bento. Быстрая доставка, лучший сервис. Спасибо Вам большое за лучшие суши в городе</div>
-				<div class="reviews__name">Илья Берёзкин</div>
-			</li>			
+			@endforeach
 		</ul>
 	</div>
 </div>

@@ -13,6 +13,10 @@ class ReviewController extends Controller
     }
 
     public function store(Request $request){
-
+    	auth()->user()->reviews()->create([
+    		'text' => $request->text,
+    		'published' => 0
+    	]);
+    	return redirect('account');
     }
 }
