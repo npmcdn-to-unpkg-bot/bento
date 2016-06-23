@@ -25,4 +25,4 @@ AdminSection::registerModel(App\Models\Review::class, function ($model) {
 
 })  
     ->addMenuPage(App\Models\Review::class, 80)
-    ->setIcon('fa  fa-gift');
+    ->setIcon('fa  fa-heart-o');

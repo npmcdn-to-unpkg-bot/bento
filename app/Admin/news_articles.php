@@ -13,17 +13,28 @@ AdminSection::registerModel(App\Models\News\Article::class, function ($model) {
     });
     // Create And Edit
     $model->onCreateAndEdit(function() {
-        return $form = AdminForm::panel()->addBody(
+        $form = AdminForm::panel()->addBody(
             AdminFormElement::text('title', 'Заголовок')->required(),
             AdminFormElement::image('image', 'Картинка'),
             AdminFormElement::textarea('entry', 'Краткое содержание')->required(),
             AdminFormElement::ckeditor('content', 'Содержание')->required(),
             AdminFormElement::text('meta_title', 'meta-title'),
             AdminFormElement::textarea('meta_description', 'meta-description'),
-            AdminFormElement::custom()->setCallback(function($model){
-                makeSlug($model);
-            })
+            AdminFormElement::text('slug', 'Название для ЧПУ')->unique()
         );
+
+        $model->updated(function($m, $model) use ($form) {
+            $model = $form->getModel();
+            $model->slug = $model->slug ? $model->slug : str_slug($model->title);
+            $model->save();
+        });
+
+        $model->created(function($m, $model) use ($form) {
+            $model = $form->getModel();
+            $model->slug = $model->slug ? $model->slug : str_slug($model->title);
+            $model->save();
+        });
+        
         return $form;
     });
 })

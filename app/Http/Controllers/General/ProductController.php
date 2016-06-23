@@ -132,15 +132,20 @@ class ProductController extends Controller
         //
     }
 
-    public function vote($id, $value){
+    public function vote($id, $value, Request $request){
         $vote = auth()
             ->user()
             ->votes()
             ->firstOrNew(['product_id'=>$id]);
         $vote->value = $value;
         $vote->save();
-        return response()->json([
-            'width' => Product::find($id)->votes->avg('value')/5*100
-        ]);
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'width' => Product::find($id)->votes->avg('value')/5*100
+            ]);
+        } else {
+            $product = Product::find($id);
+            return redirect('menu/'.$product->slug);
+        }
     }
 }

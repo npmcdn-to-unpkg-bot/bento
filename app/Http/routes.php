@@ -18,6 +18,7 @@ Route::get ('height/{height}',             'General\ImageController@height');
 Route::get ('greyscale',                   'General\ImageController@greyscale');
 
 Route::auth();
+Route::post('ulogin',                      'Auth\AuthController@ulogin');
 
 Route::get ('/',                           'General\HomeController@index');
 Route::get ('menu/{slug}',                 'General\ProductController@index');
@@ -51,6 +52,7 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::get ('account/edit',               'General\AccountController@edit');
 	Route::get ('account/order/{id}',         'General\AccountController@order');
 	Route::get ('pay/{id}',                   'General\OrderController@pay');
+	Route::post('pay',                        'General\OrderController@store');
 });
 
 Route::get ('{slug}',                      'General\PageController@index');

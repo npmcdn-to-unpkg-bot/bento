@@ -87,8 +87,7 @@
         </form>
         <div class="row__col-4 row__col-mob-12 reg-social reg-social_in-modal">
             <div class="reg-social__title">Связь с социальными сетями</div>
-            <a href="" class="reg-social__item login-social-button login-social-button_vk login-social-button_big">Войти через Вконтакте</a>
-            <a href="" class="reg-social__item login-social-button login-social-button_fb login-social-button_big">Войти через Facebook</a>
+
         </div>
     </div>
 </div>

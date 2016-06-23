@@ -1,21 +1,26 @@
 	<div class="sub-title offset_bottom_10">КУДА ВЕЗЕМ</div>
 	<div class="row">
 		<div class="row__col-6">
+			@if ($user->place)
+			<div class="offset_bottom_10">
+				<label><input type="radio" name="place" @if (!old()||old('place')==$user->place) checked @endif value="{{$user->place}}"> Основной адрес {{$user->place}}</label>
+			</div>
+			@endif
 			@foreach ($user->places as $i => $place)
 			<div class="offset_bottom_10">
-				<label><input type="radio" name="place" value="{{$place->text}}"> {{$place->name}} {{$place->text}}</label>
+				<label><input type="radio" name="place" @if(old('place')==$place->text) checked @endif value="{{$place->text}}"> {{$place->name}} {{$place->text}}</label>
 			</div>
 			@endforeach
 		</div>
 		<div class="row__col-6">
 			@if ($user->phone)
 			<div class="offset_bottom_10">
-				<label><input type="radio" name="phone" value="{{$user->phone}}"> Основной номер телефона {{$user->phone}}</label>
+				<label><input type="radio" name="phone" @if (!old()||old('phone')==$user->phone) checked @endif value="{{$user->phone}}"> Основной номер телефона {{$user->phone}}</label>
 			</div>
 			@endif
 			@foreach ($user->phones as $i => $phone)
 			<div class="offset_bottom_10">
-				<label><input type="radio" name="phone" value="{{$phone->text}}"> {{$phone->name}} {{$phone->text}}</label>
+				<label><input type="radio" name="phone" @if(old('phone')==$phone->text) checked @endif value="{{$phone->text}}"> {{$phone->name}} {{$phone->text}}</label>
 			</div>
 			@endforeach
 		</div>
@@ -23,13 +28,13 @@
 	<div class="row offset_bottom_10">
 		<div class="row__col-6">
 			<div class="optional-input">
-				<input id="new_place" type="radio" @if(old('place')==old('new_place')) checked @endif class="optional-input__checkbox" name="place" value="{{old('new_place')}}"> <input type="text" onchange="$('#new_place').val(this.value)" onfocus="$('#new_place').click()" class="input input_100 optional-input__input" name="new_place" placeholder="Другой адрес" value="{{old('new_place')}}">
+				<input id="new_place" type="radio" @if(old()&&old('place')==old('new_place')) checked @endif class="optional-input__checkbox" name="place" value="{{old('new_place')}}"> <input type="text" onchange="$('#new_place').val(this.value)" onfocus="$('#new_place').click()" class="input input_100 optional-input__input" name="new_place" placeholder="Другой адрес" value="{{old('new_place')}}">
 			</div>
 			<div class="error">{{$errors->first('place')}}</div>
 		</div>
 		<div class="row__col-6">
 			<div class="optional-input">
-				<input id="new_phone" type="radio" @if(old('phone')==old('new_phone')) checked @endif class="optional-input__checkbox" name="phone" value="{{old('new_phone')}}"> <input type="text" onchange="$('#new_phone').val(this.value)" onfocus="$('#new_phone').click()" class="input input_100 optional-input__input" name="new_phone" placeholder="Другой телефон" value="{{old('new_phone')}}">
+				<input id="new_phone" type="radio" @if(old()&&old('phone')==old('new_phone')) checked @endif class="optional-input__checkbox" name="phone" value="{{old('new_phone')}}"> <input type="text" onchange="$('#new_phone').val(this.value)" onfocus="$('#new_phone').click()" class="input input_100 optional-input__input" name="new_phone" placeholder="Другой телефон" value="{{old('new_phone')}}">
 			</div>
 			<div class="error">{{$errors->first('phone')}}</div>
 		</div>

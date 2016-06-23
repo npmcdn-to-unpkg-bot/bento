@@ -12,14 +12,27 @@ AdminSection::registerModel(App\Models\Category::class, function ($model) {
     });
     // Create And Edit
     $model->onCreateAndEdit(function() {
-        return $form = AdminForm::panel()->addBody(
+        $form = AdminForm::panel()->addBody(
             AdminFormElement::text('name', 'Название')->required(),
             AdminFormElement::image('image', 'Картинка')->required(),
             AdminFormElement::text('order', 'Порядок'),
-            AdminFormElement::text('slug', 'Slug')->required(),
+            AdminFormElement::text('slug', 'Название для ЧПУ')->unique(),
             AdminFormElement::text('meta_title', 'Meta title'),
             AdminFormElement::textarea('meta_description', 'Meta description')
         );
+        
+        $model->updated(function($m, $model) use ($form) {
+            $model = $form->getModel();
+            $model->slug = $model->slug ? $model->slug : str_slug($model->name);
+            $model->save();
+        });
+
+        $model->created(function($m, $model) use ($form) {
+            $model = $form->getModel();
+            $model->slug = $model->slug ? $model->slug : str_slug($model->name);
+            $model->save();
+        });
+
         return $form;
     });
 })

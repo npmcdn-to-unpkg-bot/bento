@@ -137,6 +137,15 @@
 		</div>
 	</div>
 
+	<div style="display: none;">
+	@include('general.comparelist.modal');
+	@include('general.wishlist.modal');
+	@if (!$user)
+		@include('general.auth.register')
+		@include('general.auth.login')
+		@include('general.checkout.modal')
+	@endif
+	</div>
 
 	<link rel="stylesheet" href="{{url('bower/animate.css/animate.min.css')}}">
 	<script src="{{url('bower/jquery/dist/jquery.min.js')}}"></script>
@@ -147,14 +156,5 @@
 	<script src="{{url('js/main.js')}}"></script>
 	@stack('scripts')
 
-	<div style="display: none;">
-	@include('general.comparelist.modal');
-	@include('general.wishlist.modal');
-	@if (!$user)
-		@include('general.auth.register')
-		@include('general.auth.login')
-		@include('general.checkout.modal')
-	@endif
-	</div>
 </body>
 </html>

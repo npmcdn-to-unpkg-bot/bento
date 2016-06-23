@@ -101,4 +101,31 @@ class AuthController extends Controller
 
         return $user;
     }
+
+    public function ulogin (Request $request) {
+        $uLogin = json_decode(
+            file_get_contents('http://ulogin.ru/token.php?token=' . $request->uToken . '&host=' . $_SERVER['HTTP_HOST']),
+            true
+        );
+
+        $user = User::firstOrNew(['email'=>$uLogin['email']]);
+        $user->{$uLogin['network']} = $uLogin['profile'];
+
+        if (!$user->first_name)
+            $user->first_name = $uLogin['first_name'];
+
+        if (!$user->last_name)
+            $user->last_name = $uLogin['last_name'];
+
+        if (!$user->image) {
+            $user->image = public_path('files/uploads/') . time() . '-' . str_slug($user->last_name).'.jpg';
+            \Image::make($uLogin['photo_big'])->save($user->image);
+        }
+
+        $user->save();
+
+        auth()->login($user, $remember = true);
+
+        return redirect()->intended($this->redirectPath());
+    }
 }

@@ -36,8 +36,7 @@
                     
                 </div>
                 <div class="row__col-6 row__col-mob-12">
-                    <a href="" class="reg-social__item login-social-button login-social-button_vk login-social-button_big">Войти через Вконтакте</a>
-                    <a href="" class="reg-social__item login-social-button login-social-button_fb login-social-button_big">Войти через Facebook</a>
+                    @include('general.auth.social')
                 </div>
             </div>
         </form>

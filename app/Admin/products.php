@@ -24,9 +24,7 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
             AdminFormElement::multiselect('categories', 'Категории')->setModelForOptions('App\Models\Category')->setDisplay('name'),
             AdminFormElement::text('meta_title', 'meta-title'),
             AdminFormElement::textarea('meta_description', 'meta-description'),
-            AdminFormElement::custom()->setCallback(function($model){
-                makeSlug($model);
-            })
+            AdminFormElement::text('slug', 'Название для ЧПУ')->unique()
         );
 
         $form->addItem(AdminFormElement::custom()
@@ -65,6 +63,18 @@ AdminSection::registerModel(App\Models\Product::class, function ($model) {
                 });
 
             }));
+
+        $model->updated(function($m, $model) use ($form) {
+            $model = $form->getModel();
+            $model->slug = $model->slug ? $model->slug : str_slug($model->name);
+            $model->save();
+        });
+
+        $model->created(function($m, $model) use ($form) {
+            $model = $form->getModel();
+            $model->slug = $model->slug ? $model->slug : str_slug($model->name);
+            $model->save();
+        });
 
 
         return $form;
