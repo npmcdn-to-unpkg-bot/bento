@@ -63,9 +63,9 @@
 		@if ($cart->next_gift())
 			<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
 		@endif
-	@endif
-	@if ($product = $cart->deleted_product())
-		<div style="color: red">Вы удалили {{$product->name}} <a href="#">ВОССТАНОВИТЬ</a></div>
+		@if ($product = $cart->deleted_product())
+			<div style="color: red">Вы удалили {{$product->name}} <a href="#">ВОССТАНОВИТЬ</a></div>
+		@endif
 	@endif
 	</div>
 </div>
