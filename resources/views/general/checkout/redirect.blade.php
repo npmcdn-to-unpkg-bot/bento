@@ -2,7 +2,7 @@
 	{!!$payment->cnb_form([
 	    'version'        => 3,
 	    'action'         => 'pay',
-	    'amount'         => $order->sum(),
+	    'amount'         => $order->total(),
 	    'currency'       => 'UAH',
 	    'sandbox'        => '1',
 	    'description'    => $order->products->implode('name',', '),

@@ -9,7 +9,7 @@
 		<table>
 			<tr>
 				<td class="product-cart__image-wrap" rowspan="999">
-					<a href="{{url($product->image)}}" class="fancybox"><img src="/width/720?image={{$product->image}}" alt="" class="product-cart__image"></a>
+					<a href="{{url($product->image)}}" class="fancybox"><img src="/width/720?format=jpg&image={{$product->image}}" alt="" class="product-cart__image"></a>
 				</td>
 				<td class="product-cart__name">{{$product->name}}</td>
 			</tr>

@@ -49,6 +49,9 @@ class CartController extends Controller
 		Cart::get()
 			->products()
 			->detach($request->id);
+
+		$request->session()->put('deleted_from_cart',$request->id);
+
 		return response(200);
 	}
 }

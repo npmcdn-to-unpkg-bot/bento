@@ -1283,8 +1283,12 @@ body {
 
 .ingredients__item{
 	text-align: center;
-	width: 70px;
+	width: 80px;
+	margin-left: 3px;
+	margin-right: 3px;
+	vertical-align: top;
 	display: inline-block;
+
 }
 
 .ingredients__icon{
@@ -1877,6 +1881,7 @@ body {
 	border-radius:2px;
 	text-align: left;
 	max-width: 100%;
+	cursor: pointer;
 }
 
 .login-social-button_big{

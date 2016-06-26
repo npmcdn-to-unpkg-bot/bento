@@ -1,3 +1,4 @@
+@push('scripts')
 <script>
     $(document).ready(function(){
         @if (Request::is('login'))
@@ -13,6 +14,7 @@
         @endif
     })
 </script>
+@endpush
 <div id="login" class="modal">
     <div class="row">
         <form class="row__col-8 row__col-mob-12 login login_or-register login_in-modal ajax-form" method="POST" action="{{ url('login') }}">

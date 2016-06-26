@@ -7,7 +7,7 @@
 				<tr>
 					<td class="product__images-wrap">
 						<a href="{{$product->url()}}">
-							<img src="/fit/210/140?image={{$product->image}}" alt="" class="product__image">
+							<img src="/fit/210/140?format=jpg&image={{$product->image}}" alt="" class="product__image">
 							@if ($product->left_label) <img src="{{url($product->left_label->image)}}" alt="" class="product__left-label"> @endif
 							@if ($product->right_label) <img src="{{url($product->right_label->image)}}" alt="" class="product__right-label"> @endif
 						</a>

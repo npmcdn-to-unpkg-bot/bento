@@ -22,27 +22,19 @@ class Order extends Model
 	}
 
 	public function sum() {
-        $sum = $this->products->map(function($product){
+        return $this->products->map(function($product){
             return $product->pivot->price*$product->pivot->quantity;
         })->sum();
-
-        $delivery = $sum >= Setting::get('free_delivery_order_sum') 
-            ? 0 
-            : Setting::get('delivery_price');
-            
-        return $sum + $delivery;
 	}
 
     public function delivery(){
-        $sum = $this->products->map(function($product){
-            return $product->pivot->price*$product->pivot->quantity;
-        })->sum();
-
-        $delivery = $sum >= Setting::get('free_delivery_order_sum') 
+        return $this->sum() >= Setting::get('free_delivery_order_sum') 
             ? 0 
             : Setting::get('delivery_price');
-            
-        return $delivery;
+    }
+
+    public function total() {
+        return $this->sum() + $this->delivery();
     }
 
     public function gift() {

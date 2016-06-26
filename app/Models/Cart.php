@@ -41,47 +41,46 @@ class Cart extends Model
 
 	public function sum() {
 
-        $sum = $this->products->map(function($product){
+        return $this->products->map(function($product){
             return $product->new_price()*$product->pivot->quantity;
         })->sum();
 
-        $delivery = $sum >= Setting::get('free_delivery_order_sum') 
-            ? 0 
-            : Setting::get('delivery_price');
-            
-		return $sum + $delivery;
 	}
 
+    public function delivery(){
+        return $this->sum() >= Setting::get('free_delivery_order_sum') 
+            ? 0 
+            : Setting::get('delivery_price');
+
+    }
+
+    public function total(){
+        return $this->sum() + $this->delivery();
+    }
+
+    public function deleted_product() {
+        return Product::find( request()->session()->get('deleted_from_cart') );
+    }
+
     public function user() {
-    	return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function products() {
-    	return $this->belongsToMany('App\Models\Product')->withPivot('quantity');
+        return $this->belongsToMany('App\Models\Product')->withPivot('quantity');
     }
 
     public function gift() {
-    	return Gift::where('start','<=',$this->sum())
-    		->orderBy('start','desc')
-    		->first();
+        return Gift::where('start','<=',$this->sum())
+            ->orderBy('start','desc')
+            ->first();
     }
     public function next_gift() {
-    	return Gift::where('start','>',$this->sum())
-    		->orderBy('start','asc')
-    		->first();
+        return Gift::where('start','>',$this->sum())
+            ->orderBy('start','asc')
+            ->first();
     }
-    public function delivery(){
 
-        $sum = $this->products->map(function($product){
-            return $product->new_price()*$product->pivot->quantity;
-        })->sum();
-
-        $delivery = $sum >= Setting::get('free_delivery_order_sum') 
-            ? 0 
-            : Setting::get('delivery_price');
-
-        return $delivery;
-    }
 
     public function checkout ($data, $user){
 

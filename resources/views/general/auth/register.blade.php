@@ -1,3 +1,4 @@
+@push('scripts')
 <script>
     $(document).ready(function(){
         @if (Request::is('register'))
@@ -13,6 +14,7 @@
         @endif
     })
 </script>
+@endpush
 <div id="register" class="modal">
     <div class="row">
         <form class="row__col-8 row__col-mob-12 registration ajax-form" action="{{ url('register') }}" method="POST">
@@ -87,7 +89,7 @@
         </form>
         <div class="row__col-4 row__col-mob-12 reg-social reg-social_in-modal">
             <div class="reg-social__title">Связь с социальными сетями</div>
-
+            @include('general.auth.social')
         </div>
     </div>
 </div>

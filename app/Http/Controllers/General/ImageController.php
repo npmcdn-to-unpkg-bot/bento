@@ -16,14 +16,16 @@ class ImageController extends Controller
     public function fit ($width, $height, Request $request) {
 
     	$path = $request->image;
+    	$format = $request->format;
 
-		$source = Image::cache( function($image) use ($width,$height,$path) {
+		$source = Image::cache( function($image) use ($width,$height,$path,$format) {
 
     		$image->make($path);
 	    	$image->fit($width,$height, function($constraint) {
 		   			$constraint->upsize();
 		   		});
-
+			if ($format)
+				$image->encode($format);
 		}, $this->lifetime);
 
 		$image = Image::make($source);
@@ -34,7 +36,8 @@ class ImageController extends Controller
     public function resize ($width, $height, Request $request) {
 
     	$path = $request->image;
-		$source = Image::cache( function($image) use ($width,$height,$path) {
+    	$format = $request->format;
+		$source = Image::cache( function($image) use ($width,$height,$path,$format) {
 
 	        $image->make($path);
 	        $image->resize($width,$height,function ($constraint) {
@@ -42,6 +45,8 @@ class ImageController extends Controller
 			    $constraint->upsize();
 			});
 			$image->resizeCanvas($width, $height, 'center', false, 'rgba(255,255,255,0)');
+			if ($format)
+				$image->encode($format);
 		}, $this->lifetime);
 
 		$image = Image::make($source);
@@ -53,15 +58,17 @@ class ImageController extends Controller
     public function width ($width, Request $request) {
 
     	$path = $request->image;
+    	$format = $request->format;
 
-		$source = Image::cache( function($image) use ($width,$path) {
+		$source = Image::cache( function($image) use ($width,$path,$format) {
 
 			$image->make($path);
 	        $image->resize($width,null,function ($constraint) {
 			    $constraint->aspectRatio();
 			    $constraint->upsize();
 			});
-
+			if ($format)
+				$image->encode($format);
 		}, $this->lifetime);
 
 		$image = Image::make($source);
@@ -72,15 +79,17 @@ class ImageController extends Controller
     public function height ($height, Request $request) {
 
     	$path = $request->image;
+		$format = $request->format;
 
-		$source = Image::cache( function($image) use ($height,$path) {
+		$source = Image::cache( function($image) use ($height,$path,$format) {
 
 			$image->make($path);
 	        $image->resize(null,$height,function ($constraint) {
 			    $constraint->aspectRatio();
 			    $constraint->upsize();
 			});
-
+			if ($format)
+				$image->encode($format);
 		}, $this->lifetime);
 
 		$image = Image::make($source);
@@ -91,12 +100,14 @@ class ImageController extends Controller
     public function greyscale (Request $request) {
 
     	$path = $request->image;
-
-		$source = Image::cache( function($image) use ($path) {
+    	$format = $request->format;
+    	
+		$source = Image::cache( function($image) use ($path,$format) {
 
     		$image->make($path);
 	    	$image->greyscale()->brightness(-35);
-
+			if ($format)
+				$image->encode($format);
 		}, $this->lifetime);
 
 		$image = Image::make($source);

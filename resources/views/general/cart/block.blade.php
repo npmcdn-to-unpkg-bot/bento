@@ -43,7 +43,7 @@
 		<table class="cart-total">
 			<tr>
 				<td class="cart-total__label">Сумма</td>
-				<td class="cart-total__value">{{$cart->sum() - $cart->delivery()}} грн</td>
+				<td class="cart-total__value">{{$cart->sum()}} грн</td>
 			</tr>
 			<tr>
 				<td class="cart-total__label">Доставка</td>
@@ -51,7 +51,7 @@
 			</tr>
 			<tr class="cart-total__result">
 				<td class="cart-total__label">ИТОГО</td>
-				<td class="cart-total__value">{{$cart->sum()}} грн</td>
+				<td class="cart-total__value">{{$cart->total()}} грн</td>
 			</tr>						
 		</table>
 			<a href="{{url('checkout')}}" class="button button_100 offset_bottom_10 offset_top_10 button_red button_small">ОФОРМИТЬ ЗАКАЗ</a>
@@ -63,6 +63,9 @@
 		@if ($cart->next_gift())
 			<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
 		@endif
+	@endif
+	@if ($product = $cart->deleted_product())
+		<div style="color: red">Вы удалили {{$product->name}} <a href="#">ВОССТАНОВИТЬ</a></div>
 	@endif
 	</div>
 </div>

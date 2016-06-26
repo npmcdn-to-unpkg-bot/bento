@@ -14,8 +14,8 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
                 return $order->count();
             })->setLabel('Товаров'),
             AdminColumn::custom()->setCallback(function($order) { 
-                return $order->sum(); 
-            })->setLabel('Сумма'),
+                return $order->total(); 
+            })->setLabel('Итог'),
             AdminColumn::text('payment_method')->setLabel('Способ оплаты'),
             AdminColumn::text('payed')->setLabel('Статус оплаты'),
             AdminColumn::text('status')->setLabel('Статус')
