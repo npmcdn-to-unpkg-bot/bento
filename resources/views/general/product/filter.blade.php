@@ -2,8 +2,9 @@
 	@foreach($ingredients as $i => $ingredient)
 	@if ($i%6==0)<div class="row">@endif
 		<div class="row__col-2 offset_bottom_10">
-			<label>
+			<label class="checkbox">
 				<input type="checkbox" value="{{$ingredient->id}}" @if ( in_array($ingredient->id, $ingredients_checked ) ) checked @endif >
+				<span class="checkbox__mark"></span>
 				{{$ingredient->name}}
 			</label>
 		</div>

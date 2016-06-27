@@ -14,8 +14,12 @@ class PageController extends Controller
     	if ($slug=='contacts')
     		return view('general.pages.contacts');
     	
-        return view('general.article.show',[
-            'article' => Page::where('slug', $slug)->first(),
-        ]);
+    	if ($page = Page::where('slug', $slug)->first())
+	        return view('general.article.show',[
+	            'article' => $page,
+	        ]);
+
+	    abort(404);
+
     }
 }

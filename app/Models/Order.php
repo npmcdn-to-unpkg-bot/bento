@@ -38,8 +38,8 @@ class Order extends Model
     }
 
     public function gift() {
-    	return Gift::where('start','<=',$this->sum())
-    		->orderBy('start','desc')
+    	return Gift::orderBy('start','desc')
+    		->where('start','<=',$this->sum())
     		->first();
     }
 

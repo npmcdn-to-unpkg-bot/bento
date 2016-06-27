@@ -67,12 +67,6 @@
 		link = this;
 		$.ajax({
 			url: link.href,
-			method: "POST",
-			type: 'json',
-			data: {
-				id: $(link).attr('data-id'),
-				_token: $('meta[name="csrf-token"]').attr('content')
-			},
 			success: function (data){
 				reloadFloatingShoppingCart()
 				$('.button.button_cart_add[data-id="'+$(link).attr('data-id')+'"]').addClass('button_red')
@@ -88,12 +82,6 @@
 		link = this;
 		$.ajax({
 			url: link.href,
-			method: "POST",
-			type: 'json',
-			data: {
-				id: $(link).attr('data-id'),
-				_token: $('meta[name="csrf-token"]').attr('content')
-			},
 			success: function (data){
 				reloadFloatingShoppingCart()
 				$('.button.button_cart_add[data-id="'+$(link).attr('data-id')+'"]').removeClass('button_red')
@@ -109,12 +97,6 @@
 		link = this;
 		$.ajax({
 			url: link.href,
-			method: "POST",
-			type: 'json',
-			data: {
-				id: $(link).attr('data-id'),
-				_token: $('meta[name="csrf-token"]').attr('content')
-			},
 			success: function (data){
 				reloadWishlistModal()
 				$('.button.button_wishlist[data-id="'+$(link).attr('data-id')+'"]').toggleClass('button_red')
@@ -130,12 +112,6 @@
 		link = this;
 		$.ajax({
 			url: link.href,
-			method: "POST",
-			type: 'json',
-			data: {
-				id: $(link).attr('data-id'),
-				_token: $('meta[name="csrf-token"]').attr('content')
-			},
 			success: function (data){
 				reloadComparelistModal()
 				$('.button.button_comparelist[data-id="'+$(link).attr('data-id')+'"]').toggleClass('button_red')
@@ -147,16 +123,11 @@
 	}
 
 	function updateCartItem (event) {
-		event.preventDefault();
 		$.ajax({
-			url: $(this).attr('data-action'),
+			url: this.action,
 			method: "POST",
 			type: 'json',
-			data: {
-				id: $(this).attr('data-id'),
-				_token: $('meta[name="csrf-token"]').attr('content'),
-				value: $(this).val()
-			},
+			data: $(this).serializeArray(),
 			success: function (data){
 				reloadFloatingShoppingCart()
 			},
@@ -251,7 +222,7 @@
 	$(document).on('click','.button_cart_delete', removeCartItem);
 	$(document).on('click','.button_wishlist', addOrRemoveWishlistItem);
 	$(document).on('click','.button_comparelist', addOrRemoveComparelistItem);
-	$(document).on('change','.ajax-send-input',updateCartItem);
+	$(document).on('change','.ajax-update-cart-item',updateCartItem);
 	$(window)
 		.imagesLoaded(positionFloatingShopingCart)
 		.on("scroll resize", positionFloatingShopingCart);

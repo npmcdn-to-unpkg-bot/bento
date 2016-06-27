@@ -19,7 +19,7 @@
 		@if ($wishlist = $comparelist)
 		@foreach ($wishlist->products as $product)
 		<tr>
-			<td class="products-table__remove-wrap"><a href="{{url('comparelist/toggle')}}" data-id="{{$product->id}}" class="button_comparelist products-table__remove"></a></td>
+			<td class="products-table__remove-wrap"><a href="{{url('comparelist/toggle/'.$product->id)}}" data-id="{{$product->id}}" class="button_comparelist products-table__remove"></a></td>
 			<td class="products-table__image-wrap"><img src="width/100?image={{$product->image}}" alt=""></td>
 			<td class="products-table__name-wrap">
 				{{$product->name}}

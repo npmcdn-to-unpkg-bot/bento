@@ -3,24 +3,24 @@
 		<div class="row__col-6">
 			@if ($user->place)
 			<div class="offset_bottom_10">
-				<label><input type="radio" name="place" @if (!old()||old('place')==$user->place) checked @endif value="{{$user->place}}"> Основной адрес {{$user->place}}</label>
+				<label class="radio"><input type="radio" name="place" @if (!old()||old('place')==$user->place) checked @endif value="{{$user->place}}"><span class="radio__mark"></span> Основной адрес {{$user->place}}</label>
 			</div>
 			@endif
 			@foreach ($user->places as $i => $place)
 			<div class="offset_bottom_10">
-				<label><input type="radio" name="place" @if(old('place')==$place->text) checked @endif value="{{$place->text}}"> {{$place->name}} {{$place->text}}</label>
+				<label class="radio"><input type="radio" name="place" @if(old('place')==$place->text) checked @endif value="{{$place->text}}"><span class="radio__mark"></span> {{$place->name}} {{$place->text}}</label>
 			</div>
 			@endforeach
 		</div>
 		<div class="row__col-6">
 			@if ($user->phone)
 			<div class="offset_bottom_10">
-				<label><input type="radio" name="phone" @if (!old()||old('phone')==$user->phone) checked @endif value="{{$user->phone}}"> Основной номер телефона {{$user->phone}}</label>
+				<label class="radio"><input type="radio" name="phone" @if (!old()||old('phone')==$user->phone) checked @endif value="{{$user->phone}}"><span class="radio__mark"></span> Основной номер телефона {{$user->phone}}</label>
 			</div>
 			@endif
 			@foreach ($user->phones as $i => $phone)
 			<div class="offset_bottom_10">
-				<label><input type="radio" name="phone" @if(old('phone')==$phone->text) checked @endif value="{{$phone->text}}"> {{$phone->name}} {{$phone->text}}</label>
+				<label class="radio"><input type="radio" name="phone" @if(old('phone')==$phone->text) checked @endif value="{{$phone->text}}"><span class="radio__mark"></span> {{$phone->name}} {{$phone->text}}</label>
 			</div>
 			@endforeach
 		</div>

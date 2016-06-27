@@ -25,6 +25,11 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
     });
     $model->onEdit(function() {
         return $form = AdminForm::panel()->addBody(
+            AdminFormElement::custom()->setDisplay(function($order){
+                return view('admin.order',[
+                    'order'=>$order
+                ]);
+            }),
             AdminFormElement::radio('status', 'Статус заказа')->setSortable(false)->setOptions([
                 'В обработке'                       => 'В обработке',
                 'Принят'                            => 'Принят',

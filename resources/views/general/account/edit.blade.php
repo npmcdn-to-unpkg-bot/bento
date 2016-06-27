@@ -7,6 +7,7 @@
 		<span class="title__text">ЛИЧНЫЙ КАБИНЕТ</span>
 	</div>
 	<form action="{{url('account')}}" method="POST" enctype="multipart/form-data">
+	{!!csrf_field()!!}
 	<div class="title title_small">
 		<span class="title__text">ЛИЧНЫЕ ДАННЫЕ</span>
 	</div>

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = 'account';
 
     /**
      * Create a new authentication controller instance.
@@ -49,17 +50,55 @@ class AuthController extends Controller
         ], 422);
     }
 
-    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
     {
-        if ($throttles) {
-            $this->clearLoginAttempts($request);
+        $cart = Cart::get();
+
+        $this->validateLogin($request);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+
+        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
         }
 
-        if (method_exists($this, 'authenticated')) {
-            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+        $credentials = $this->getCredentials($request);
+
+        if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
+            if ($cart){
+                auth()->user()->cart()->delete();
+                $cart->hash = '';
+                $cart->user_id = auth()->id();
+                $cart->save();
+            }
+            return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
-        return response()->json(['redirect'=>redirect()->intended($this->redirectPath())->getTargetUrl()]);
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        if ($throttles && ! $lockedOut) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    public function authenticated () {
+        return response()->json([
+            'redirect'=>redirect()->intended($this->redirectPath())->getTargetUrl()
+        ]);
     }
 
     /**
@@ -99,10 +138,17 @@ class AuthController extends Controller
             'password' => bcrypt($data['password'])
         ]);
 
+        if ( $cart = Cart::get() ){
+            $cart->hash = '';
+            $cart->user_id = $user->id;
+            $cart->save();
+        }
+
         return $user;
     }
 
     public function ulogin (Request $request) {
+
         $uLogin = json_decode(
             file_get_contents('http://ulogin.ru/token.php?token=' . $request->uToken . '&host=' . $_SERVER['HTTP_HOST']),
             true
@@ -124,7 +170,15 @@ class AuthController extends Controller
 
         $user->save();
 
+        if ( $cart = Cart::get() ){
+            $user->cart()->delete();
+            $cart->hash = '';
+            $cart->user_id = $user->id;
+            $cart->save();
+        }
+
         auth()->login($user, $remember = true);
+
 
         return redirect()->intended($this->redirectPath());
     }

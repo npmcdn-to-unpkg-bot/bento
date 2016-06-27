@@ -13,7 +13,7 @@
 						{{$product->new_price()}} грн
 					</div>
 					<div class="wishlist__buy">@include('general.product.add_to_cart')</div>
-					<a href="{{url('wishlist/toggle')}}" data-id="{{$product->id}}" class="button_wishlist wishlist__remove"></a>
+					<a href="{{url('wishlist/toggle/'.$product->id)}}" data-id="{{$product->id}}" class="button_wishlist wishlist__remove"></a>
 				</div>
 			</div>
 			@if (($i+1)%2==0||$wishlist->products->last()==$product) </div> @endif

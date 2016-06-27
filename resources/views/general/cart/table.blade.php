@@ -1,4 +1,7 @@
 <div class="shoping-cart-table">
+	@if ($cart && $product = $cart->deleted_product())
+		<div class="offset_bottom_10 error">Вы удалили {{$product->name}} <a href="{{url('cart/add/'.$product->id)}}" class="button_cart_add">ВОССТАНОВИТЬ</a></div>
+	@endif
 	<table class="products-table">
 		<tr>
 			<th>Продукт</th>
@@ -15,10 +18,16 @@
 				<b>{{$product->name}}</b>
 				<div class="products-table__ingredients">{{$product->ingredients->implode('name', ', ')}}</div>
 			</td>
-			<td><input class="ajax-send-input input input_round"  data-id="{{$product->id}}" data-action="{{url('cart/update')}}" style="width: 80px;" type="number" value="{{$product->pivot->quantity}}"></td>
+			<td>
+				<form action="{{url('cart/update')}}" class="ajax-update-cart-item">
+					{!!csrf_field()!!}
+					<input type="hidden" name="id" value="{{$product->id}}">
+					<input type="number" class="input input_round" style="width: 80px" name="quantity" value="{{$product->pivot->quantity}}">
+				</form>
+			</td>
 			<td><span class="input input_round">{{$product->price}} грн.</span></td>
 			<td><span class="input input_round">{{$product->pivot->quantity*$product->price}} грн.</span></td>
-			<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="button_cart_delete products-table__remove"></a></td>
+			<td><a href="{{url('cart/delete/'.$product->id)}}" data-id="{{$product->id}}" class="button_cart_delete products-table__remove"></a></td>
 		</tr>
 		@endforeach
 		@if ($cart->gift() && $product = $cart->gift()->product)
@@ -31,7 +40,7 @@
 			<td><span class="input input_round">1</span></td>
 			<td><span class="input input_round">0 грн.</span></td>
 			<td><span class="input input_round">0 грн.</span></td>
-			<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="button_cart_delete products-table__remove"></a></td>
+			<td></td>
 		</tr>
 		@endif
 	</table>

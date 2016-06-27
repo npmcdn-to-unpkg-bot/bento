@@ -59,7 +59,7 @@ class Cart extends Model
     }
 
     public function deleted_product() {
-        return Product::find( request()->session()->get('deleted_from_cart') );
+        return Product::find( session('deleted_from_cart') );
     }
 
     public function user() {

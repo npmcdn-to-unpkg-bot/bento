@@ -19,11 +19,15 @@
 				@foreach ($cart->products as $product)
 				<tr class="shoping-cart__item">
 					<td class="shoping-cart__item-count">
-						<input type="number" data-action="{{url('cart/update')}}" data-id="{{$product->id}}" class="ajax-send-input number number_small" name="" value="{{$product->pivot->quantity}}">
+					<form action="{{url('cart/update')}}" class="ajax-update-cart-item">
+						{!!csrf_field()!!}
+						<input type="hidden" name="id" value="{{$product->id}}">
+						<input type="number" class="number number_small" name="quantity" value="{{$product->pivot->quantity}}">
+					</form>
 					</td>
 					<td class="shoping-cart__item-name">{{$product->name}}</td>
 					<td class="shoping-cart__item-price">{{$product->new_price()*$product->pivot->quantity}}грн</td>
-					<td><a href="{{url('cart/delete')}}" data-id="{{$product->id}}" class="button_cart_delete shoping-cart__item-remove"></a></td>
+					<td><a href="{{url('cart/delete/'.$product->id)}}" data-id="{{$product->id}}" class="button_cart_delete shoping-cart__item-remove"></a></td>
 				</tr>
 				@endforeach
 				@if ($cart->gift() && $product = $cart->gift()->product)
@@ -35,6 +39,9 @@
 					</tr>
 				@endif
 			</table>
+			@if ($product = $cart->deleted_product())
+				<div style="color: red">Вы удалили {{$product->name}} <a href="{{url('cart/add/'.$product->id)}}" class="button_cart_add">ВОССТАНОВИТЬ</a></div>
+			@endif
 		</div>
 	@endif
 	</div>
@@ -62,9 +69,6 @@
 
 		@if ($cart->next_gift())
 			<div style="color: red">Купите еще на {{$cart->next_gift()->start - $cart->sum()}}грн. и получите {{$cart->next_gift()->product->name}} в подарок!!!</div>
-		@endif
-		@if ($product = $cart->deleted_product())
-			<div style="color: red">Вы удалили {{$product->name}} <a href="#">ВОССТАНОВИТЬ</a></div>
 		@endif
 	@endif
 	</div>

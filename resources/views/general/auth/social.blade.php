@@ -3,22 +3,14 @@
 <script>
     function login_from_social (token) {
         var form = document.createElement('form');
-        var _token = document.createElement('input');
-        var uToken = document.createElement('input');
-        form.appendChild(_token);
-        form.appendChild(uToken);
-
         form.method = 'POST';
         form.action = '{{url('/ulogin')}}';
 
-        _token.type = 'hidden';
-        _token.name = '_token';
-        _token.value = '{{csrf_token()}}';
-
-        uToken.type = 'hidden';
+        var uToken = document.createElement('input');
         uToken.name = 'uToken';
         uToken.value = token;
 
+        form.appendChild(uToken);
         form.submit();
     }
 </script>

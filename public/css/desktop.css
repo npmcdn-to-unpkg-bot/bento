@@ -2227,3 +2227,69 @@ background: transparent;
 .orders-table tr:nth-child(odd) {
 	background-color: #f4f4f4;
 }
+
+/*checkbox*/
+
+.checkbox input{
+	display: none;
+}
+
+.checkbox {
+	cursor: pointer;
+}
+
+.checkbox__mark {
+	display: inline-block;
+	vertical-align: -17%;
+	margin-right: 5px;
+	height: 15px;
+	width: 15px;
+	border: 1px solid #c2c2c2;
+	position: relative;
+}
+
+:checked+.checkbox__mark:after {
+	content:'';
+	display: inline-block;
+	position: absolute;
+	width: 11px;
+	height: 11px;
+	top: 2px;
+	left: 2px;
+	background: #dedede;
+
+}
+
+/*radio*/
+
+.radio input{
+	display: none;
+}
+
+.radio {
+	cursor: pointer;
+}
+
+.radio__mark {
+	display: inline-block;
+	vertical-align: -17%;
+	margin-right: 5px;
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	border: 1px solid #c2c2c2;
+	position: relative;
+}
+
+:checked+.radio__mark:after {
+	content:'';
+	display: inline-block;
+	position: absolute;
+	width: 11px;
+	height: 11px;
+	top: 2px;
+	left: 2px;
+	border-radius: 50%;
+	background: #dedede;
+
+}

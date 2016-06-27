@@ -16,16 +16,16 @@ class WishlistController extends Controller
     }
 
 
-	public function toggle(Request $request) {
+	public function toggle($id) {
 
 		$wishlist = Wishlist::get() ? Wishlist::get() : Wishlist::init();
 
-		if ($wishlist->products()->where('id',$request->id)->first())
-			$wishlist->products()->detach($request->id);
+		if ($wishlist->products()->where('id',$id)->first())
+			$wishlist->products()->detach($id);
 		else
-			$wishlist->products()->attach($request->id);
+			$wishlist->products()->attach($id);
 	
-		return response(200);
+		return back();
 	}
 
 }

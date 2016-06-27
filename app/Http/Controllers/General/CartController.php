@@ -23,35 +23,37 @@ class CartController extends Controller
 		return view('general.cart.table');
 	}
 
-	public function add(Request $request) {
+	public function add($id) {
 
 		$cart = Cart::get() ? Cart::get() : Cart::init();
 	
-		if ($product = $cart->products()->find($request->id)) {
+		if ($product = $cart->products()->find($id)) {
 			$product->pivot->quantity++;
 			$product->pivot->save();
 		}else{
-			$cart->products()->attach($request->id,['quantity'=>1]);
+			$cart->products()->attach($id,['quantity'=>1]);
 		}
+
+		session()->forget('deleted_from_cart');
 	
-		return response(200);
+		return back();
 	}
 
 	public function update(Request $request) {
 		if ($product = Cart::get()->products()->find($request->id)) {
-			$product->pivot->quantity=$request->value > 0 ? $request->value : 1;
+			$product->pivot->quantity=$request->quantity > 0 ? $request->quantity : 1;
 			$product->pivot->save();
 		}
 		return response(200);
 	}
 
-	public function delete(Request $request) {
+	public function delete($id) {
 		Cart::get()
 			->products()
-			->detach($request->id);
+			->detach($id);
 
-		$request->session()->put('deleted_from_cart',$request->id);
+		session()->put('deleted_from_cart',$id);
 
-		return response(200);
+		return back();
 	}
 }
