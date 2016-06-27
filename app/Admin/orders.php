@@ -4,7 +4,7 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
     // Display
     $model->onDisplay(function () {
         $display = AdminDisplay::table()->setColumns([
-            AdminColumn::text('id')->setWidth('90px'),
+            AdminColumn::text('id')->setWidth('90px')->setLabel('ID'),
             AdminColumn::datetime('created_at')->setLabel('Дата')->setFormat('d.m.Y G:i'),
             AdminColumn::text('user.email')->setLabel('E-mail'),
             AdminColumn::text('phone')->setLabel('Телефон'),
@@ -19,8 +19,11 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
             AdminColumn::text('payment_method')->setLabel('Способ оплаты'),
             AdminColumn::text('payed')->setLabel('Статус оплаты'),
             AdminColumn::text('status')->setLabel('Статус')
-        ]);
-        $display->paginate(15);
+        ])
+        ->setApply(function($query){
+            $query->orderBy('created_at');
+        })
+        ->paginate(9);
         return $display;
     });
     $model->onEdit(function() {
