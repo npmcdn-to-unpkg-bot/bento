@@ -21,7 +21,7 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
             AdminColumn::text('status')->setLabel('Статус')
         ])
         ->setApply(function($query){
-            $query->orderBy('created_at');
+            $query->orderBy('created_at','desc');
         })
         ->paginate(9);
         return $display;
