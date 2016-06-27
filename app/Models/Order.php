@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Setting;
+use SoapClient;
 
 class Order extends Model
 {
