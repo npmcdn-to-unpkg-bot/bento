@@ -142,7 +142,7 @@
 			$.get('/cart',function(data){
 				cart.replaceWith(data)
 				FSCart.init()
-				positionFloatingShopingCart()
+				FSCart.position()
 			})
 
 
@@ -165,38 +165,55 @@
 	}
 
 
-	var FSCart = FSCart||{}
-	FSCart.init = function () {
-		this.topElement =  $('.main-slider')
-		this.bottomElement = $('.footer')
-		this.container = $('.floating-shoping-cart')
-		this.top = this.container.find('.floating-shoping-cart__top')
-		this.middle = this.container.find('.floating-shoping-cart__middle')
-		this.bottom = this.container.find('.floating-shoping-cart__bottom')
+	var FSCart = {
+		init: function () {
+			this.topElement =  $('.main-slider')
+			this.bottomElement = $('.footer')
+			this.container = $('.floating-shoping-cart')
+			this.top = this.container.find('.floating-shoping-cart__top')
+			this.middle = this.container.find('.floating-shoping-cart__middle')
+			this.bottom = this.container.find('.floating-shoping-cart__bottom')
+		},
+		fixedTop: 45,
+		position: function () {
+			if (!this.container.length)
+				return false;
+
+			var upperLimit = this.topElement.offset().top + this.topElement.outerHeight() - this.fixedTop;
+			var lowerLimit = this.bottomElement.offset().top;
+
+			if (upperLimit >= $(window).scrollTop() && this.container.hasClass('floating-shoping-cart_fixed'))
+				this.container.removeClass('floating-shoping-cart_fixed')
+			if (upperLimit < $(window).scrollTop() && !this.container.hasClass('floating-shoping-cart_fixed'))
+				this.container.addClass('floating-shoping-cart_fixed')
+
+			this.container.css({
+				height: Math.min( lowerLimit - this.container.offset().top, $(window).height() - this.fixedTop )
+			});
+
+			this.middle.css({
+				"max-height": this.container.height() - this.top.height() - this.bottom.height()
+			})
+		}
 	}
-	FSCart.init();
+	FSCart.init()
 
-	function positionFloatingShopingCart(){
-		
-		if (!FSCart.container.length)
-			return false;
+	var MMenu = {
+		before: $('.main-menu__before'),
+		container: $('.main-menu'),
+		position: function(){
+			if (!this.container.length)
+				return false
+			var top = this.before.offset().top + this.before.outerHeight()
 
-		var upperLimit = FSCart.topElement.offset().top + FSCart.topElement.outerHeight();
-		var lowerLimit = FSCart.bottomElement.offset().top;
+			if (top >= $(window).scrollTop() && this.container.hasClass('main-menu__fixed'))
+				this.container.removeClass('main-menu__fixed')
 
-		if (upperLimit >= $(window).scrollTop() && FSCart.container.hasClass('floating-shoping-cart_fixed'))
-			FSCart.container.removeClass('floating-shoping-cart_fixed')
-		if (upperLimit < $(window).scrollTop() && !FSCart.container.hasClass('floating-shoping-cart_fixed'))
-			FSCart.container.addClass('floating-shoping-cart_fixed')
-
-		FSCart.container.css({
-			height: Math.min( lowerLimit - FSCart.container.offset().top, $(window).height() )
-		});
-
-		FSCart.middle.css({
-			"max-height": FSCart.container.height() - FSCart.top.height() - FSCart.bottom.height()
-		})
+			if (top < $(window).scrollTop() && !this.container.hasClass('main-menu__fixed'))
+				this.container.addClass('main-menu__fixed')
+		}
 	}
+
 
 	function dataToggle (event) {
 		event.preventDefault()
@@ -224,8 +241,14 @@
 	$(document).on('click','.button_comparelist', addOrRemoveComparelistItem);
 	$(document).on('change','.ajax-update-cart-item',updateCartItem);
 	$(window)
-		.imagesLoaded(positionFloatingShopingCart)
-		.on("scroll resize", positionFloatingShopingCart);
+		.imagesLoaded( function(){ 
+			FSCart.position()
+			MMenu.position()
+		} )
+		.on("scroll resize", function(){
+			FSCart.position()
+			MMenu.position()
+		});
 
 	function initListeners(){
 		$('.fancybox').fancybox();

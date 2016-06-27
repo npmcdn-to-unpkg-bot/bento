@@ -390,8 +390,14 @@ body {
 
 /*main-menu*/
 
-.main-menu{
+.main-menu__container{
 	position: relative;
+}
+
+.main-menu__fixed{
+	position: fixed;
+	top: 0;
+	z-index: 999;
 }
 
 .main-menu__item{
@@ -1457,7 +1463,7 @@ body {
 
 .floating-shoping-cart_fixed {
 	position: fixed;
-	top: 0;
+	top: 45px;
 }
 
 .floating-shoping-cart__top {

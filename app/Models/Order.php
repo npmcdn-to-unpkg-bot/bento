@@ -48,6 +48,15 @@ class Order extends Model
         if ($this->status == $newStatus) 
             return false;
 
+        if ($newStatus == 'Принят')
+            $this->sms('Ваш заказ #'.$this->id.' принят');
+
+        if ($newStatus == 'Приготовлен')
+            $this->sms('Ваш заказ #'.$this->id.' приготовлен');
+
+        if ($newStatus == 'В пути')
+            $this->sms('Ваш заказ #'.$this->id.' в пути');
+
         if ($newStatus == 'Доставлен') {
             if ($this->payment_method == 'Наличными при получении')
                 $this->moneyPay();
@@ -61,6 +70,21 @@ class Order extends Model
             self::where('id',$this->id)->update(['status' => $newStatus]);
         }
 
+    }
+
+    public function sms($text){
+        $client = new SoapClient('http://turbosms.in.ua/api/wsdl.html');
+
+        $client->Auth([
+            'login' => env('SMS_USERNAME'),
+            'password' => env('SMS_PASSWORD')
+        ]);
+
+        $client->SendSMS([
+            'sender' => 'bento',
+            'destination' => $this->phone,
+            'text' => $text
+        ]);
     }
 
     public function moneyPay(){

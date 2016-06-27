@@ -45,7 +45,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container container_fix">
+	<div class="container container_fix main-menu__before">
 		<div class="row">
 			<div class="row__col-left">
 				<a href="{{url('/')}}" class="logo logo_dark logo_in-header">
@@ -67,22 +67,24 @@
 			</form>
 		</div>
 	</div>
-	<div class="container-fluid container-fluid_lightgray">
-		<div class="container container_fix main-menu">
-			<div class="main-menu__item">МЕНЮ
-				<div class="main-menu__dropdown">
-					@foreach (App\Models\Category::all() as $category)
-					<a href="/menu/{{$category->slug}}" class="main-menu__subitem">
-						<img src="{{url($category->image)}}" alt="" class="main-manu__icon">
-						<img src="/greyscale?image={{$category->image}}" alt="" class="main-manu__icon main-manu__icon_inverse">
-						{{$category->name}}
-					</a>
-					@endforeach
+	<div style="height: 45px;">
+		<div class="main-menu container-fluid container-fluid_lightgray">
+			<div class="container container_fix main-menu__container">
+				<div class="main-menu__item">МЕНЮ
+					<div class="main-menu__dropdown">
+						@foreach (App\Models\Category::all() as $category)
+						<a href="/menu/{{$category->slug}}" class="main-menu__subitem">
+							<img src="{{url($category->image)}}" alt="" class="main-manu__icon">
+							<img src="/greyscale?image={{$category->image}}" alt="" class="main-manu__icon main-manu__icon_inverse">
+							{{$category->name}}
+						</a>
+						@endforeach
+					</div>
 				</div>
+				<a href="" class="main-menu__item">ДОСТАВКА И ОПЛАТА</a>
+				<a href="{{url('news')}}" class="main-menu__item">НОВОСТИ И АКЦИИ</a>
+				<a href="{{url('contacts')}}" class="main-menu__item">НАШИ КОНТАКТЫ</a>
 			</div>
-			<a href="" class="main-menu__item">ДОСТАВКА И ОПЛАТА</a>
-			<a href="{{url('news')}}" class="main-menu__item">НОВОСТИ И АКЦИИ</a>
-			<a href="{{url('contacts')}}" class="main-menu__item">НАШИ КОНТАКТЫ</a>
 		</div>
 	</div>
 	<div class="main-slider container-fluid flexslider">
