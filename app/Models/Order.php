@@ -75,17 +75,22 @@ class Order extends Model
 
     public function sms($text){
         $client = new SoapClient('http://turbosms.in.ua/api/wsdl.html');
+        echo "<pre>";
+        print_r(
+            $client->Auth([
+                'login' => env('SMS_USERNAME'),
+                'password' => env('SMS_PASSWORD')
+            ])
+        );
 
-        $client->Auth([
-            'login' => env('SMS_USERNAME'),
-            'password' => env('SMS_PASSWORD')
-        ]);
-
-        $client->SendSMS([
-            'sender' => 'bento',
-            'destination' => $this->phone,
-            'text' => $text
-        ]);
+        print_r(
+            $client->SendSMS([
+                'sender' => 'bento',
+                'destination' => $this->phone,
+                'text' => $text
+            ])
+        );
+        die();
     }
 
     public function moneyPay(){

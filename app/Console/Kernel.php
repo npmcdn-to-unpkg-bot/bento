@@ -24,7 +24,33 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function(){
+
+            $liqpay = new \LiqPay(env("LIQPAY_PUBLIC_KEY"), env("LIQPAY_PRIVAT_KEY"));
+
+            $orders = \App\Models\Order::whereNotIn('liqpay_status', [
+                'success',
+                'failure',
+                'error',
+                'subscribed',
+                'unsubscribed',
+                'reversed',
+                'sandbox',
+            ])->get();
+
+            foreach ($orders as $order) {
+                $data = $liqpay->api("payment/status", array(
+                    'version'       => '3',
+                    'order_id'      => $order->id
+                ));
+
+                $order->liqpay_response = json_encode($data);
+
+                $order->liqpay_status = $data->status;
+
+                $order->save();
+            }
+
+        })->everyMinute();
     }
 }

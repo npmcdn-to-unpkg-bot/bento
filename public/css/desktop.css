@@ -236,6 +236,7 @@ body {
 	line-height: 45px;
 	color: #7e7e7e;
 	cursor: pointer;
+	margin-left: 15px;
 	transition:.3s;
 }
 
@@ -261,7 +262,7 @@ body {
 	z-index: 11;
 }
 
-.user-menu:hover .user-menu__dropdown{
+.user-menu__box:hover+.user-menu__dropdown{
 	display: block;
 }
 

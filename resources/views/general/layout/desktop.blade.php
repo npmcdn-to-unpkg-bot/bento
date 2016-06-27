@@ -24,6 +24,7 @@
 					<a href="{{url('blog')}}" class="about-menu__item">Блог</a>
 				</div>
 				<div class="user-menu row__col-right">
+					<a href="{{url('checkout')}}" class="user-menu__box"><i style="color: #a3a3a3;font-size: 18px;" class="fa fa-shopping-cart"></i> Корзина </a>
 					<a href="{{ $user ? url('account') : '#'}}" class="user-menu__box">
 						<img class="user-menu__icon" src="{{url('img/user-menu-icon.png')}}" alt="">
 						@if ($user) {{$user->first_name}} {{$user->last_name}} @else МОЙ АККАУНТ @endif
@@ -36,7 +37,7 @@
 						@endif
 						<a href="#wishlist" class="fancybox user-menu__item">Избранное</a>
 						<a href="#comparelist" class="fancybox user-menu__item">Мои сравнения</a>
-						<a href="" class="user-menu__item">Корзина</a>
+						<a href="{{url('checkout')}}" class="user-menu__item">Корзина</a>
 						@if ($user)
 						<a href="{{url('logout')}}" class="user-menu__item">Выход</a>
 						@endif
