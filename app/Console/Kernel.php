@@ -45,8 +45,12 @@ class Kernel extends ConsoleKernel
                 ));
 
                 $order->liqpay_response = json_encode($data);
-
                 $order->liqpay_status = $data->status;
+
+                if ($data->status == 'success' || $data->status == 'sandbox') {
+                    $order->payed = 'Оплачен';
+                    $order->payment_method = 'Онлайн оплата visa/mastercard';
+                }
 
                 $order->save();
             }
