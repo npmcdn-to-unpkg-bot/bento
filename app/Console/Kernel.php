@@ -36,6 +36,7 @@ class Kernel extends ConsoleKernel
                 'unsubscribed',
                 'reversed',
                 'sandbox',
+                ''
             ])->get();
 
             foreach ($orders as $order) {

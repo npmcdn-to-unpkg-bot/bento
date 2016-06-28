@@ -130,10 +130,10 @@ class OrderController extends Controller
             }
             
             $order->save();
-        }else{
-            abort(404);
+            return redirect('account');
         }
-        return redirect('account');
+        
+        abort(404);
     }
 
 }

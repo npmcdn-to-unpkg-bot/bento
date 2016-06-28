@@ -68,6 +68,7 @@
 	                'description'    => $order->products->implode('name',', '),
 	                'order_id'       => $order->id,
 	                'result_url'     => url('account'),
+	                'server_url'     => url('pay')
 	            ])!!}
 			@endif
 		</div>
