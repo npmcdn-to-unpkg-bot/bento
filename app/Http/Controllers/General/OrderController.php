@@ -110,30 +110,8 @@ class OrderController extends Controller
 
     public function store(Request $request) {
 
-        $signature = base64_encode( sha1( 
-            env("LIQPAY_PRIVAT_KEY") .  
-            $request->data . 
-            env("LIQPAY_PRIVAT_KEY")
-            , 1 ));
+        Order::update('payed', 'Оплачен');
 
-        if ($request->signature == $signature) {
-            $data = json_decode ( base64_decode ($request->data) );
-            $order = Order::find($data->order_id);
-            $order->liqpay_status = $data->status;
-            $order->liqpay_response = base64_decode ($request->data);
-
-            if ($data->status=='sandbox') {
-                $order->payment_method = 'Онлайн оплата visa/mastercard';
-                $order->payed = 'Оплачен';
-            }else{
-                $order->payed = 'Ожидает оплаты';
-            }
-            
-            $order->save();
-            return redirect('account');
-        }
-        
-        abort(404);
     }
 
 }
