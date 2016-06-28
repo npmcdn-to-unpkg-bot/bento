@@ -68,7 +68,7 @@
 	<div class="title title_small">
 		<span class="title__text">ТЕКУЩИЕ ЗАКАЗЫ</span>
 	</div>
-	@foreach($user->orders->orderBy('created_at','desc')->whereIn('status',[ 'В обработке', 'Принят', 'Приготовлен', 'В пути' ]) as $order)
+	@foreach($user->orders()->orderBy('created_at','desc')->whereIn('status',[ 'В обработке', 'Принят', 'Приготовлен', 'В пути' ])->get() as $order)
 		@include('general.account.order')
 	@endforeach
 
