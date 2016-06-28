@@ -110,7 +110,7 @@ class OrderController extends Controller
 
     public function store(Request $request) {
 
-        Order::update('payed', 'Оплачен');
+        Order::fasdfasdf();
 
     }
 
