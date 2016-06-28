@@ -5,6 +5,7 @@
 	<div class="title">
 		<span class="title__text">ВАША КОРЗИНА</span>
 	</div>
+	@if ($cart)
 	@include('general.cart.table')
 	<div class="row offset_top_60">
 		<div class="row__col-8 row__col-offset-2">
@@ -28,5 +29,10 @@
 			</form>
 		</div>
 	</div>
+	@else
+	<div class="offset_bottom_60">
+		Ваша корзина пуста. <a href="{{url('/')}}">Перейти к покупкам.</a>
+	</div>
+	@endif
 </div>
 @endsection
