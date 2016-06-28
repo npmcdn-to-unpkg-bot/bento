@@ -78,12 +78,12 @@ class Order extends Model
         $client->Auth([
             'login' => env('SMS_USERNAME'),
             'password' => env('SMS_PASSWORD')
-        ])
+        ]);
         $client->SendSMS([
             'sender' => 'bento',
             'destination' => $this->phone,
             'text' => $text
-        ])
+        ]);
     }
 
     public function moneyPay(){
