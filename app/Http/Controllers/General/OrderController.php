@@ -115,6 +115,7 @@ class OrderController extends Controller
             $request->data . 
             env("LIQPAY_PRIVAT_KEY")
             , 1 ));
+        
 
         if ($request->signature == $signature) {
             $data = json_decode ( base64_decode ($request->data) );
@@ -130,8 +131,15 @@ class OrderController extends Controller
             }
             
             $order->save();
+            
             return redirect('account');
         }
+
+        $data = json_decode ( base64_decode ($request->data) );
+        $order = Order::find($data->order_id);
+        $order->liqpay_status = $data->status;
+        $order->liqpay_response = base64_decode ($request->data);
+        $order->save();
         
         abort(404);
     }
