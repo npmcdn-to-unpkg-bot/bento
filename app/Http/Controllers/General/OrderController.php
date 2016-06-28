@@ -132,7 +132,6 @@ class OrderController extends Controller
             
             $order->save();
             
-            return redirect('account');
         }
 
         $data = json_decode ( base64_decode ($request->data) );
