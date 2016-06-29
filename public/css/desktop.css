@@ -709,6 +709,17 @@ body {
 	width: 168px;
 }
 
+.product__quantity {
+	width: 168px;
+}
+
+.product__quantity [type=number] {
+	background: transparent;
+	color: white;
+	text-align: center;
+	font-size: 16px;
+}
+
 /*visit-us*/
 
 .visit-us {
@@ -2301,4 +2312,14 @@ background: transparent;
 	border-radius: 50%;
 	background: #dedede;
 
+}
+/*button_cart_add*/
+.button_cart_add + form.ajax-update-cart-item {
+	display: none;
+}
+.button_cart_add_active {
+	display: none;
+}
+.button_cart_add_active + form.ajax-update-cart-item{
+	display: inline-block;
 }

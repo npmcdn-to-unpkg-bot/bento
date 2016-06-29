@@ -20,9 +20,8 @@
 				<tr class="shoping-cart__item">
 					<td class="shoping-cart__item-count">
 					<form action="{{url('cart/update')}}" class="ajax-update-cart-item">
-						{!!csrf_field()!!}
-						<input type="hidden" name="id" value="{{$product->id}}">
-						<input type="number" class="number number_small" name="quantity" value="{{$product->pivot->quantity}}">
+							<input type="hidden" name="id" value="{{$product->id}}">
+						<input type="number" autocomplete="off" class="number number_small" data-id="{{$product->id}}" name="quantity" value="{{$product->pivot->quantity}}">
 					</form>
 					</td>
 					<td class="shoping-cart__item-name">{{$product->name}}</td>
@@ -40,7 +39,7 @@
 				@endif
 			</table>
 			@if ($product = $cart->deleted_product())
-				<div style="color: red">Вы удалили {{$product->name}} <a href="{{url('cart/add/'.$product->id)}}" class="button_cart_add">ВОССТАНОВИТЬ</a></div>
+				<div style="color: red">Вы удалили {{$product->name}} <a href="{{url('cart/add/'.$product->id)}}" data-id="{{$product->id}}" class="button_cart_add">ВОССТАНОВИТЬ</a></div>
 			@endif
 		</div>
 	@endif

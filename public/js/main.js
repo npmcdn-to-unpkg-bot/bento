@@ -69,7 +69,7 @@
 			url: link.href,
 			success: function (data){
 				reloadFloatingShoppingCart()
-				$('.button.button_cart_add[data-id="'+$(link).attr('data-id')+'"]').addClass('button_red')
+				$('.button.button_cart_add[data-id="'+$(link).attr('data-id')+'"]').addClass('button_cart_add_active')
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
@@ -79,12 +79,13 @@
 
 	function removeCartItem (event) {
 		event.preventDefault();
-		link = this;
+		var id = $(this).attr('data-id')
 		$.ajax({
-			url: link.href,
+			url: this.href,
 			success: function (data){
 				reloadFloatingShoppingCart()
-				$('.button.button_cart_add[data-id="'+$(link).attr('data-id')+'"]').removeClass('button_red')
+				$('.button.button_cart_add[data-id="'+id+'"]').removeClass('button_cart_add_active')
+				$('.ajax-update-cart-item [name=id][value='+id+']').siblings('[name=quantity]').val(1)
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
@@ -93,13 +94,13 @@
 	}
 
 	function addOrRemoveWishlistItem (event) {
-		event.preventDefault();
-		link = this;
+		event.preventDefault()
+		var id = $(this).attr('data-id')
 		$.ajax({
-			url: link.href,
+			url: this.href,
 			success: function (data){
 				reloadWishlistModal()
-				$('.button.button_wishlist[data-id="'+$(link).attr('data-id')+'"]').toggleClass('button_red')
+				$('.button.button_wishlist[data-id="'+id+'"]').toggleClass('button_red')
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
@@ -108,13 +109,13 @@
 	}
 
 	function addOrRemoveComparelistItem (event) {
-		event.preventDefault();
-		link = this;
+		event.preventDefault()
+		var id = $(this).attr('data-id')
 		$.ajax({
-			url: link.href,
+			url: this.href,
 			success: function (data){
 				reloadComparelistModal()
-				$('.button.button_comparelist[data-id="'+$(link).attr('data-id')+'"]').toggleClass('button_red')
+				$('.button.button_comparelist[data-id="'+id+'"]').toggleClass('button_red')
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
@@ -123,13 +124,15 @@
 	}
 
 	function updateCartItem (event) {
+		var id = $(this).find('[name=id]').val()
+		var quantity = $(this).find('[name=quantity]').val()
 		$.ajax({
 			url: this.action,
 			method: "POST",
-			type: 'json',
 			data: $(this).serializeArray(),
 			success: function (data){
 				reloadFloatingShoppingCart()
+				$('.ajax-update-cart-item [name=id][value='+id+']').siblings('[name=quantity]').val(quantity)
 			},
 			error: function (data){
 				$.fancybox(data.responseText)
