@@ -1,4 +1,16 @@
 (function(){
+	$.datetimepicker.setLocale('ru')
+	$('#delivery_time').datetimepicker({
+		format: 'd.m.Y H:i'
+	})
+	$('#birthday').datetimepicker({
+		format: 'd.m.Y',
+		timepicker: false
+	})
+
+	$('[name=phone]').mask('+380999999999')
+	initMask()
+	
 	$('.main-slider').flexslider({
 		controlNav: false,
 		directionNav: false,
@@ -232,6 +244,13 @@
 		event.preventDefault()
 		var template = $( $(this).attr('href') ).clone().attr('id','')
 		$(this).parents('.row').before(template)
+		initMask()
+	}
+
+	function initMask(){
+		$('[data-mask]').each(function(key,item){
+			$(this).mask( $(this).attr('data-mask') )
+		})
 	}
 
 	// listners

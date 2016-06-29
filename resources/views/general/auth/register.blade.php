@@ -52,35 +52,7 @@
                         <input type="text" class="input input_100" name="trafic_source" value="{{old('trafic_source')}}" placeholder="Где вы о нас узнали?">
                     </div>
                     <div class="offset_bottom_10">
-                        <div class="date-picker input input_100">
-                            <select class="date-picker__item date-picker__day" name="" id="">
-                                <option value="">число</option>
-                                @for ($i=1;$i<=31;$i++)
-                                <option value="{{$i}}">{{$i}}</option>
-                                @endfor
-                            </select>
-                            <select class="date-picker__item date-picker__month" name="" id="">
-                                <option value="0">месяц</option>
-                                <option value="1">январь</option>
-                                <option value="2">февраль</option>
-                                <option value="3">март</option>
-                                <option value="4">апрель</option>
-                                <option value="5">май</option>
-                                <option value="6">июнь</option>
-                                <option value="7">июль</option>
-                                <option value="8">август</option>
-                                <option value="9">сентябрь</option>
-                                <option value="10">октябрь</option>
-                                <option value="11">ноябрь</option>
-                                <option value="12">декабрь</option>
-                            </select>
-                            <select class="date-picker__item date-picker__year" name="" id="">
-                                <option value="">год рождения</option>
-                                @for ($i=Carbon\Carbon::now()->year;$i>=1900;$i--)
-                                <option value="{{$i}}">{{$i}}</option>
-                                @endfor
-                            </select>
-                        </div>
+                        <input id="birthday" name="birth_day" class="input input_100" placeholder="Дата рождения" value="{{old('birth_day')}}">
                     </div>
                     
                 </div>

@@ -14,6 +14,6 @@
 		data-id="{{$product->id}}"
 		name="quantity"
 		autocomplete="off"
-		value="{{$cart->products()->find($product->id) ? $cart->products()->find($product->id)->pivot->quantity : 1}}"
+		value="{{$cart&&$cart->products()->find($product->id) ? $cart->products()->find($product->id)->pivot->quantity : 1}}"
 	>
 </form>

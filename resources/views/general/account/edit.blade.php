@@ -29,35 +29,7 @@
 		<div class="row offset_bottom_10">
 			<div class="row__col-2">Дата рождения <span class="error">*</span></div>
 			<div class="row__col-5">
-                <div class="date-picker input input_100">
-                    <select class="date-picker__item date-picker__day">
-                        <option value="">число</option>
-                        @for ($i=1;$i<=31;$i++)
-                        <option value="{{$i}}">{{$i}}</option>
-                        @endfor
-                    </select>
-                    <select class="date-picker__item date-picker__month">
-                        <option value="0">месяц</option>
-                        <option value="1">январь</option>
-                        <option value="2">февраль</option>
-                        <option value="3">март</option>
-                        <option value="4">апрель</option>
-                        <option value="5">май</option>
-                        <option value="6">июнь</option>
-                        <option value="7">июль</option>
-                        <option value="8">август</option>
-                        <option value="9">сентябрь</option>
-                        <option value="10">октябрь</option>
-                        <option value="11">ноябрь</option>
-                        <option value="12">декабрь</option>
-                    </select>
-                    <select class="date-picker__item date-picker__year">
-                        <option value="">год рождения</option>
-                        @for ($i=Carbon\Carbon::now()->year;$i>=1900;$i--)
-                        <option value="{{$i}}">{{$i}}</option>
-                        @endfor
-                    </select>
-                </div>
+                <input id="birthday" name="birth_day" class="input input_100" placeholder="Дата рождения" value="{{old()?old('birth_day'):$user->birth_day->format('d.m.Y')}}">
 			</div>
 		</div>
 		<div class="row offset_bottom_10">
@@ -87,7 +59,7 @@
 			</div>		
 			<div class="row offset_bottom_10">
 				<div class="row__col-2">Телефон:</div>
-				<div class="row__col-5"><input name="phones[text][{{$phone->id}}]" class="input input_100" value="{{$phone->text}}"></div>
+				<div class="row__col-5"><input name="phones[text][{{$phone->id}}]" data-mask="+380999999999" class="input input_100" value="{{$phone->text}}"></div>
 				<div class="row__col-1"><a href="#" class="multiple-field__delete"><img src="/img/delete.png" alt=""></a></div>
 			</div>
 		</div>
@@ -153,7 +125,7 @@
 			</div>
 			<div class="row offset_bottom_10">
 				<div class="row__col-2">Телефон:</div>
-				<div class="row__col-5"><input name="phones[text][]" class="input input_100" value=""></div>
+				<div class="row__col-5"><input name="phones[text][]" data-mask="+380999999999" class="input input_100" value=""></div>
 				<div class="row__col-1"><a href="#" class="multiple-field__delete"><img src="/img/delete.png" alt=""></a></div>
 			</div>
 		</div>

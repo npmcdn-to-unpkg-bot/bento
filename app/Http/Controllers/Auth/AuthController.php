@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use Auth;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -133,6 +134,7 @@ class AuthController extends Controller
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
             'place' => $data['place'],
+            'birth_day' => Carbon::parse($data['birth_day']),
             'trafic_source' => $data['trafic_source'],
             'bento_card' => $data['bento_card'],
             'password' => bcrypt($data['password'])

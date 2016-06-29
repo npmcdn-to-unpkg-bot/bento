@@ -10,6 +10,7 @@ use Image;
 use Storage;
 use App\Models\Order;
 use App\Http\Controllers\Payment;
+use Carbon\Carbon;
 
 class AccountController extends Controller
 {
@@ -43,9 +44,11 @@ class AccountController extends Controller
             $request->merge(['image' => $image]);
         }
 
+        $request->merge( ['birth_day' => Carbon::parse($request->birth_day)] );
+
     	auth()
     		->user()
-    		->fill( $request->only('first_name','last_name','phone','place','image') )
+    		->fill( $request->only('first_name','last_name','phone','place','image', 'birth_day') )
     		->save();
 
         auth()

@@ -50,7 +50,7 @@
 		</div>
 		<div class="row__col-6">
 			<div class="offset_bottom_10">
-				<input type="text" name="time" class="input input_100" placeholder="Время доставки">
+				<input id="delivery_time" autocomplete="off" name="time" class="input input_100" placeholder="Время доставки">
 			</div>
 		</div>
 	</div>

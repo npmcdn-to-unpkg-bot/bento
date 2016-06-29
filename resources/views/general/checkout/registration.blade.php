@@ -41,7 +41,7 @@
 				</select>
 			</div>
 			<div class="row__col-6">
-				<input type="text" class="input input_100" name="time" placeholder="Время доставки" value="{{old('time')}}">
+				<input id="delivery_time" autocomplete="off" class="input input_100" name="time" placeholder="Время доставки" value="{{old('time')}}">
 			</div>
 		</div>
 	</div>
