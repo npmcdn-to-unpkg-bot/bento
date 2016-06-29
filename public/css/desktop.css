@@ -263,6 +263,7 @@ body {
 	z-index: 11;
 }
 
+.user-menu__dropdown:hover,
 .user-menu__box:hover+.user-menu__dropdown{
 	display: block;
 }
