@@ -238,6 +238,7 @@ body {
 	cursor: pointer;
 	margin-left: 15px;
 	transition:.3s;
+	display: inline-block;
 }
 
 .user-menu__box:hover{

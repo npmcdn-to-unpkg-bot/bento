@@ -27,7 +27,7 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
         return $display;
     });
     $model->onEdit(function() {
-        return $form = AdminForm::panel()->addBody(
+        $form = AdminForm::panel()->addBody(
             AdminFormElement::custom()->setDisplay(function($order){
                 return view('admin.order',[
                     'order'=>$order
@@ -43,6 +43,8 @@ AdminSection::registerModel(App\Models\Order::class, function ($model) {
             ]),
             AdminFormElement::textarea('comment', 'Коментарий к заказу')
         );
+        $form->getButtons()->hideSaveAndCloseButton();
+        $form->getButtons()->hideSaveAndCreateButton();
         return $form;
     });
 

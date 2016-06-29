@@ -49,14 +49,11 @@ class Order extends Model
         if ($this->status == $newStatus) 
             return false;
 
-        if ($newStatus == 'Принят')
-            $this->sms('Ваш заказ #'.$this->id.' принят');
-
         if ($newStatus == 'Приготовлен')
-            $this->sms('Ваш заказ #'.$this->id.' приготовлен');
+            $this->sms( str_replace('{id}',$this->id, Setting::get('sms_1') ) );
 
         if ($newStatus == 'В пути')
-            $this->sms('Ваш заказ #'.$this->id.' в пути');
+            $this->sms( str_replace('{id}',$this->id, Setting::get('sms_2') ) );
 
         if ($newStatus == 'Доставлен') {
             if ($this->payment_method == 'Наличными при получении')
@@ -68,8 +65,11 @@ class Order extends Model
             if ($this->payment_method == 'С бонусного счета')
                 $this->bonusPay();
 
-            self::where('id',$this->id)->update(['status' => $newStatus]);
+            $this->sms( str_replace('{id}',$this->id, Setting::get('sms_3') ) );
+
         }
+
+        self::where('id',$this->id)->update(['status' => $newStatus]);
 
     }
 

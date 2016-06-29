@@ -48,7 +48,16 @@ class SettingController extends AdminController
 		        AdminFormElement::multiselect('ingredient_filters', 'Ингредиенты в фильтре')
 		            ->setModel(Setting::getModel('ingredient_filters'))
 		            ->setModelForOptions(\App\Models\Ingredient::class)
-		            ->setDisplay('name')
+		            ->setDisplay('name'),
+
+		    	AdminFormElement::html('<hr>'),
+
+		    	AdminFormElement::text('sms_1', 'СМС для статуса заказа приготовлен')
+		    		->setModel(Setting::getModel('sms_1')),
+		    	AdminFormElement::text('sms_2', 'СМС для статуса заказа в пути')
+		    		->setModel(Setting::getModel('sms_2')),
+		    	AdminFormElement::text('sms_3', 'СМС для статуса заказа доставлен')
+		    		->setModel(Setting::getModel('sms_3'))
 		    )
 		    ->setAction(route('admin.settings'))
         	->initialize();
