@@ -1,8 +1,26 @@
 (function(){
+
+	$(document).on('click','.number__minus',function(event){
+		event.preventDefault()
+		$(this).siblings('.number__input').each(function(key,item){
+			$(item).val( Math.max( Number( $(item).val() ) - 1, 1) )
+		})
+		$(this).change()
+	})
+
+	$(document).on('click','.number__plus',function(event){
+		event.preventDefault()
+		$(this).siblings('.number__input').each(function(key,item){
+			$(item).val( Number($(item).val())+1 )
+		})
+		$(this).change()
+	})
+
 	$.datetimepicker.setLocale('ru')
 	$('#delivery_time').datetimepicker({
 		format: 'd.m.Y H:i'
 	})
+
 	$('#birthday').datetimepicker({
 		format: 'd.m.Y',
 		timepicker: false
@@ -144,7 +162,10 @@
 			data: $(this).serializeArray(),
 			success: function (data){
 				reloadFloatingShoppingCart()
-				$('.ajax-update-cart-item [name=id][value='+id+']').siblings('[name=quantity]').val(quantity)
+				$('.ajax-update-cart-item [name=id][value='+id+']')
+					.parents('.ajax-update-cart-item')
+					.find('[name=quantity]')
+					.val(quantity)
 			},
 			error: function (data){
 				$.fancybox(data.responseText)

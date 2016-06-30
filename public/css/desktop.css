@@ -1585,6 +1585,29 @@ body {
 }
 
 /*number*/
+.number {
+	display: inline-block;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+.number__input{
+	width: 50px;
+}
+
+.number__plus,
+.number__minus{
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	text-align: center;
+	line-height: 20px;
+	cursor: pointer;
+}
+
 .number_small{
 	border: none;
 	width: 40px;
@@ -1593,6 +1616,7 @@ body {
 	color: #3d3d3d;
 	font-weight: 600;
 }
+
 
 .number_medium{
 	border:1px solid #b8b6b6;
@@ -2317,9 +2341,24 @@ background: transparent;
 .button_cart_add + form.ajax-update-cart-item {
 	display: none;
 }
+
+.button_cart_add + form.ajax-update-cart-item input {
+	background: transparent;
+	color: white;
+	text-align: center;
+	font-size: 18px;
+	border: none;
+}
+
 .button_cart_add_active {
+	background-color: #ff4848;
+	color: white;
+	border: none;
+}
+
+:hover>.button_cart_add_active {
 	display: none;
 }
-.button_cart_add_active + form.ajax-update-cart-item{
+:hover>.button_cart_add_active + form.ajax-update-cart-item{
 	display: inline-block;
 }
